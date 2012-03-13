@@ -2,11 +2,9 @@ package br.com.drerp.financeiro.model.transferencia;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,7 +21,7 @@ public class RequisicaoTransferencia {
 	private Pagador pagador;
 	private StatusRequisicaoTransferencia status;
 	private Long dataRequisicaoMilis;
-	@OneToOne(mappedBy = "transferencia")
+	@OneToOne(mappedBy = "requisicao")
 	private Transferencia transferencia;
 	
 	public Long getId() {
