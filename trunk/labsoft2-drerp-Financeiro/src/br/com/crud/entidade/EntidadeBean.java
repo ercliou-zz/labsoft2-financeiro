@@ -11,8 +11,6 @@ public class EntidadeBean {
 	
 	private Entidade entidade = new Entidade();
 	
-	
-	
 	public String novo(){
 		entidade = new Entidade();
 		entidade.setPropriedade("nova propriedade");
