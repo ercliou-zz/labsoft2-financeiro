@@ -20,7 +20,7 @@ public class EntidadeBR {
 	
 	public void save(Entidade entidade){
 		Long id = entidade.getId();
-		if(id == null || id == 0){
+		if(id== null || id.equals(0L)){
 			entidadeDAO.save(entidade);
 		}
 		else{

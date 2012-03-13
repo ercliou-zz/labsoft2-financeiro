@@ -3,8 +3,10 @@ package br.com.drerp.financeiro.model.transferencia;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="FIN_PAGADOR")
 public class Pagador {
 	
 	@Id

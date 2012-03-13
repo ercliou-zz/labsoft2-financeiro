@@ -3,18 +3,25 @@ package br.com.drerp.financeiro.model.transferencia;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
+@Table(name="FIN_TRANSFERENCIA")
 public class Transferencia {
 	
 	@Id
 	@GeneratedValue
 	private long id;
 	private BigDecimal valor;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="requisicao_fk")
 	private RequisicaoTransferencia requisicao;
 	private Long dataRealizacaoMilis;
 	

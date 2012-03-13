@@ -15,6 +15,9 @@
     
 		<mapping class="br.com.crud.model.Entidade"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Transferencia"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.Beneficiario"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.Pagador"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia"/>
     
     </session-factory>
     
