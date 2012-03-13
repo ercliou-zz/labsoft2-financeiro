@@ -4,6 +4,8 @@ import org.hibernate.Session;
 
 import br.com.crud.dao.EntidadeDAO;
 import br.com.crud.dao.EntidadeDAOImpl;
+import br.com.drerp.financeiro.dao.transferencia.RequisicaoTransferenciaDAO;
+import br.com.drerp.financeiro.dao.transferencia.RequisicaoTransferenciaDAOImpl;
 import br.com.drerp.financeiro.dao.transferencia.TransferenciaDAO;
 import br.com.drerp.financeiro.dao.transferencia.TransferenciaDAOImpl;
 
@@ -19,6 +21,12 @@ public class DAOFactory {
 		TransferenciaDAO transferenciaDAO = new TransferenciaDAOImpl();
 		transferenciaDAO.setSession(getSession());
 		return transferenciaDAO;
+	}
+	
+	public static RequisicaoTransferenciaDAO createRequisicaoTransferenciaDAO(){
+		RequisicaoTransferenciaDAO requisicaoTransferenciaDAO = new RequisicaoTransferenciaDAOImpl();
+		requisicaoTransferenciaDAO.setSession(getSession());
+		return requisicaoTransferenciaDAO;
 	}
 	
 	private static Session getSession(){
