@@ -21,6 +21,7 @@ public class RequisicaoTransferencia {
 	private Pagador pagador;
 	private StatusRequisicaoTransferencia status;
 	private Long dataRequisicaoMilis;
+	private Long dataLimiteMilis;
 	@OneToOne(mappedBy = "requisicao")
 	private Transferencia transferencia;
 	
@@ -56,6 +57,15 @@ public class RequisicaoTransferencia {
 	}
 	public Date getDataRequisicao(){
 		return new Date(this.dataRequisicaoMilis);
+	}
+	public Long getDataLimiteMilis() {
+		return dataLimiteMilis;
+	}
+	public void setDataLimiteMilis(Long dataLimiteMilis) {
+		this.dataLimiteMilis = dataLimiteMilis;
+	}
+	public Date getDataLimite(){
+		return new Date(this.dataLimiteMilis);
 	}
 	public Transferencia getTransferencia() {
 		return transferencia;
