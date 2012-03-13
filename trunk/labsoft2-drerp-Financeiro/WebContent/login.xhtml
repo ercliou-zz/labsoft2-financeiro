@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="jquery-ui-1.8.14.custom/css/south-street/jquery-ui-1.8.14.custom.css" type="text/css">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script type="text/javascript" src="jquery-ui-1.8.14.custom/js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.8.14.custom/js/jquery-ui-1.8.14.custom.min.js"></script>
+<title>MD2S</title>
+</head>
+<body>
+	<%
+	session.setAttribute("logadoId", null);
+	Logica logica = new LogicaImpl();
+	String login = request.getParameter("login");
+	String senha = request.getParameter("senha");
+	Funcionario logado;
+	int error = 0;
+
+	if (login != null && senha != null){
+		logado = logica.verificaSenha(login, senha);
+		if (logado != null) {
+			session.setAttribute("logadoId", logado.getIdFuncionario());
+			
+			if (logado.getTipoFunc().equals(TipoFuncionario.MEDICO_ATENDENTE)) {
+				response.sendRedirect("AgendaMedico.jsp");
+			}
+			else if (logado.getTipoFunc().equals(TipoFuncionario.MEDICO_ESPECIALISTA)){
+				response.sendRedirect("CadastrarSintoma.jsp");
+			}
+			else if (logado.getTipoFunc().equals(TipoFuncionario.MEDICO_SUPERVISOR)){
+				response.sendRedirect("SolicitarRelatorio.jsp");
+			}
+			else if (logado.getTipoFunc().equals(TipoFuncionario.RECEPCIONISTA)){
+				response.sendRedirect("AgendaRecep.jsp");
+			}
+			else if (logado.getTipoFunc().equals(TipoFuncionario.FUNCIONARIO_CM)){
+				response.sendRedirect("CadastrarFunc.jsp?tipo=medicoAtendente");
+			}
+		}
+		else {
+			error = 1;
+		}
+	}
+	
+	%>
+	
+	<div id="effect" class="ui-widget-content ui-corner-all">
+		<h3 class="ui-widget-header ui-corner-all">
+		<img class="logo_login" src="Images/logo.png"></br>
+		Medical Diagnostic Support System</h3>
+		<form methot="post" enctype="multipart/form-data" class="login_box">
+			<table>
+				<tr>
+					<td>Login:</td>
+					<td><input type="text" name="login" id="login" value="<% if (login != null) out.print(login); %>"></td>
+				</tr>
+				<tr>
+					<td>Senha:</td>
+					<td><input type="password" name="senha" id="senha" value=""></td>
+				</tr>
+			</table>
+			<%	if (error == 1) {%>
+			<span class="error">Login e/ou senha inválida</span>
+			<%}%>
+			</br>	
+			<input id="button" class="ui-state-default ui-corner-all login_button" type="submit" value="Entrar"/>	
+		</form>		
+	</div>
+
+</body>
+</html>
