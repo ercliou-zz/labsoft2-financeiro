@@ -29,7 +29,9 @@ public class LoginBean {
 		return usuario.getTipo();
 	}
 	
-	
+	public void criar(){
+		loginDAO.save(usuario);
+	}
 	
 }
 
