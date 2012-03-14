@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.crud.util.GenericDAOFactory;
 import br.com.drerp.financeiro.dao.GenericDAO;
-import br.com.drerp.financeiro.model.transferencia.GenericModel;
+import br.com.drerp.financeiro.dao.GenericModel;
 
 public abstract class GenericBR<T extends GenericDAO<Y>, Y extends GenericModel> {
 

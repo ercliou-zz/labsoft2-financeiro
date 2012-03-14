@@ -11,29 +11,20 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.NaturalId;
 
+import br.com.drerp.financeiro.dao.GenericModel;
+
 @Entity
 @Table(name="FIN_USUARIO", uniqueConstraints = {@UniqueConstraint(columnNames={"login"})})
-public class Usuario implements Serializable{
+public class Usuario extends GenericModel implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue
-	private Long id;
-	
 	@Column(unique=true)
 	private String login;
 	
 	private String senha;
 	private TiposUsuario tipo;
 
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getLogin() {
 		return login;
 	}

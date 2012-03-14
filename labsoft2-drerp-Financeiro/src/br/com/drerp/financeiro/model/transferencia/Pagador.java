@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import br.com.drerp.financeiro.dao.GenericModel;
+
 @Entity
 @Table(name="FIN_PAGADOR")
 public class Pagador extends GenericModel {
