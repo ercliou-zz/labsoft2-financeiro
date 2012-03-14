@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<head>
+
+<link rel="stylesheet" href="jquery-ui-1.8.18.custom/css/cupertino/jquery-ui-1.8.18.custom.css" type="text/css" media="screen" ></link>
+    <link rel="stylesheet" href="styles.css" type="text/css" media="screen" ></link>
+    <script type="text/javascript" src="jquery-ui-1.8.18.custom/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.8.18.custom/js/jquery-ui-1.8.18.custom.min.js"></script>
+    <script>
+	    $(function() {
+	    	$( "#accordion" ).accordion();
+		});
+	</script>
+	<script type="text/javascript">
+	    $(function() {
+			$( "input:submit, a, button", ".center" ).button();
+		});
+	</script>
+<title>Dr ERP</title>
+
+</head>
+<body>
+
+	<div class="head">
+		<div class="usuario_log">
+			Olá, 
+			<a href="login.xhtml" >Logout</a>
+		</div>
+	</div>
+	<div>
+		<div id="accordion">
+			<h3><a href="#">Transferências</a></h3>
+			<div>
+				<a style="font-size: 18px" href="transferenciaEdit.xhtml">Transferências</a>
+			</div>
+			<div>
+				<a style="font-size: 18px" href="relatorioTransferencias.xhtml">Relatórios</a>
+			</div>
+			<h3><a href="#">Planos de Saúde</a></h3>
+			<div>
+				<a style="font-size: 18px" href="relatorioTransferencias.xhtml">Planos</a>
+			</div>
+		</div>	
+		<div class="center">
+			<h1>Relatório</h1>
+			<div>
+				<div>
+					<h4>Informações</h4>
+					<table>
+						<tr>
+							<td> Início </td>
+							<td> Término </td>
+							<td> </td>
+						</tr>
+						<tr>
+							<td>Efetuadas:</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Em processamento:</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Recusadas:</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>Total Gasto:</td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
