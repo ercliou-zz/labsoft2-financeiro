@@ -7,6 +7,8 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.drerp.financeiro.business.transferencia.RequisicaoTransferenciaBR;
 import br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia;
+import br.com.drerp.financeiro.model.transferencia.StatusRequisicaoTransferencia;
+import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
 @ManagedBean(name="RequisicaoTransferenciaBean")
 @RequestScoped
@@ -27,26 +29,48 @@ public class RequisicaoTransferenciaBean {
 //		return "requisicaoTransferenciaNovo";
 //	}
 //	
+	
+	public String save(){
+		requisicaoTransferenciaBR.save(requisicaoTransferencia);
+		return "RequisicaoTransferenciaLista";
+	}
+	
 	public String alter(){
 		requisicaoTransferencia = new RequisicaoTransferencia();
 		return "requisicaoTransferenciaNovo";
 	}
 	
 	public String listarAprovadas(){
-		
-		
-		return "RequisicaoTransferenciaLista";
+		return "requisicaoAprovadaList";
 	}
 	
 	public String realizarTransferencia(){
-		return "";
+		
+		// falta umas condicoes aquiiii !! verificar o status antes!!
+		
+		requisicaoTransferenciaBR.realizarTransferencia(requisicaoTransferencia);
+		
+		// para atualizar a lista?? see doencaBean
+		this.listaAprovada = null;
+		
+		return null;
 	}
 
 	
 	
 	
 	
+	public RequisicaoTransferencia getRequisicaoTransferencia() {
+		return requisicaoTransferencia;
+	}
+
+	public void setRequisicaoTransferencia(
+			RequisicaoTransferencia requisicaoTransferencia) {
+		this.requisicaoTransferencia = requisicaoTransferencia;
+	}
+
 	public List<RequisicaoTransferencia> getListaAprovada() {
+		listaAprovada = requisicaoTransferenciaBR.list();
 		return listaAprovada;
 	}
 

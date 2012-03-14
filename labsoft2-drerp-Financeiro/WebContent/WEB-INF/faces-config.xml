@@ -9,7 +9,12 @@
 	<managed-bean> 
 		<managed-bean-name>entidadeBean</managed-bean-name> 
 		<managed-bean-class>br.com.crud.entidade.EntidadeBean</managed-bean-class> 
-		<managed-bean-scope>request</managed-bean-scope> 
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>requisicaoTransferenciaBean</managed-bean-name> 
+		<managed-bean-class>br.com.drerp.financeiro.web.transferencia.RequisicaoTransferenciaBean</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 
 </faces-config>

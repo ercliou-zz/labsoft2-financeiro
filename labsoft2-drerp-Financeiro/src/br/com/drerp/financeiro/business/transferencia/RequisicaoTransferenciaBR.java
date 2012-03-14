@@ -5,6 +5,8 @@ import java.util.List;
 import br.com.crud.util.DAOFactory;
 import br.com.drerp.financeiro.dao.transferencia.RequisicaoTransferenciaDAO;
 import br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia;
+import br.com.drerp.financeiro.model.transferencia.StatusRequisicaoTransferencia;
+import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
 public class RequisicaoTransferenciaBR {
 	
@@ -40,5 +42,18 @@ public class RequisicaoTransferenciaBR {
 	
 	public List<RequisicaoTransferencia> listarAbertas(){
 		return requisicaoTransferenciaDAO.listarAbertas();
+	}
+	
+	public Transferencia realizarTransferencia (RequisicaoTransferencia requisicaoTransferencia){
+		Transferencia transferencia = new Transferencia();
+		transferencia.setDataRealizacaoMilis(0l);
+		transferencia.setRequisicao(requisicaoTransferencia);
+		// mais coisassssssss
+		
+		requisicaoTransferencia.setStatus(StatusRequisicaoTransferencia.EFETUADA);
+		requisicaoTransferencia.setTransferencia(transferencia);
+		save(requisicaoTransferencia);
+		
+		return transferencia;
 	}
 }
