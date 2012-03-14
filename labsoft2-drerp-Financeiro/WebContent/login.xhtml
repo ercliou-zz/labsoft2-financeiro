@@ -13,10 +13,11 @@
 <h:body>
 
 	
-	<div id="effect" class="ui-widget-content ui-corner-all">
+	<div id="effect" class="ui-widget-content ui-corner-all" style="width:190px">
 		<h3 class="ui-widget-header ui-corner-all">
 			Doctor ERP
 		</h3>
+		<h:form>
 			<table>
 				<tr>
 					<td><h:inputText id="login" label="Login" value="#{LoginBean.usuario.login}"/></td>
@@ -27,6 +28,7 @@
 			</table>
 			<h:commandButton action="#{LoginBean.validarLogin}" class="ui-state-default ui-corner-all login_button"  value="Entrar" />	
 			<h:commandButton action="#{LoginBean.criar}" class="ui-state-default ui-corner-all login_button"  value="Criar" />			
+		</h:form>
 	</div>
 
 </h:body>
