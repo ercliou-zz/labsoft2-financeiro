@@ -4,10 +4,10 @@
 	>
 <head>
 
-<link rel="stylesheet" href="jquery-ui-1.8.14.custom/css/south-street/jquery-ui-1.8.14.custom.css" type="text/css"></link>
-    <link rel="stylesheet" href="styles.css" type="text/css"></link>
-    <script type="text/javascript" src="jquery-ui-1.8.14.custom/js/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript" src="jquery-ui-1.8.14.custom/js/jquery-ui-1.8.14.custom.min.js"></script>
+<link rel="stylesheet" href="jquery-ui-1.8.18.custom/css/cupertino/jquery-ui-1.8.18.custom.css" type="text/css" media="screen" ></link>
+    <link rel="stylesheet" href="styles.css" type="text/css" media="screen" ></link>
+    <script type="text/javascript" src="jquery-ui-1.8.18.custom/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.8.18.custom/js/jquery-ui-1.8.18.custom.min.js"></script>
 <title>MD2S</title>
 </head>
 <h:body>
@@ -25,7 +25,8 @@
 					<td><h:inputText id="senha" label="Senha" value="#{LoginBean.usuario.senha}"/></td>
 				</tr>
 			</table>
-			<input id="button" class="ui-state-default ui-corner-all login_button" type="submit" value="Entrar"/>			
+			<h:commandButton action="#{LoginBean.validarLogin}" class="ui-state-default ui-corner-all login_button"  value="Entrar" />	
+			<h:commandButton action="#{LoginBean.criar}" class="ui-state-default ui-corner-all login_button"  value="Criar" />			
 	</div>
 
 </h:body>
