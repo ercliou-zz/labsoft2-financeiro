@@ -1,5 +1,7 @@
 package br.com.drerp.financeiro.business.transferencia;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import br.com.crud.util.DAOFactory;
@@ -44,10 +46,19 @@ public class RequisicaoTransferenciaBR {
 		return requisicaoTransferenciaDAO.listarAbertas();
 	}
 	
-	public Transferencia realizarTransferencia (RequisicaoTransferencia requisicaoTransferencia){
+	public List<RequisicaoTransferencia> listarAceitas(){
+		return requisicaoTransferenciaDAO.listarAceitas();
+	}
+	
+	public List<RequisicaoTransferencia> listarEfetuadas(){
+		return requisicaoTransferenciaDAO.listarEfetuadas();
+	}
+	
+	public Transferencia realizarTransferencia (RequisicaoTransferencia requisicaoTransferencia, BigDecimal valorTransferido){
 		Transferencia transferencia = new Transferencia();
-		transferencia.setDataRealizacaoMilis(0l);
+		transferencia.setDataRealizacaoMilis((new Date()).getTime());
 		transferencia.setRequisicao(requisicaoTransferencia);
+		transferencia.setValor(requisicaoTransferencia.getValor());
 		// mais coisassssssss
 		
 		requisicaoTransferencia.setStatus(StatusRequisicaoTransferencia.EFETUADA);

@@ -7,4 +7,6 @@ import br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia;
 
 public interface RequisicaoTransferenciaDAO extends GenericDAO<RequisicaoTransferencia>{
 	public List<RequisicaoTransferencia> listarAbertas();
+	public List<RequisicaoTransferencia> listarAceitas();
+	public List<RequisicaoTransferencia> listarEfetuadas();
 }

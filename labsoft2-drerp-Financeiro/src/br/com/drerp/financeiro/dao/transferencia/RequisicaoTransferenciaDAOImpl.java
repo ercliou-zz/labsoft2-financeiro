@@ -44,7 +44,15 @@ private Session session;
 		List<RequisicaoTransferencia> list = session.createCriteria(RequisicaoTransferencia.class).add(Restrictions.eq("status", StatusRequisicaoTransferencia.ABERTA)).list();
 		return list;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RequisicaoTransferencia> listarAceitas() {
+		return session.createCriteria(RequisicaoTransferencia.class).add(Restrictions.eq("status", StatusRequisicaoTransferencia.ACEITA)).list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<RequisicaoTransferencia> listarEfetuadas() {
+		return session.createCriteria(RequisicaoTransferencia.class).add(Restrictions.eq("status", StatusRequisicaoTransferencia.EFETUADA)).list();
+	}
 
-	
-	
 }
