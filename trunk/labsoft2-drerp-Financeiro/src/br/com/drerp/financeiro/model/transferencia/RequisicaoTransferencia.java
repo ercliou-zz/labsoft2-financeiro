@@ -3,11 +3,13 @@ package br.com.drerp.financeiro.model.transferencia;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "FIN_REQUISICAO")
@@ -31,7 +33,7 @@ public class RequisicaoTransferencia {
 	
 	private Long dataLimiteMilis;
 	
-	@OneToOne(mappedBy = "requisicao")
+	@OneToOne(mappedBy = "requisicao", cascade = CascadeType.ALL)
 	private Transferencia transferencia;
 
 	public Long getId() {

@@ -1,5 +1,6 @@
 package br.com.drerp.financeiro.web.transferencia;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -7,14 +8,14 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.drerp.financeiro.business.transferencia.RequisicaoTransferenciaBR;
 import br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia;
-import br.com.drerp.financeiro.model.transferencia.StatusRequisicaoTransferencia;
-import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
 @ManagedBean(name="RequisicaoTransferenciaBean")
 @RequestScoped
 public class RequisicaoTransferenciaBean {
 	
 	private RequisicaoTransferencia requisicaoTransferencia;
+	
+	private BigDecimal valorDepositado;
 	
 	private List<RequisicaoTransferencia> listaAprovada;
 	
@@ -47,18 +48,19 @@ public class RequisicaoTransferenciaBean {
 	public String realizarTransferencia(){
 		
 		// falta umas condicoes aquiiii !! verificar o status antes!!
+		requisicaoTransferenciaBR.realizarTransferencia(requisicaoTransferencia, valorDepositado);
 		
-		requisicaoTransferenciaBR.realizarTransferencia(requisicaoTransferencia);
-		
-		// para atualizar a lista?? see doencaBean
+		// para atualizar a lista
 		this.listaAprovada = null;
-		
 		return null;
 	}
-
 	
-	
-	
+	public String delete() {
+		requisicaoTransferenciaBR.delete(this.requisicaoTransferencia);
+		// para atualizar a lista
+		this.listaAprovada = null;
+		return null;
+	}
 	
 	public RequisicaoTransferencia getRequisicaoTransferencia() {
 		return requisicaoTransferencia;
@@ -70,13 +72,24 @@ public class RequisicaoTransferenciaBean {
 	}
 
 	public List<RequisicaoTransferencia> getListaAprovada() {
-		listaAprovada = requisicaoTransferenciaBR.list();
+		listaAprovada = requisicaoTransferenciaBR.listarAceitas();
+		listaAprovada.addAll(requisicaoTransferenciaBR.listarEfetuadas());
 		return listaAprovada;
 	}
 
 	public void setListaAprovada(List<RequisicaoTransferencia> listaAprovada) {
 		this.listaAprovada = listaAprovada;
 	}
+
+	public BigDecimal getValorDepositado() {
+		return valorDepositado;
+	}
+
+	public void setValorDepositado(BigDecimal valorDepositado) {
+		this.valorDepositado = valorDepositado;
+	}
+	
+	
 	
 	
 	
