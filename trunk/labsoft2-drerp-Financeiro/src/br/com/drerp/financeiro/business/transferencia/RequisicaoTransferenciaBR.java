@@ -37,4 +37,8 @@ public class RequisicaoTransferenciaBR {
 	public List<RequisicaoTransferencia> list(){
 		return requisicaoTransferenciaDAO.list();
 	}
+	
+	public List<RequisicaoTransferencia> listarAbertas(){
+		return requisicaoTransferenciaDAO.listarAbertas();
+	}
 }
