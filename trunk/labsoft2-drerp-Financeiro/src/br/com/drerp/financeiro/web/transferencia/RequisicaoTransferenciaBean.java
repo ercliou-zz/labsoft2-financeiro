@@ -1,11 +1,12 @@
 package br.com.drerp.financeiro.web.transferencia;
 
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import br.com.drerp.financeiro.business.transferencia.TransferenciaBR;
+import br.com.drerp.financeiro.business.transferencia.RequisicaoTransferenciaBR;
 import br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia;
-import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
 @ManagedBean(name="RequisicaoTransferenciaBean")
 @RequestScoped
@@ -13,6 +14,14 @@ public class RequisicaoTransferenciaBean {
 	
 	private RequisicaoTransferencia requisicaoTransferencia;
 	
+	private List<RequisicaoTransferencia> listaAprovada;
+	
+	private RequisicaoTransferenciaBR requisicaoTransferenciaBR;
+	
+	public RequisicaoTransferenciaBean() {
+		requisicaoTransferenciaBR = new RequisicaoTransferenciaBR();
+	}
+
 //	public String create(){
 //		requisicaoTransferencia = new RequisicaoTransferencia();
 //		return "requisicaoTransferenciaNovo";
@@ -22,6 +31,32 @@ public class RequisicaoTransferenciaBean {
 		requisicaoTransferencia = new RequisicaoTransferencia();
 		return "requisicaoTransferenciaNovo";
 	}
+	
+	public String listarAprovadas(){
+		
+		
+		return "RequisicaoTransferenciaLista";
+	}
+	
+	public String realizarTransferencia(){
+		return "";
+	}
+
+	
+	
+	
+	
+	public List<RequisicaoTransferencia> getListaAprovada() {
+		return listaAprovada;
+	}
+
+	public void setListaAprovada(List<RequisicaoTransferencia> listaAprovada) {
+		this.listaAprovada = listaAprovada;
+	}
+	
+	
+	
+	
 	
 //
 //	public String salvar(){
