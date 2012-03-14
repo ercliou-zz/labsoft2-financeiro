@@ -13,12 +13,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "FIN_REQUISICAO")
-public class RequisicaoTransferencia {
+public class RequisicaoTransferencia extends GenericModel {
 
-	@Id
-	@GeneratedValue
-	private Long id;
-	
 	@OneToOne
 	private Beneficiario beneficiario;
 	
@@ -35,14 +31,6 @@ public class RequisicaoTransferencia {
 	
 	@OneToOne(mappedBy = "requisicao", cascade = CascadeType.ALL)
 	private Transferencia transferencia;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public Beneficiario getBeneficiario() {
 		return beneficiario;

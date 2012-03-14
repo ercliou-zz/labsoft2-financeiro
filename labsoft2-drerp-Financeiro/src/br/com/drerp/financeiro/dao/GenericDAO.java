@@ -10,7 +10,7 @@ public abstract interface GenericDAO<T> {
 	
 	public void save(T entidade);
 	public void delete(T entidade);
-	public void alter(T entidade);
+	public void edit(T entidade);
 	public T getById(Long id);
 	public List<T> list();
 }

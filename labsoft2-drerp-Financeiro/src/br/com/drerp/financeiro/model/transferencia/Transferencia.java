@@ -14,11 +14,8 @@ import javax.persistence.Transient;
 
 @Entity
 @Table(name="FIN_TRANSFERENCIA")
-public class Transferencia {
+public class Transferencia extends GenericModel {
 	
-	@Id
-	@GeneratedValue
-	private long id;
 	private BigDecimal valor;
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="requisicao_fk")
@@ -26,13 +23,7 @@ public class Transferencia {
 	private Long dataRealizacaoMilis;
 	
 	private CategoriaTransferencia categoria;
-	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+
 	public BigDecimal getValor() {
 		return valor;
 	}

@@ -23,6 +23,7 @@ public class RequisicaoTransferenciaBean {
 	
 	public RequisicaoTransferenciaBean() {
 		requisicaoTransferenciaBR = new RequisicaoTransferenciaBR();
+		requisicaoTransferencia = new RequisicaoTransferencia();
 	}
 
 //	public String create(){
