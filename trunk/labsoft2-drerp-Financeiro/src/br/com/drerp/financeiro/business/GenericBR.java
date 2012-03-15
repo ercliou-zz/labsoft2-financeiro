@@ -1,4 +1,4 @@
-package br.com.drerp.financeiro.business.transferencia;
+package br.com.drerp.financeiro.business;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -9,10 +9,11 @@ import br.com.drerp.financeiro.dao.GenericModel;
 
 public abstract class GenericBR<T extends GenericDAO<Y>, Y extends GenericModel> {
 
-	private T dao;
+	protected T dao;
 
 	private Class<T> persistentClass;
 
+	@SuppressWarnings("unchecked")
 	public GenericBR() {
 		super();
 		this.persistentClass = (Class<T>) ((ParameterizedType) getClass()
@@ -21,6 +22,7 @@ public abstract class GenericBR<T extends GenericDAO<Y>, Y extends GenericModel>
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public T getById(Long id) {
 		return (T) this.dao.getById(id);
 	}

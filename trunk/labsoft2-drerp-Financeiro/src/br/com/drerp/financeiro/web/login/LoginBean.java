@@ -3,22 +3,22 @@ package br.com.drerp.financeiro.web.login;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import br.com.crud.util.DAOFactory;
-import br.com.drerp.financeiro.dao.login.LoginDAO;
+import br.com.drerp.financeiro.business.login.LoginBR;
 import br.com.drerp.financeiro.model.usuario.TiposUsuario;
 import br.com.drerp.financeiro.model.usuario.Usuario;
 
-@ManagedBean(name="LoginBean")
+@ManagedBean(name = "LoginBean")
 @RequestScoped
 public class LoginBean {
 
-	private Usuario usuario = new Usuario();
-	private LoginDAO loginDAO;
-	
-	public LoginBean(){
-		loginDAO = DAOFactory.createLoginDAO();
+	private Usuario usuario;
+	private LoginBR loginBR;
+
+	public LoginBean() {
+		this.usuario = new Usuario();
+		this.loginBR = new LoginBR();
 	}
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -27,31 +27,24 @@ public class LoginBean {
 		this.usuario = usuario;
 	}
 
-
 	public String validarLogin() {
-		Usuario usuarioRetorno = loginDAO.getByLogin(usuario.getLogin());
-		if (usuarioRetorno.getSenha() == null || !usuarioRetorno.getSenha().equals(usuario.getSenha())){
-			return "login";
-		}
-		
-		
-		if (usuarioRetorno.getTipo().equals(TiposUsuario.GERENTE)){
+		TiposUsuario tipo = this.loginBR.validarLogin(this.usuario);
+
+		switch (tipo) {
+		case GERENTE:
 			return "relatorioTransferencias";
-		}
-		else if (usuarioRetorno.getTipo().equals(TiposUsuario.OPERADOR)) {
-			
-			return "crudPlanosSaude";
-		}
-		else {
+		case OPERADOR:
+			return "relatorioTransferencias";
+		case INVALIDO:
 			return "login";
+		default:
+			return "login";
+
 		}
+	}
 
+	public void save() {
+		this.loginBR.save(this.usuario);
 	}
-	
-	public void criar(){
-		this.usuario.setTipo(TiposUsuario.GERENTE);
-		loginDAO.save(usuario);
-	}
-	
+
 }
-

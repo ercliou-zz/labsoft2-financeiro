@@ -6,6 +6,7 @@ import br.com.drerp.financeiro.dao.GenericDAO;
 
 public class GenericDAOFactory<T extends GenericDAO<?>> {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public T createDAO(Class type) {
 		try {
 			T entidade = (T) type.newInstance();
