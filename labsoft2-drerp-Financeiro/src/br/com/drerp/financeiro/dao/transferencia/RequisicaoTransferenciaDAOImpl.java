@@ -2,7 +2,6 @@ package br.com.drerp.financeiro.dao.transferencia;
 
 import java.util.List;
 
-import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.drerp.financeiro.dao.GenericDAOImpl;
