@@ -43,8 +43,9 @@ public class LoginBean {
 		}
 	}
 
-	public void save() {
+	public String save() {
 		this.loginBR.save(this.usuario);
+		return "login";
 	}
 
 }
