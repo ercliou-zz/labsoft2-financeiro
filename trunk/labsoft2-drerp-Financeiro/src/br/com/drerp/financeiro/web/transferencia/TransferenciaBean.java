@@ -31,4 +31,8 @@ public class TransferenciaBean {
 	public void setTransferencia(Transferencia transferencia) {
 		this.transferencia = transferencia;
 	}
+	
+	public String searchTransferencias(){	
+		return "login";
+	}
 }

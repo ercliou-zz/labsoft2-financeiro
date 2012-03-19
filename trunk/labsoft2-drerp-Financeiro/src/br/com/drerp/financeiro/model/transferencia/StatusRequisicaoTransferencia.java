@@ -1,5 +1,5 @@
 package br.com.drerp.financeiro.model.transferencia;
 
 public enum StatusRequisicaoTransferencia {
-	ABERTA, ACEITA, REJEITADA, EFETUADA
+	ABERTA, ACEITA, REJEITADA, EFETUADA, ERRO
 }
