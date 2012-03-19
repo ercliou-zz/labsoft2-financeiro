@@ -1,7 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	>
+	xmlns:h="http://java.sun.com/jsf/html">
 <head>
 
 <link rel="stylesheet" href="jquery-ui-1.8.18.custom/css/cupertino/jquery-ui-1.8.18.custom.css" type="text/css" media="screen" ></link>
@@ -20,14 +19,14 @@
 		<h:form>
 			<table>
 				<tr>
-					<td><h:inputText id="login" label="Login" value="#{LoginBean.usuario.login}"/></td>
+					<td><h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/></td>
 				</tr>
 				<tr>
-					<td><h:inputText id="senha" label="Senha" value="#{LoginBean.usuario.senha}"/></td>
+					<td><h:inputSecret id="senha" label="Senha" value="#{loginBean.usuario.senha}"/></td>
 				</tr>
 			</table>
-			<h:commandButton action="#{LoginBean.validarLogin}" class="ui-state-default ui-corner-all login_button"  value="Entrar" />	
-			<h:commandButton action="#{LoginBean.save}" class="ui-state-default ui-corner-all login_button"  value="Criar" />			
+			<h:commandButton action="#{loginBean.validarLogin}" class="ui-state-default ui-corner-all login_button"  value="Entrar" />	
+			<h:commandButton action="#{loginBean.save}" class="ui-state-default ui-corner-all login_button"  value="Criar" />			
 		</h:form>
 	</div>
 

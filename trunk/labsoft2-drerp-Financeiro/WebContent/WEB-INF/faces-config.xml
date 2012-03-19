@@ -22,14 +22,23 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
+		<managed-bean-name>transferenciaBean</managed-bean-name> 
+		<managed-bean-class>br.com.drerp.financeiro.web.transferencia.TransferenciaBean</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>requisicaoTransferenciaBean</managed-bean-name> 
 		<managed-bean-class>br.com.drerp.financeiro.web.transferencia.RequisicaoTransferenciaBean</managed-bean-class> 
 		<managed-bean-scope>request</managed-bean-scope>
-	</managed-bean>
-	
+	</managed-bean>	
 	<managed-bean> 
-		<managed-bean-name>LoginBean</managed-bean-name> 
+		<managed-bean-name>loginBean</managed-bean-name> 
 		<managed-bean-class>br.com.drerp.financeiro.web.login.LoginBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope> 
+	</managed-bean>
+	<managed-bean> 
+		<managed-bean-name>planoSaudeBean</managed-bean-name> 
+		<managed-bean-class>br.com.drerp.financeiro.web.planosaude.PlanoSaudeBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope> 
 	</managed-bean>
 

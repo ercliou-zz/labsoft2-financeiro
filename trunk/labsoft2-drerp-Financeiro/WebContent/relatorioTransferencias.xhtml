@@ -17,6 +17,22 @@
 			$( "input:submit, a, button", ".center" ).button();
 		});
 	</script>
+	<script>
+		$(function() {
+			$( "#dataInicio" ).datepicker({
+				changeMonth: true,
+				changeYear: true
+			});
+		});
+	</script>
+	<script>
+		$(function() {
+			$( "#dataFim" ).datepicker({
+				changeMonth: true,
+				changeYear: true
+			});
+		});
+	</script>
 <title>Dr ERP</title>
 
 </head>
@@ -46,29 +62,47 @@
 			<h1>Relatório</h1>
 			<div>
 				<div>
+					<h:form>
 					<table>
 						<tr>
-							<td> Início </td>
-							<td> Término </td>
-							<td> </td>
+							<td>Início:   <h:inputText id="dataInicio" label="Login" value="#{loginBean.usuario.login}"/>
+							  Término:   <h:inputText id="dataFim" label="Login" value="#{loginBean.usuario.login}"/></td>
 						</tr>
 						<tr>
-							<td>Efetuadas:</td>
-							<td></td>
+							<td>Status: 
+								<select>
+									<option value="todas">Todas</option>
+									<option value="aprovada">Aberta</option>
+									<option value="recusada">Aceita</option>
+									<option value="paga">Recusada</option>
+									<option value="erro">Efetuada</option>
+									<option value="erro">Erro</option>
+								</select>
+							</td>
 						</tr>
 						<tr>
-							<td>Em processamento:</td>
-							<td></td>
+							<td>Tipo: 
+								<select>
+									<option value="todas">Todas</option>
+									<option value="pagar">A pagar</option>
+									<option value="receber">A receber</option>
+								</select>
+							</td>
 						</tr>
 						<tr>
-							<td>Recusadas:</td>
-							<td></td>
+							<td>Pagador/Beneficiário:
+								<h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/>
+							</td>
 						</tr>
 						<tr>
-							<td>Total Gasto:</td>
-							<td></td>
+							<td>Valor Mínimo:   <h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/>
+							  Valor Máximo:   <h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/></td>
+						</tr>
+						<tr>
+							<td><h:commandButton action="#{TransferenciaBean.searchTransferencias}" class="ui-state-default ui-corner-all login_button"  value="Buscar" /></td>
 						</tr>
 					</table>
+					</h:form>
 				</div>
 			</div>
 		</div>

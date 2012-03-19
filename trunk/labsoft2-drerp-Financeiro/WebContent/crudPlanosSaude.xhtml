@@ -17,6 +17,11 @@
 			$( "input:submit, a, button", ".center" ).button();
 		});
 	</script>
+	<script>
+		$(function() {
+			$( "#tabs" ).tabs();
+		});
+	</script>
 <title>Dr ERP</title>
 
 </head>
@@ -45,8 +50,23 @@
 		<div class="center">
 			<h1>Planos de Saúde</h1>
 			<div>
-				<div>
-
+				<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">Criar</a></li>
+						<li><a href="#tabs-2">Listar</a></li>
+						<li><a href="#tabs-3">Editar</a></li>
+					</ul>
+					<div id="tabs-1">
+						
+					</div>
+					<div id="tabs-2">
+						<p>bbbb  X  E</p>
+						<p>cccc  X  E</p>
+						<p>dddd  X  E</p>
+					</div>
+					<div id="tabs-1">
+						
+					</div>
 				</div>
 			</div>
 		</div>
