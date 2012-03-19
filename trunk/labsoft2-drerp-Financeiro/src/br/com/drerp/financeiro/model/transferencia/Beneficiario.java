@@ -1,8 +1,6 @@
 package br.com.drerp.financeiro.model.transferencia;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import br.com.drerp.financeiro.dao.GenericModel;
