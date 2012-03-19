@@ -15,7 +15,7 @@ public class RequisicaoTransferenciaBean {
 	
 	private RequisicaoTransferencia requisicaoTransferencia;
 	
-	private BigDecimal valorDepositado;
+	private BigDecimal valorTransferido;
 	
 	private List<RequisicaoTransferencia> listaAprovada;
 	
@@ -49,10 +49,12 @@ public class RequisicaoTransferenciaBean {
 	public String realizarTransferencia(){
 		
 		// falta umas condicoes aquiiii !! verificar o status antes!!
-		requisicaoTransferenciaBR.realizarTransferencia(requisicaoTransferencia, valorDepositado);
+		requisicaoTransferenciaBR.realizarTransferencia(requisicaoTransferencia, valorTransferido);
+		
 		
 		// para atualizar a lista
 		this.listaAprovada = null;
+		this.valorTransferido = null;
 		return null;
 	}
 	
@@ -82,12 +84,12 @@ public class RequisicaoTransferenciaBean {
 		this.listaAprovada = listaAprovada;
 	}
 
-	public BigDecimal getValorDepositado() {
-		return valorDepositado;
+	public BigDecimal getValorTransferido() {
+		return valorTransferido;
 	}
 
-	public void setValorDepositado(BigDecimal valorDepositado) {
-		this.valorDepositado = valorDepositado;
+	public void setValorTransferido(BigDecimal valorTransferido) {
+		this.valorTransferido = valorTransferido;
 	}
 	
 	
