@@ -28,13 +28,13 @@ public class RequisicaoTransferenciaBR extends GenericBR<RequisicaoTransferencia
 		Transferencia transferencia = new Transferencia();
 		transferencia.setDataRealizacaoMilis((new Date()).getTime());
 		transferencia.setRequisicao(requisicaoTransferencia);
-		transferencia.setValor(requisicaoTransferencia.getValor());
+		transferencia.setValor(valorTransferido);
 		// mais coisassssssss
 		
 		requisicaoTransferencia.setStatus(StatusRequisicaoTransferencia.EFETUADA);
 		requisicaoTransferencia.setTransferencia(transferencia);
-		save(requisicaoTransferencia);
 		
+		save(requisicaoTransferencia);
 		return transferencia;
 	}
 }
