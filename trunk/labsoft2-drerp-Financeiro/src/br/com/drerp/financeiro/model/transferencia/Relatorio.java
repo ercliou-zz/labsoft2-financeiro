@@ -54,101 +54,81 @@ public class Relatorio extends GenericModel {
 		return dateCalendar;
 	}
 
-
 	public String getDateBeginString() {
 		return dateBeginString;
 	}
-
 
 	public void setDateBeginString(String dateBeginString) {
 		this.dateBeginString = dateBeginString;
 	}
 
-
 	public Calendar getDateBegin() {
 		return dateBegin;
 	}
-
 
 	public void setDateBegin(Calendar dateBegin) {
 		this.dateBegin = dateBegin;
 	}
 
-
 	public String getDateEndString() {
 		return dateEndString;
 	}
-
 
 	public void setDateEndString(String dateEndString) {
 		this.dateEndString = dateEndString;
 	}
 
-
 	public Calendar getDateEnd() {
 		return dateEnd;
 	}
-
 
 	public void setDateEnd(Calendar dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 
-
 	public StatusRequisicaoTransferencia getStatus() {
 		return status;
 	}
-
 
 	public void setStatus(StatusRequisicaoTransferencia status) {
 		this.status = status;
 	}
 
-
 	public TipoTransferencia getTipo() {
 		return tipo;
 	}
-
 
 	public void setTipo(TipoTransferencia tipo) {
 		this.tipo = tipo;
 	}
 
-
 	public String getPagBen() {
 		return pagBen;
 	}
-
 
 	public void setPagBen(String pagBen) {
 		this.pagBen = pagBen;
 	}
 
-
 	public long getMinValue() {
 		return minValue;
 	}
-
 
 	public void setMinValue(long minValue) {
 		this.minValue = minValue;
 	}
 
-
 	public long getMaxValue() {
 		return maxValue;
 	}
-
 
 	public void setMaxValue(long maxValue) {
 		this.maxValue = maxValue;
 	}
 
-
 	public List<Transferencia> getTransferencias() {
 		return transferencias;
 	}
-
 
 	public void setTransferencias(List<Transferencia> transferencias) {
 		this.transferencias = transferencias;

@@ -65,8 +65,8 @@
 					<h:form>
 					<table>
 						<tr>
-							<td>Início:   <h:inputText id="dataInicio" label="Login" value="#{loginBean.usuario.login}"/>
-							  Término:   <h:inputText id="dataFim" label="Login" value="#{loginBean.usuario.login}"/></td>
+							<td>Início:   <h:inputText id="dataInicio" label="Login" value="#{relatorioTransBean.relatorio.dateBeginString}"/>
+							  Término:   <h:inputText id="dataFim" label="Login" value="#{relatorioTransBean.relatorio.dateEndString}"/></td>
 						</tr>
 						<tr>
 							<td>Status: 
@@ -91,15 +91,15 @@
 						</tr>
 						<tr>
 							<td>Pagador/Beneficiário:
-								<h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/>
+								<h:inputText id="pagBen" label="Login" value="#{relatorioTransBean.relatorio.pagBen}"/>
 							</td>
 						</tr>
 						<tr>
-							<td>Valor Mínimo:   <h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/>
-							  Valor Máximo:   <h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/></td>
+							<td>Valor Mínimo:   <h:inputText id="valmin" label="Login" value="#{relatorioTransBean.relatorio.minValue}"/>
+							  Valor Máximo:   <h:inputText id="valmax" label="Login" value="#{relatorioTransBean.relatorio.maxValue}"/></td>
 						</tr>
 						<tr>
-							<td><h:commandButton action="#{TransferenciaBean.searchTransferencias}" class="ui-state-default ui-corner-all login_button"  value="Buscar" /></td>
+							<td><h:commandButton action="#{relatorioTransBean.searchTransferencias}" class="ui-state-default ui-corner-all login_button"  value="Buscar" /></td>
 						</tr>
 					</table>
 					</h:form>
