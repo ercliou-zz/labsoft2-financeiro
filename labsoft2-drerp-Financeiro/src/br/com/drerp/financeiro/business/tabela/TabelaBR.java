@@ -17,7 +17,7 @@ public class TabelaBR extends GenericBR<TabelaDAOImpl, Tabela>{
 	
 	private ItemTabelaDAO itemTabelaDAO;
 	
-	public TabelaBR(ItemTabelaDAO itemTabelaDAO) {
+	public TabelaBR() {
 		super();
 		this.itemTabelaDAO = (new GenericDAOFactory<ItemTabelaDAO>()).createDAO(ItemTabela.class);
 	}
