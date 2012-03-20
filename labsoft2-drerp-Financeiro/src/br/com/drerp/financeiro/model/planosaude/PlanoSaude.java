@@ -17,5 +17,4 @@ public class PlanoSaude extends GenericModel {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
 }
