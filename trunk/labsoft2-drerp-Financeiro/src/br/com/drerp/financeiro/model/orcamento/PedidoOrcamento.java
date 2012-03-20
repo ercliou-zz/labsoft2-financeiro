@@ -1,5 +1,6 @@
 package br.com.drerp.financeiro.model.orcamento;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,6 +36,8 @@ public class PedidoOrcamento extends GenericModel {
 	
 	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
 	private Orcamento orcamento;
+	
+	private Long dataPedidoMilis;
 
 	public Pagador getPagador() {
 		return pagador;
@@ -67,8 +70,17 @@ public class PedidoOrcamento extends GenericModel {
 	public void setOrcamento(Orcamento orcamento) {
 		this.orcamento = orcamento;
 	}
-	
-	
-	
 
+	public Long getDataPedidoMilis() {
+		return dataPedidoMilis;
+	}
+
+	public void setDataPedidoMilis(Long dataPedidoMilis) {
+		this.dataPedidoMilis = dataPedidoMilis;
+	}
+	
+	public Date getDataRequisicao() {
+		return new Date(this.dataPedidoMilis);
+	}
+	
 }
