@@ -11,7 +11,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
-    
+<!--     	<property name="hibernate.hbm2ddl.import_files">importar.sql</property> -->
     
 		<mapping class="br.com.crud.model.Entidade"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Transferencia"/>
@@ -24,7 +24,8 @@
     	<mapping class="br.com.drerp.financeiro.model.tabela.Coluna"/>
     	<mapping class="br.com.drerp.financeiro.model.tabela.Valor"/>
     	<mapping class="br.com.drerp.financeiro.model.planosaude.PlanoSaude"/>
-    
+    	<mapping class="br.com.drerp.financeiro.model.orcamento.PedidoOrcamento"/>
+    	<mapping class="br.com.drerp.financeiro.model.orcamento.Orcamento"/>
     
     </session-factory>
     
