@@ -24,6 +24,7 @@
     	<mapping class="br.com.drerp.financeiro.model.tabela.Coluna"/>
     	<mapping class="br.com.drerp.financeiro.model.tabela.Valor"/>
     	<mapping class="br.com.drerp.financeiro.model.planosaude.PlanoSaude"/>
+    	<mapping class="br.com.drerp.financeiro.model.planosaude.Procedimento"/>
     	<mapping class="br.com.drerp.financeiro.model.orcamento.PedidoOrcamento"/>
     	<mapping class="br.com.drerp.financeiro.model.orcamento.Orcamento"/>
     
