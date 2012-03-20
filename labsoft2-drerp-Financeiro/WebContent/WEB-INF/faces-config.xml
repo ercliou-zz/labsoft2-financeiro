@@ -27,6 +27,11 @@
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
+		<managed-bean-name>relatorioTransBean</managed-bean-name> 
+		<managed-bean-class>br.com.drerp.financeiro.web.transferencia.RelatorioBean</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>requisicaoTransferenciaBean</managed-bean-name> 
 		<managed-bean-class>br.com.drerp.financeiro.web.transferencia.RequisicaoTransferenciaBean</managed-bean-class> 
 		<managed-bean-scope>request</managed-bean-scope>

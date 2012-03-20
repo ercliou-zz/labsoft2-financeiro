@@ -32,7 +32,4 @@ public class TransferenciaBean {
 		this.transferencia = transferencia;
 	}
 	
-	public String searchTransferencias(){	
-		return "login";
-	}
 }
