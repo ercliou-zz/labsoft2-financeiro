@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.drerp.financeiro.dao.GenericModel;
 
@@ -64,6 +65,7 @@ public class RequisicaoTransferencia extends GenericModel {
 		this.dataRequisicaoMilis = dataRequisicaoMilis;
 	}
 
+	@Transient
 	public Date getDataRequisicao() {
 		return new Date(this.dataRequisicaoMilis);
 	}

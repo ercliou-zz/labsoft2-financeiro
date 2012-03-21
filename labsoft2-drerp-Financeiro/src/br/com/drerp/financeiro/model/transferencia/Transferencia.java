@@ -11,49 +11,66 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.drerp.financeiro.dao.GenericModel;
+import br.com.drerp.financeiro.model.transferencia.tributo.Tributo;
 
 @Entity
-@Table(name="FIN_TRANSFERENCIA")
+@Table(name = "FIN_TRANSFERENCIA")
 public class Transferencia extends GenericModel {
-	
+
 	private BigDecimal valor;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="requisicao_fk")
+	@JoinColumn(name = "requisicao_fk")
 	private RequisicaoTransferencia requisicao;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "tributo_fk")
+	private Tributo tributo;
 	private Long dataRealizacaoMilis;
-	
+
 	private CategoriaTransferencia categoria;
 
 	public BigDecimal getValor() {
 		return valor;
 	}
+
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
+
+	public Tributo getTributo() {
+		return tributo;
+	}
+
+	public void setTributo(Tributo tributo) {
+		this.tributo = tributo;
+	}
+
 	public Long getDataRealizacaoMilis() {
 		return dataRealizacaoMilis;
 	}
+
 	public void setDataRealizacaoMilis(Long dataRealizacaoMilis) {
 		this.dataRealizacaoMilis = dataRealizacaoMilis;
 	}
-	
+
 	@Transient
 	public Date getDataRealizacao() {
 		return new Date(this.dataRealizacaoMilis);
 	}
-	
+
 	public RequisicaoTransferencia getRequisicao() {
 		return requisicao;
 	}
+
 	public void setRequisicao(RequisicaoTransferencia requisicao) {
 		this.requisicao = requisicao;
 	}
+
 	public CategoriaTransferencia getCategoria() {
 		return categoria;
 	}
+
 	public void setCategoria(CategoriaTransferencia categoria) {
 		this.categoria = categoria;
 	}
-	
-	
+
 }
