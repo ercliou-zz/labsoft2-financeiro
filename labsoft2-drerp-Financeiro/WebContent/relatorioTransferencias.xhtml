@@ -1,6 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <head>
 
 <link rel="stylesheet" href="jquery-ui-1.8.18.custom/css/cupertino/jquery-ui-1.8.18.custom.css" type="text/css" media="screen" ></link>
@@ -102,10 +103,55 @@
 					<h:commandButton action="#{relatorioTransBean.searchTransferencias}" style="left:0px; margin-top:-25px;" class="ui-state-default ui-corner-all login_button"  value="Buscar" />
 					</h:form>
 				</div>
-				<h:panelGroup rendered="#{relatorioTransBean.relatorio.numTransferencias > '0'}">
-					<table>
-						<tr>aaaaa</tr>
-					</table>
+				<h:panelGroup rendered="#{relatorioTransBean.relatorio.numTransferencias > '0'}" >
+						<h:form id="form" style="margin-top:55px;"> 
+		
+							<p:dataTable var="trans" value="#{relatorioTransBean.relatorio.transferencias}">
+							
+								<p:column id="valor" sortBy="#{trans.requisicao.beneficiario.valor}">
+									<f:facet name="header">  
+						                Valor
+						            </f:facet>
+						            #{trans.valor}
+								</p:column>
+							
+								<p:column id="beneficiario" sortBy="#{trans.requisicao.beneficiario.nome}">
+									<f:facet name="header">  
+						                Beneficiario
+						            </f:facet>
+						            #{trans.requisicao.beneficiario.nome}
+								</p:column>
+								
+								<p:column id="pagador" sortBy="#{trans.requisicao.pagador.nome}">
+									<f:facet name="header">  
+						                Pagador
+						            </f:facet>
+						            #{trans.requisicao.pagador.nome}
+								</p:column>
+								
+								<p:column id="status" sortBy="#{trans.requisicao.pagador.nome}">
+									<f:facet name="header">  
+						                Status
+						            </f:facet>
+						            #{trans.requisicao.status}
+								</p:column>
+								
+								<p:column id="dataRequisicao" sortBy="#{trans.requisicao.pagador.nome}">
+									<f:facet name="header">  
+						                Data Requisição
+						            </f:facet>
+						            #{trans.requisicao.dataRequisicaoMilis}
+								</p:column>
+								
+								<p:column id="dataLimite" sortBy="#{trans.requisicao.pagador.nome}">
+									<f:facet name="header">  
+						                Data Limite
+						            </f:facet>
+						            #{trans.requisicao.dataLimiteMilis}
+								</p:column>
+							
+							</p:dataTable>
+						</h:form>
 				</h:panelGroup>
 			</div>
 		</div>
