@@ -19,10 +19,16 @@
 		<h:form>
 			<table>
 				<tr>
-					<td><h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/></td>
+					<td>
+						<h:outputLabel value="Login: " for="login"/>
+						<h:inputText id="login" label="Login" value="#{loginBean.usuario.login}"/>
+					</td>
 				</tr>
 				<tr>
-					<td><h:inputSecret id="senha" label="Senha" value="#{loginBean.usuario.senha}"/></td>
+					<td>
+						<h:outputLabel value="Senha: " for="senha"/>
+						<h:inputSecret id="senha" label="Senha" value="#{loginBean.usuario.senha}"/>
+					</td>
 				</tr>
 			</table>
 			<h:commandButton action="#{loginBean.validarLogin}" class="ui-state-default ui-corner-all login_button"  value="Entrar" />	
