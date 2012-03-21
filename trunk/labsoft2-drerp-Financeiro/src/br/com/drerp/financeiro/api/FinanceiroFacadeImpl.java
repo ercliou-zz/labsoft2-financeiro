@@ -7,7 +7,7 @@ import java.util.List;
 import br.com.drerp.financeiro.business.orcamento.PedidoOrcamentoBR;
 import br.com.drerp.financeiro.business.transferencia.RequisicaoTransferenciaBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.tabela.ItemTabela;
+import br.com.drerp.financeiro.model.planosaude.Procedimento;
 import br.com.drerp.financeiro.model.transferencia.Beneficiario;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 import br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia;
@@ -43,11 +43,12 @@ public class FinanceiroFacadeImpl implements FinanceiroFacade {
 	}
 
 	@Override
-	public BigDecimal pedirOrcamento(Pagador pagador, List<ItemTabela> procedimentos, PlanoSaude planoSaude) {
+	public BigDecimal pedirOrcamento(Pagador pagador, List<Procedimento> procedimentos, PlanoSaude planoSaude) {
 		
 		// tratar excecao!!
 		
 		return this.pedidoBR.pedirOrcamento(pagador, procedimentos, planoSaude);
 	}
+	
 
 }

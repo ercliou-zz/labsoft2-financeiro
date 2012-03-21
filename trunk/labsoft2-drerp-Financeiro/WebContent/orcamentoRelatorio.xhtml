@@ -1,0 +1,67 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>relatorio</title>
+</h:head>
+
+<h:body>
+
+	<h:form>
+	
+	<h:panelGrid columns="2">
+		<h:outputLabel value="Tipo de Gráfico: " for="tipoGrafico" />
+		<h:selectOneMenu id="tipoGrafico" value="#{orcamentoBean.tipoGrafico}">
+		  <f:selectItem itemLabel="Barra" itemValue="BARRA" />
+		  <f:selectItem itemLabel="Linha" itemValue="LINHA" />
+		  <f:selectItem itemLabel="Pizza" itemValue="PIZZA" />
+		</h:selectOneMenu>
+		
+		<h:outputLabel value="Parâmetro 1: " for="eixoX" />
+		<h:selectOneMenu id="eixoX" value="#{orcamentoBean.eixoX}">
+		  <f:selectItem itemLabel="Quantidade de Pedidos de Orçamentos" itemValue="BAR" />
+		  <f:selectItem itemLabel="Valor de Pedidos de Orçamentos" itemValue="LINE" />
+		  <f:selectItem itemLabel="Plano Saude" itemValue="PIE" />
+		  <f:selectItem itemLabel="Tempo" itemValue="PIE1" />
+		</h:selectOneMenu>
+		
+		<h:outputLabel value="Parâmetro 2: " for="eixoY" />
+		<h:selectOneMenu id="eixoY" value="#{orcamentoBean.eixoY}">
+		  <f:selectItem itemLabel="Quantidade de Pedidos de Orçamentos" itemValue="BAR" />
+		  <f:selectItem itemLabel="Valor de Pedidos de Orçamentos" itemValue="LINE" />
+		  <f:selectItem itemLabel="Plano Saude" itemValue="PIE" />
+		  <f:selectItem itemLabel="Tempo" itemValue="PIE1" />
+		</h:selectOneMenu>
+		
+		<h:outputText value="Planos de Saúde: " />
+		<h:selectManyCheckbox layout="pageDirection"
+				value="#{orcamentoBean.planosSelecionados}" required="true">
+			<c:forEach var="plano" items="#{orcamentoBean.planosList}">
+				<f:selectItem itemLabel="#{plano.nome}" itemValue="#{plano.id}" />
+			</c:forEach>
+		</h:selectManyCheckbox>
+	
+	</h:panelGrid>
+	
+	<h:commandButton action="#{orcamentoBean.gerarGrafico}" value="Gerar Gráfico" />
+	
+	</h:form>
+	
+<p:barChart id="basic" value="#{orcamentoBean.categoryModel}" legendPosition="ne"  
+            title="Basic Bar Chart" min="0" max="200" style="height:300px"/>  
+  
+<p:barChart id="horizontal" value="#{orcamentoBean.categoryModel}" legendPosition="se" style="height:300px"  
+            title="Horizontal Bar Chart" orientation="horizontal" min="0" max="200"/>  
+  
+<p:barChart id="stacked" value="#{orcamentoBean.categoryModel}" legendPosition="ne" style="height:300px"  
+            title="Stacked Bar Chart" stacked="true" barMargin="50" min="0" max="300"/>  
+</h:body>
+
+</html>
+
+
+
