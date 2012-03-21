@@ -18,7 +18,8 @@ public class Relatorio extends GenericModel {
 	private long minValue;
 	private long maxValue;
 	private List<Transferencia> transferencias = new ArrayList<Transferencia>();
-	
+	private int numTransferencias = 0;
+
 	
 	public Calendar stringToDate(String dateString){
 		Calendar dateCalendar = new Calendar() {
@@ -132,6 +133,15 @@ public class Relatorio extends GenericModel {
 
 	public void setTransferencias(List<Transferencia> transferencias) {
 		this.transferencias = transferencias;
+		this.numTransferencias = transferencias.size();
 	}
-	
+
+	public int getNumTransferencias() {
+		return numTransferencias;
+	}
+
+	public void setNumTransferencias(int numTransferencias) {
+		this.numTransferencias = numTransferencias;
+	}
+
 }
