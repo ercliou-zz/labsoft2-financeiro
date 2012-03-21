@@ -33,12 +33,12 @@ public class PlanoSaudeBean {
 	
 	public String save() {
 		this.planoBR.save(this.plano);
-		return "crudPlanosSaude";
+		return "crudPlanosSaude&tabs-2";
 	}
 	
 	public String edit(){
 		this.planoBR.save(this.plano);
-		return "crudPlanosSaude";
+		return "crudPlanosSaude#tabs-3";
 	}
 
 	public String delete(){
