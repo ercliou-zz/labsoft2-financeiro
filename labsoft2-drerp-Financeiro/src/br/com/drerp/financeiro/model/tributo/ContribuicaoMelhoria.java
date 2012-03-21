@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.com.drerp.financeiro.dao.GenericModel;
+
 @Entity
 @Table(name = "FIN_CONTRIBUICAO_MELHORIA")
-public class ContribuicaoMelhoria {
+public class ContribuicaoMelhoria extends GenericModel {
 	
 	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, targetEntity = Tributo.class)
 	private Tributo tributo;

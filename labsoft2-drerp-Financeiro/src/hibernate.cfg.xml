@@ -19,6 +19,7 @@
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Pagador"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia"/>
     	<mapping class="br.com.drerp.financeiro.model.tributo.ContribuicaoEspecial"/>
+    	<mapping class="br.com.drerp.financeiro.model.tributo.ContribuicaoMelhoria"/>
     	<mapping class="br.com.drerp.financeiro.model.tributo.EmprestimoCompulsorio"/>
     	<mapping class="br.com.drerp.financeiro.model.tributo.Imposto"/>
     	<mapping class="br.com.drerp.financeiro.model.tributo.Taxa"/>
