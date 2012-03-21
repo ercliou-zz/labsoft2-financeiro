@@ -23,8 +23,8 @@ public abstract class GenericBR<T extends GenericDAO<Y>, Y extends GenericModel>
 	}
 
 	@SuppressWarnings("unchecked")
-	public T getById(Long id) {
-		return (T) this.dao.getById(id);
+	public Y getById(Long id) {
+		return (Y) this.dao.getById(id);
 	}
 
 	public List<Y> list() {
