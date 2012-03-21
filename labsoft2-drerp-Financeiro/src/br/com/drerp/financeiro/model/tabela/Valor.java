@@ -1,6 +1,7 @@
 package br.com.drerp.financeiro.model.tabela;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -39,6 +40,11 @@ public class Valor extends GenericModel{
 	}
 	public BigDecimal getValor() {
 		return valor;
+	}
+	public String getValorMoeda(){
+		DecimalFormat formatter = new DecimalFormat();
+		formatter.setMaximumFractionDigits(2);
+		return formatter.format(valor);
 	}
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
