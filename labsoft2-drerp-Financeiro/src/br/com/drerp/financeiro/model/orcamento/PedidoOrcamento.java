@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 import br.com.drerp.financeiro.dao.GenericModel;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
+import br.com.drerp.financeiro.model.planosaude.Procedimento;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 
@@ -26,10 +27,10 @@ public class PedidoOrcamento extends GenericModel {
 	
 	@OneToMany
     @JoinTable(
-            name="FIN_PEDIDO_ITEMTABELA",
+            name="FIN_PEDIDO_PROCEDIMENTO",
             joinColumns = { @JoinColumn( name="PEDIDO_ID") },
-            inverseJoinColumns = @JoinColumn( name="ITEMTABELA_ID"))
-	private List<ItemTabela> procedimentos;
+            inverseJoinColumns = @JoinColumn( name="PROCEDIMENTO_ID"))
+	private List<Procedimento> procedimentos;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private PlanoSaude plano;
@@ -47,11 +48,11 @@ public class PedidoOrcamento extends GenericModel {
 		this.pagador = pagador;
 	}
 
-	public List<ItemTabela> getProcedimentos() {
+	public List<Procedimento> getProcedimentos() {
 		return procedimentos;
 	}
 
-	public void setProcedimentos(List<ItemTabela> procedimentos) {
+	public void setProcedimentos(List<Procedimento> procedimentos) {
 		this.procedimentos = procedimentos;
 	}
 
