@@ -11,6 +11,8 @@ public class TransferenciaBR extends GenericBR<TransferenciaDAOImpl, Transferenc
 
 	public List<Transferencia> searchTransferencia(){
 		List<Transferencia> list = new ArrayList<Transferencia>();
+		Transferencia trans = new Transferencia();
+		list.add(trans);
 		return list;
 	}
 }
