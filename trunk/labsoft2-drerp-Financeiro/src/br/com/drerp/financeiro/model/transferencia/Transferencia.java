@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.drerp.financeiro.dao.GenericModel;
-import br.com.drerp.financeiro.model.transferencia.tributo.Tributo;
+import br.com.drerp.financeiro.model.tributo.Tributo;
 
 @Entity
 @Table(name = "FIN_TRANSFERENCIA")
