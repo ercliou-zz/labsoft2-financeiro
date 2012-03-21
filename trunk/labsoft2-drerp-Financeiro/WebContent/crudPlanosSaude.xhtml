@@ -57,15 +57,53 @@
 						<li><a href="#tabs-3">Editar</a></li>
 					</ul>
 					<div id="tabs-1">
-						
+					<h:form>
+						<table>
+							<tr>
+								<h:outputLabel value="Nome: " for="nome"/>
+								<h:inputText id="nome" label="nome" value="#{planoSaudeBean.plano.nome}"/>
+							</tr>
+						</table>
+					<h:commandButton action="#{planoSaudeBean.save}" class="ui-state-default ui-corner-all login_button"  value="Criar" />			
+					</h:form>
 					</div>
 					<div id="tabs-2">
-						<p>bbbb  X  E</p>
-						<p>cccc  X  E</p>
-						<p>dddd  X  E</p>
-					</div>
-					<div id="tabs-1">
 						
+						<h:form>
+							<h:dataTable value="#{planoSaudeBean.planos}" var="planoSaude" rules="rows">
+								<f:facet name="caption"></f:facet>
+					
+								<f:facet name="footer"></f:facet>
+					
+								<h:column>
+									<f:facet name="header"></f:facet>
+									<h:outputText value="#{planoSaude.nome}"></h:outputText>
+								</h:column>
+								<h:column>
+									<f:facet name="header"></f:facet>
+									<h:commandLink action="#{planoSaudeBean.edit}">edit
+										<f:setPropertyActionListener target="#{planoSaudeBean.plano}" value="#{doenca}" />
+									</h:commandLink>
+								</h:column>
+					
+								<h:column>
+									<f:facet name="header"></f:facet>
+									<h:commandLink action="#{planoSaudeBean.delete}">delete
+										<f:setPropertyActionListener target="#{planoSaudeBean.plano}" value="#{doenca}" />
+									</h:commandLink>
+								</h:column>
+					
+							</h:dataTable>
+						</h:form>
+						
+						
+					</div>
+					<div id="tabs-3">
+						<table>
+							<tr>
+								<h:inputText id="login" label="Login" value="#{planoSaudeBean.plano.nome}"/>
+							</tr>
+						</table>
 					</div>
 				</div>
 			</div>

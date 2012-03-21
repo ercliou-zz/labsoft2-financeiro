@@ -98,12 +98,15 @@
 							<td>Valor Mínimo:   <h:inputText id="valmin" label="Login" value="#{relatorioTransBean.relatorio.minValue}"/>
 							  Valor Máximo:   <h:inputText id="valmax" label="Login" value="#{relatorioTransBean.relatorio.maxValue}"/></td>
 						</tr>
-						<tr>
-							<td><h:commandButton action="#{relatorioTransBean.searchTransferencias}" class="ui-state-default ui-corner-all login_button"  value="Buscar" /></td>
-						</tr>
 					</table>
+					<h:commandButton action="#{relatorioTransBean.searchTransferencias}" style="left:0px; margin-top:-25px;" class="ui-state-default ui-corner-all login_button"  value="Buscar" />
 					</h:form>
 				</div>
+				<h:panelGroup rendered="#{relatorioTransBean.relatorio.numTransferencias > '0'}">
+					<table>
+						<tr>aaaaa</tr>
+					</table>
+				</h:panelGroup>
 			</div>
 		</div>
 	</div>
