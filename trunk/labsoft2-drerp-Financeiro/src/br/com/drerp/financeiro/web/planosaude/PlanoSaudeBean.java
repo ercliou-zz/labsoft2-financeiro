@@ -13,11 +13,17 @@ import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 @RequestScoped
 public class PlanoSaudeBean {
 
+	private final int LISTAR = 0;
+	private final int EDITAR = 1;
+	
 	private PlanoSaude plano;
 	private PlanoSaudeBR planoBR;
 	private List<PlanoSaude> planos;
 	
+	private int tabIndex;
+	
 	public PlanoSaudeBean(){
+		tabIndex = LISTAR;
 		this.plano = new PlanoSaude();
 		this.planoBR = new PlanoSaudeBR();
 		this.planos = new ArrayList<PlanoSaude>();
@@ -31,14 +37,22 @@ public class PlanoSaudeBean {
 		this.plano = plano;
 	}
 	
-	public String save() {
-		this.planoBR.save(this.plano);
-		return "crudPlanosSaude&tabs-2";
+	public String edit() {
+		tabIndex = EDITAR;
+		return "crudPlanosSaude";
 	}
 	
-	public String edit(){
+	public String create() {
+		tabIndex = LISTAR;
+		this.plano.setId(null);
 		this.planoBR.save(this.plano);
-		return "crudPlanosSaude#tabs-3";
+		return "crudPlanosSaude";
+	}
+	
+	public String update() {
+		tabIndex = LISTAR;
+		this.planoBR.save(this.plano);
+		return "crudPlanosSaude";
 	}
 
 	public String delete(){
@@ -50,4 +64,17 @@ public class PlanoSaudeBean {
 		this.planos = planoBR.list();
 		return this.planos;
 	}
+
+	public int getTabIndex() {
+		return tabIndex;
+	}
+
+	public void setTabIndex(int tabIndex) {
+		this.tabIndex = tabIndex;
+	}
+
+	public void setPlanos(List<PlanoSaude> planos) {
+		this.planos = planos;
+	}
+	
 }
