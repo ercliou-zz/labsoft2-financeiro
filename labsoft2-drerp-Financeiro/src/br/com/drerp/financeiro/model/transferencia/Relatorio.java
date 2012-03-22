@@ -14,7 +14,8 @@ public class Relatorio extends GenericModel {
 	private Calendar dateEnd;
 	private StatusRequisicaoTransferencia status;
 	private TipoTransferencia tipo;
-	private String pagBen;
+	private String pagador;
+	private String beneficiario;
 	private long minValue;
 	private long maxValue;
 	private List<Transferencia> transferencias = new ArrayList<Transferencia>();
@@ -103,12 +104,20 @@ public class Relatorio extends GenericModel {
 		this.tipo = tipo;
 	}
 
-	public String getPagBen() {
-		return pagBen;
+	public String getPagador() {
+		return pagador;
 	}
 
-	public void setPagBen(String pagBen) {
-		this.pagBen = pagBen;
+	public void setPagador(String pagador) {
+		this.pagador = pagador;
+	}
+
+	public String getBeneficiario() {
+		return beneficiario;
+	}
+
+	public void setBeneficiario(String beneficiario) {
+		this.beneficiario = beneficiario;
 	}
 
 	public long getMinValue() {
