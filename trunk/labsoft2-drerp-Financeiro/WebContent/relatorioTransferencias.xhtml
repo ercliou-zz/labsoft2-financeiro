@@ -66,10 +66,6 @@
 					<h:form>
 					<table>
 						<tr>
-							<td>Início:   <h:inputText id="dataInicio" label="Login" value="#{relatorioTransBean.relatorio.dateBeginString}"/>
-							  Término:   <h:inputText id="dataFim" label="Login" value="#{relatorioTransBean.relatorio.dateEndString}"/></td>
-						</tr>
-						<tr>
 							<td>Status: 
 								<select>
 									<option value="todas">Todas</option>
@@ -91,8 +87,17 @@
 							</td>
 						</tr>
 						<tr>
-							<td>Pagador/Beneficiário:
-								<h:inputText id="pagBen" label="Login" value="#{relatorioTransBean.relatorio.pagBen}"/>
+							<td>Início:   <h:inputText id="dataInicio" label="Login" value="#{relatorioTransBean.relatorio.dateBeginString}"/>
+							  Término:   <h:inputText id="dataFim" label="Login" value="#{relatorioTransBean.relatorio.dateEndString}"/></td>
+						</tr>
+						<tr>
+							<td>Pagador:
+								<h:inputText id="pagador" label="pagador" value="#{relatorioTransBean.relatorio.pagador}"/>
+							</td>
+						</tr>
+						<tr>
+							<td>Beneficiário:
+								<h:inputText id="beneficiario" label="beneficiario" value="#{relatorioTransBean.relatorio.beneficiario}"/>
 							</td>
 						</tr>
 						<tr>
