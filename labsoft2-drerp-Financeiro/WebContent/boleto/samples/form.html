@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt" lang="pt">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Boleto Bancário . com - Exemplos</title>
+		<link rel="shortcut icon" href="http://www.boletobancario.com/favicon.ico" />
+		<link href="../css/estilo.css" rel="stylesheet" type="text/css" title="Boleto" />
+	</head>
+	<body>
+		<div id="mestre">
+			<div id="cabecalho">
+				<a href="http://www.boletobancario.com/"><img src="../imagens/logo.png" alt="Boleto Bancário . com" /></a>
+				<h1>Boleto Bancário . com</h1>
+				<h2>Desde 2000 no mercado de emissão de boletos!</h2>
+			</div>
+			<div id="conteudo">
+				<ul id="menu_int">
+					<li><a href="../index.jsp">Início</a></li>
+				</ul>
+				<form action="boletoForm.jsp" method="post">
+					<fieldset>
+						<label for="nossoNumero">Nosso Número: <input type="text" name="nossoNumero" value="378" id="nossoNumero" /></label><br />
+						<label for="numDoc">Número do Documento: <input type="text" name="numDoc" value="GC 8289" id="numDoc" /></label><br />
+						<label for="valor">Valor: <input type="text" name="valor" value="427,90" id="valor" /></label><br />
+						<label for="vencimento">Vencimento: <input type="text" name="vencimento" value="17/03/2012" id="vencimento" /></label><br />
+						<label for="nomeSac">Nome do Sacado: <input type="text" name="nomeSac" value="Beltrano de Tal" id="nomeSac" /></label><br />
+						<label for="enderecoSac">Endereço do Sacado: <input type="text" name="enderecoSac" value="R. Silas Salazar, 768 - 8º Andar" id="enderecoSac" /></label><br />
+						<label for="cepSac">CEP do Sacado: <input type="text" name="cepSac" value="12345678" id="cepSac" /></label><br />
+						<label for="cidadeSac">Cidade do Sacado: <input type="text" name="cidadeSac" value="São Paulo" id="cidadeSac" /></label><br />
+						<label for="estadoSac">Estado do Sacado: <input type="text" name="estadoSac" value="SP" id="estadoSac" /></label><br />
+						<label for="infoAdicionais">Informações Adicionais: <input type="text" name="infoAdicionais" value="" id="infoAdicionais" /></label><br />
+						<label for="msg1">Mensagem linha 1: <input type="text" name="msg1" value="Fatura referente aos serviços prestados" id="msg1" /></label><br />
+						<label for="msg2">Mensagem linha 2: <input type="text" name="msg2" value="Após o vencimento acesse nosso site para gerar uma nova fatura" id="msg2" /></label><br />
+						<label for="msg3">Mensagem linha 3: <input type="text" name="msg3" value="" id="msg3" /></label><br />
+						<label for="msg4">Mensagem linha 4: <input type="text" name="msg4" value="" id="msg4" /></label><br />
+						<label for="msg5">Mensagem linha 5: <input type="text" name="msg5" value="" id="msg5" /></label><br />
+						<label for="msg6">Mensagem linha 6: <input type="text" name="msg6" value="" id="msg6" /></label><br />
+						<label for="msg7">Mensagem linha 7: <input type="text" name="msg7" value="" id="msg7" /></label><br />
+						<label for="msg8">Mensagem linha 8: <input type="text" name="msg8" value="" id="msg8" /></label><br />
+						<label for="msg9">Mensagem linha 9: <input type="text" name="msg9" value="www.suaempresa.com.br" id="msg9" /></label>
+					</fieldset>
+					<input type="submit" value="Gerar Boleto" class="bt" />
+				</form>
+			</div>
+			<div id="rodape"><address>Rua Des. Ermelino de Leão, 35 - 3º Andar - Centro - Curitiba - PR<br /></address></div>
+		</div>
+	</body>
+</html>
