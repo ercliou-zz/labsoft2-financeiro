@@ -9,6 +9,7 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.drerp.financeiro.business.tabela.TabelaBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
+import br.com.drerp.financeiro.model.planosaude.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Tabela;
@@ -30,7 +31,10 @@ public class TabelaBean {
 		
 		
 		//para teste
+		Procedimento pro1 = new Procedimento();
+		pro1.setNome("Consulta");
 		ItemTabela item1 = new ItemTabela();
+		item1.setProcedimento(pro1);
 		Valor val = new Valor();
 		val.setValor((new BigDecimal(1.1)));
 		Valor val2 = new Valor();

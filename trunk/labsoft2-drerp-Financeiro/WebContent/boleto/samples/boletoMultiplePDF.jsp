@@ -1,0 +1,54 @@
+<%@ page import="java.util.List" %><%@
+	page import="java.util.ArrayList" %><%@
+	page import="com.boletobancario.boleto.pdf.BoletoPDFFormatter" %><%@
+	page import="com.boletobancario.boleto.BoletoFactory" %><%
+	
+	
+	// Exemplo com multiplos boletos por documento PDF.
+	BoletoFactory factory = new BoletoFactory();
+	
+	factory.setBanco( BoletoFactory.BRADESCO );
+	// Pode ser passado tambem o numero do banco no lugar da constante. Ex:
+	//factory.setBanco( "237" );
+	factory.setAgencia( "123" );
+	factory.setCedente( "4567" );
+	factory.setCarteira( "06" );
+	factory.setNossoNumero( "525" );
+	factory.setValor( "125,80" );
+	factory.setVencimento( "17/03/2012" );
+	
+	
+	factory.setNomeCedente( "Empresa Demonstração LTDA." );
+	factory.setLocalPagamento( "Pagável em qualquer agência bancária até o vencimento." );
+	
+	factory.setNomeSac( "Beltrano de Tal" );
+	factory.setEnderecoSac( "R. Silas Salazar, 768 - 8º Andar" );
+	
+	factory.setCepSac( "12345678" );
+	
+	factory.setCidadeSac( "São Paulo" );
+	factory.setEstadoSac( "SP" );
+	
+	factory.setMensagem( 1, "Após o vencimento, entre em contato com nossa central de atendimento: [b]0800-00001[/b]." );
+	
+	factory.setCustomContent( "imageC63:cabecalho.png|nl:1|textBC20: |nl:2|textBC14:Exemplo com múltiplos boletos por documento PDF|nl:2|textBC16:Fatura {parcela}|nl:3|" );
+
+	List boletos = new ArrayList();
+	
+	factory.setParcela( "01" );
+	boletos.add( factory.createBoleto() );
+	
+	factory.setParcela( "02" );
+	boletos.add( factory.createBoleto() );
+	
+	factory.setParcela( "03" );
+	boletos.add( factory.createBoleto() );
+	
+	response.setContentType( "application/x-pdf" );
+	response.setHeader( "Pragma", "public" );
+	response.setHeader( "Cache-Control", "max-age=0" );
+	response.setHeader( "Content-Disposition", "attachment; filename=\"boleto.pdf\"" );
+	
+	new BoletoPDFFormatter( boletos, BoletoPDFFormatter.LAYOUT_NORMAL, response.getOutputStream() ).format();
+	
+%>
