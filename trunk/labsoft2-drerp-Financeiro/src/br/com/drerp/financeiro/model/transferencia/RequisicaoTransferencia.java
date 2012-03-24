@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import br.com.drerp.financeiro.dao.GenericModel;
+import br.com.drerp.financeiro.model.GenericModel;
 
 
 @Entity

@@ -2,7 +2,7 @@ package br.com.crud.model;
 
 import javax.persistence.Entity;
 
-import br.com.drerp.financeiro.dao.GenericModel;
+import br.com.drerp.financeiro.model.GenericModel;
 
 @Entity
 public class Entidade extends GenericModel {

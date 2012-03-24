@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import br.com.drerp.financeiro.dao.GenericModel;
+import br.com.drerp.financeiro.model.GenericModel;
 
 public class Relatorio extends GenericModel {
 	
