@@ -12,23 +12,44 @@ import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 @ManagedBean(name="PlanoSaudeBean")
 @RequestScoped
 public class PlanoSaudeBean {
-
-	private final int LISTAR = 0;
-	private final int EDITAR = 1;
 	
 	private PlanoSaude plano;
 	private PlanoSaudeBR planoBR;
 	private List<PlanoSaude> planos;
 	
-	private int tabIndex;
-	
 	public PlanoSaudeBean(){
-		tabIndex = LISTAR;
 		this.plano = new PlanoSaude();
 		this.planoBR = new PlanoSaudeBR();
 		this.planos = new ArrayList<PlanoSaude>();
 	}
 
+	public String edit() {
+		return "edit";
+	}
+	
+	public String view(){
+		return "view";
+	}
+	
+	public String create() {
+		this.plano = new PlanoSaude();
+		return edit();
+	}
+	
+	public String save() {
+		this.planoBR.save(this.plano);
+		return list();
+	}
+
+	public String delete(){
+		this.planoBR.delete(this.plano);
+		return list();
+	}
+	
+	public String list() {
+		return "list";
+	}
+	
 	public PlanoSaude getPlano() {
 		return plano;
 	}
@@ -37,40 +58,9 @@ public class PlanoSaudeBean {
 		this.plano = plano;
 	}
 	
-	public String edit() {
-		tabIndex = EDITAR;
-		return "crudPlanosSaude";
-	}
-	
-	public String create() {
-		tabIndex = LISTAR;
-		this.plano.setId(null);
-		this.planoBR.save(this.plano);
-		return "crudPlanosSaude";
-	}
-	
-	public String update() {
-		tabIndex = LISTAR;
-		this.planoBR.save(this.plano);
-		return "crudPlanosSaude";
-	}
-
-	public String delete(){
-		this.planoBR.delete(this.plano);
-		return "crudPlanosSaude";
-	}
-	
 	public List<PlanoSaude> getPlanos() {
 		this.planos = planoBR.list();
 		return this.planos;
-	}
-
-	public int getTabIndex() {
-		return tabIndex;
-	}
-
-	public void setTabIndex(int tabIndex) {
-		this.tabIndex = tabIndex;
 	}
 
 	public void setPlanos(List<PlanoSaude> planos) {
