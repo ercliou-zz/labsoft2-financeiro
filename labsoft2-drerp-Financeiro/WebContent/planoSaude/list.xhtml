@@ -30,7 +30,7 @@
 					</h:column>
 					<h:column>
 						<f:facet name="header"></f:facet>
-						<h:commandLink onclick="return confirm('Tem certeza que deseja remover este plano de saúde?');" onaction="#{planoSaudeBean.delete}">Excluir
+						<h:commandLink onclick="if(!confirm('Tem certeza que deseja remover este plano de saúde?')) return false;" action="#{planoSaudeBean.delete}">Excluir
 											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
 								value="#{planoSaude}" />
 						</h:commandLink>
