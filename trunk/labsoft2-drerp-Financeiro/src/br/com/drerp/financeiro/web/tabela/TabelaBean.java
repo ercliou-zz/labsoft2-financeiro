@@ -12,23 +12,20 @@ import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.planosaude.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
-import br.com.drerp.financeiro.model.tabela.Tabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
 
 @ManagedBean(name="tabelaBean")
 @RequestScoped
 public class TabelaBean {
 	
-	private Tabela tabela;
 	private TabelaBR tabelaBR;
+	private List<ItemTabela> itens;
+	private List<Coluna> colunas;
 	
 	public TabelaBean() {
 		tabelaBR = new TabelaBR();
-		List<Tabela> retrieved = tabelaBR.list();
-		if(!retrieved.isEmpty()){
-			tabela = retrieved.get(0);
-		}
-		
+		itens = tabelaBR.listarItens();
+		colunas = tabelaBR.listarColunas();
 		
 		//para teste
 		Procedimento pro1 = new Procedimento();
@@ -46,8 +43,6 @@ public class TabelaBean {
 		List<ItemTabela> itens = new ArrayList<ItemTabela>();
 		itens.add(item1);
 		
-		tabela = new Tabela();
-		tabela.setItens(itens);
 		PlanoSaude ps1 = new PlanoSaude();
 		ps1.setNome("PLANO1");
 		PlanoSaude ps2 = new PlanoSaude();
@@ -59,15 +54,14 @@ public class TabelaBean {
 		List<Coluna> cols = new ArrayList<Coluna>();
 		cols.add(col1);
 		cols.add(col2);
-		tabela.setColunas(cols);
+	}
+
+	public List<ItemTabela> getItens() {
+		return itens;
+	}
+
+	public List<Coluna> getColunas() {
+		return colunas;
 	}
 	
-	public Tabela getTabela() {
-		return tabela;
-	}
-
-	public void setTabela(Tabela tabela) {
-		this.tabela = tabela;
-	}
-
 }

@@ -3,7 +3,6 @@ package br.com.drerp.financeiro.model.tabela;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -18,19 +17,10 @@ public class Coluna extends GenericModel {
 	@JoinColumn(name="planoSaude_fk")
 	private PlanoSaude planoSaude;
 	
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Tabela.class )
-	private Tabela tabela;
-	
 	public PlanoSaude getPlanoSaude() {
 		return planoSaude;
 	}
 	public void setPlanoSaude(PlanoSaude planoSaude) {
 		this.planoSaude = planoSaude;
-	}
-	public Tabela getTabela() {
-		return tabela;
-	}
-	public void setTabela(Tabela tabela) {
-		this.tabela = tabela;
 	}
 }

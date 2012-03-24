@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,10 +23,6 @@ public class ItemTabela extends GenericModel{
 	@OneToMany(mappedBy="itemTabela")
 	private List<Valor> valores;
 	
-	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE}, targetEntity=Tabela.class )
-	private Tabela tabela;
-	
-	
 	public Procedimento getProcedimento() {
 		return procedimento;
 	}
@@ -39,12 +34,6 @@ public class ItemTabela extends GenericModel{
 	}
 	public void setValores(List<Valor> valores) {
 		this.valores = valores;
-	}
-	public Tabela getTabela() {
-		return tabela;
-	}
-	public void setTabela(Tabela tabela) {
-		this.tabela = tabela;
 	}
 	
 }

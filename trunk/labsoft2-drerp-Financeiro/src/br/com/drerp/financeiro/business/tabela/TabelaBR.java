@@ -4,25 +4,27 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import br.com.crud.util.GenericDAOFactory;
-import br.com.drerp.financeiro.business.GenericBR;
+import br.com.drerp.financeiro.dao.tabela.ColunaDAO;
+import br.com.drerp.financeiro.dao.tabela.ColunaDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAO;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAOImpl;
-import br.com.drerp.financeiro.dao.tabela.TabelaDAOImpl;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.planosaude.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
-import br.com.drerp.financeiro.model.tabela.Tabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
 
-public class TabelaBR extends GenericBR<TabelaDAOImpl, Tabela>{
+public class TabelaBR {
 	
 	private ItemTabelaDAO itemTabelaDAO;
+	private ColunaDAO colunaDAO;
 	
 	public TabelaBR() {
 		super();
 		GenericDAOFactory<ItemTabelaDAO> factory = new GenericDAOFactory<ItemTabelaDAO>();
 		itemTabelaDAO = factory.createDAO(ItemTabelaDAOImpl.class);
+		GenericDAOFactory<ColunaDAO> factoryColuna = new GenericDAOFactory<ColunaDAO>();
+		colunaDAO = factoryColuna.createDAO(ColunaDAOImpl.class);
 	}
 	
 	/**
@@ -49,6 +51,14 @@ public class TabelaBR extends GenericBR<TabelaDAOImpl, Tabela>{
 			}
 		}
 		return null;
+	}
+	
+	public List<ItemTabela> listarItens(){
+		return this.itemTabelaDAO.list();
+	}
+	
+	public List<Coluna> listarColunas(){
+		return this.colunaDAO.list();
 	}
 	
 }
