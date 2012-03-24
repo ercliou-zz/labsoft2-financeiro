@@ -1,0 +1,47 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+    	LISTA
+		<h:panelGrid columns="2" cellpadding="10">
+			<h:form>
+				<h:dataTable value="#{planoSaudeBean.planos}" var="planoSaude"
+					rules="rows">
+					<h:column>
+						<f:facet name="header"></f:facet>
+						<h:outputText value="#{planoSaude.nome}"></h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header"></f:facet>
+						<h:commandLink action="#{planoSaudeBean.view}">Vizualizar
+											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
+								value="#{planoSaude}" />
+						</h:commandLink>
+					</h:column>
+					<h:column>
+						<f:facet name="header"></f:facet>
+						<h:commandLink action="#{planoSaudeBean.edit}">Editar
+											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
+								value="#{planoSaude}" />
+						</h:commandLink>
+					</h:column>
+					<h:column>
+						<f:facet name="header"></f:facet>
+						<h:commandLink onclick="return confirm('Tem certeza que deseja remover este plano de saúde?');" onaction="#{planoSaudeBean.delete}">Excluir
+											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
+								value="#{planoSaude}" />
+						</h:commandLink>
+					</h:column>
+
+				</h:dataTable>
+
+				<h:commandLink action="#{planoSaudeBean.create}">
+					Novo
+				</h:commandLink>
+			</h:form>
+		</h:panelGrid>
+	</ui:define>
+</ui:composition>
