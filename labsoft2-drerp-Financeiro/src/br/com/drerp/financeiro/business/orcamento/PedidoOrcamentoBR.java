@@ -39,21 +39,21 @@ public class PedidoOrcamentoBR extends GenericBR<PedidoOrcamentoDAOImpl, PedidoO
 		return valorTotal; //oooooooou? id do Orcamento para fazer outra requisicao com acrescentarAcrescimoNoOrcamento(idOrcamento, acrescimo)
 	}
 	
-	public int qtdOrcamento(PlanoSaude planoSaude, Calendar dataInicio) {
+	public int getQtdOrcamentoByPeriodo(PlanoSaude planoSaude, Calendar dataInicio, Calendar dataFim) {
 		
+		return this.dao.listByDataPedido(planoSaude, dataInicio.getTimeInMillis(), dataFim.getTimeInMillis()).size();
+	}
+	
+	public BigDecimal getValorOrcamentoByPeriodo(PlanoSaude planoSaude, Calendar dataInicio, Calendar dataFim) {
 		
-		int mesFim = dataInicio.get(Calendar.MONTH);
-		int anoFim = dataInicio.get(Calendar.YEAR);
+		List<PedidoOrcamento> pedidos = this.dao.listByDataPedido(planoSaude, dataInicio.getTimeInMillis(), dataFim.getTimeInMillis());
+		BigDecimal soma = new BigDecimal(0);
 		
-		mesFim--;
-		if(mesFim<0){
-			mesFim=11;
-			anoFim--;
+		for (PedidoOrcamento p : pedidos) {
+			soma = soma.add(p.getOrcamento().getValorFinal());
 		}
 		
-		Calendar dataFim = new GregorianCalendar(anoFim, mesFim, 1);
-		
-		return this.dao.listByDataPedido(dataInicio.getTimeInMillis(), dataFim.getTimeInMillis()).size();
+		return soma;
 	}
 	
 	
