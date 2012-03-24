@@ -46,7 +46,12 @@
 		<managed-bean-class>br.com.drerp.financeiro.web.planosaude.PlanoSaudeBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope> 
 	</managed-bean>
-	<managed-bean> 
+	<managed-bean>
+    	<managed-bean-name>orcamentoBean</managed-bean-name>
+    	<managed-bean-class>br.com.drerp.financeiro.web.orcamento.OrcamentoBean</managed-bean-class>
+    	<managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean> 
 		<managed-bean-name>tabelaBean</managed-bean-name> 
 		<managed-bean-class>br.com.drerp.financeiro.web.tabela.TabelaBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope> 

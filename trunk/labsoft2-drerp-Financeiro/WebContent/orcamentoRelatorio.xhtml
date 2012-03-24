@@ -21,20 +21,12 @@
 		  <f:selectItem itemLabel="Pizza" itemValue="PIZZA" />
 		</h:selectOneMenu>
 		
-		<h:outputLabel value="Parâmetro 1: " for="eixoX" />
-		<h:selectOneMenu id="eixoX" value="#{orcamentoBean.eixoX}">
-		  <f:selectItem itemLabel="Quantidade de Pedidos de Orçamentos" itemValue="BAR" />
-		  <f:selectItem itemLabel="Valor de Pedidos de Orçamentos" itemValue="LINE" />
-		  <f:selectItem itemLabel="Plano Saude" itemValue="PIE" />
-		  <f:selectItem itemLabel="Tempo" itemValue="PIE1" />
-		</h:selectOneMenu>
-		
-		<h:outputLabel value="Parâmetro 2: " for="eixoY" />
+		<h:outputLabel value="Eixo Y: " for="eixoY" />
 		<h:selectOneMenu id="eixoY" value="#{orcamentoBean.eixoY}">
-		  <f:selectItem itemLabel="Quantidade de Pedidos de Orçamentos" itemValue="BAR" />
-		  <f:selectItem itemLabel="Valor de Pedidos de Orçamentos" itemValue="LINE" />
-		  <f:selectItem itemLabel="Plano Saude" itemValue="PIE" />
-		  <f:selectItem itemLabel="Tempo" itemValue="PIE1" />
+		  <f:selectItem itemLabel="Número de Pedidos de Orçamento" itemValue="N_PEDIDOS" />
+		  <f:selectItem itemLabel="Valor Total de Pedidos de Orçamento" itemValue="VAL_PEDIDOS" />
+<!-- 		  <f:selectItem itemLabel="Plano Saude" itemValue="PIE" /> -->
+<!-- 		  <f:selectItem itemLabel="Tempo" itemValue="PIE1" /> -->
 		</h:selectOneMenu>
 		
 		<h:outputText value="Planos de Saúde: " />
@@ -50,15 +42,22 @@
 	<h:commandButton action="#{orcamentoBean.gerarGrafico}" value="Gerar Gráfico" />
 	
 	</h:form>
-	
-<p:barChart id="basic" value="#{orcamentoBean.categoryModel}" legendPosition="ne"  
-            title="Basic Bar Chart" min="0" max="200" style="height:300px"/>  
+
+<h:panelGroup rendered="#{orcamentoBean.tipoGrafico == 'BARRA'}">
+<p:barChart id="basic" value="#{orcamentoBean.categoryModel}" legendPosition="ne"
+            title="Basic Bar Chart" min="0" max="#{orcamentoBean.maxEixoY}" style="height:300px"/>
+</h:panelGroup>
   
-<p:barChart id="horizontal" value="#{orcamentoBean.categoryModel}" legendPosition="se" style="height:300px"  
-            title="Horizontal Bar Chart" orientation="horizontal" min="0" max="200"/>  
-  
-<p:barChart id="stacked" value="#{orcamentoBean.categoryModel}" legendPosition="ne" style="height:300px"  
-            title="Stacked Bar Chart" stacked="true" barMargin="50" min="0" max="300"/>  
+<h:panelGroup rendered="#{orcamentoBean.tipoGrafico == 'LINHA'}">
+<p:lineChart id="linear" value="#{orcamentoBean.categoryModel}" legendPosition="e"
+     title="Linear Chart" minY="0" maxY="#{orcamentoBean.maxEixoY}" style="height:300px"/>              
+</h:panelGroup>
+
+<h:panelGroup rendered="#{orcamentoBean.tipoGrafico == 'PIZZA'}">
+<p:pieChart id="sample" value="#{orcamentoBean.pieModel}" legendPosition="w"  
+                title="Sample Pie Chart" style="width:400px;height:300px" /> 
+</h:panelGroup>
+
 </h:body>
 
 </html>
