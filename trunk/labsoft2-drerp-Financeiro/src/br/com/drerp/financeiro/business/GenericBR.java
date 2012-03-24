@@ -22,7 +22,6 @@ public abstract class GenericBR<T extends GenericDAO<Y>, Y extends GenericModel>
 
 	}
 
-	@SuppressWarnings("unchecked")
 	public Y getById(Long id) {
 		return (Y) this.dao.getById(id);
 	}
@@ -33,7 +32,7 @@ public abstract class GenericBR<T extends GenericDAO<Y>, Y extends GenericModel>
 
 	public void save(Y entidade) {
 		Long id = entidade.getId();
-		if (id == null || id.equals(0)) {
+		if (id == null || id.equals(0L)) {
 			dao.save(entidade);
 		} else {
 			dao.edit(entidade);
