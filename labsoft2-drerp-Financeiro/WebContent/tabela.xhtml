@@ -10,7 +10,7 @@
 <h:body>
 	<h:form id="form"> 
 		
-		<p:dataTable var="itemTabela" value="#{tabelaBean.tabela.itens}">
+		<p:dataTable var="itemTabela" value="#{tabelaBean.itens}">
 		
 			<p:column id="headerModel">
 				<f:facet name="header">  
@@ -19,7 +19,7 @@
 	            #{itemTabela.procedimento.nome}
 			</p:column>
 		
-			<p:columns value="#{tabelaBean.tabela.colunas}" var="coluna" columnIndexVar="colIndex" sortBy="#{itemTabela.valores[colIndex].valorMoeda}">
+			<p:columns value="#{tabelaBean.colunas}" var="coluna" columnIndexVar="colIndex" sortBy="#{itemTabela.valores[colIndex].valorMoeda}">
 				<f:facet name="header">  
 	                #{coluna.planoSaude.nome}
 	            </f:facet>

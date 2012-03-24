@@ -27,7 +27,6 @@
     	<mapping class="br.com.drerp.financeiro.model.tributo.TributoMensal"/>
     	<mapping class="br.com.drerp.financeiro.model.usuario.Usuario"/>
     	<mapping class="br.com.drerp.financeiro.model.tabela.ItemTabela"/>
-    	<mapping class="br.com.drerp.financeiro.model.tabela.Tabela"/>
     	<mapping class="br.com.drerp.financeiro.model.tabela.Coluna"/>
     	<mapping class="br.com.drerp.financeiro.model.tabela.Valor"/>
     	<mapping class="br.com.drerp.financeiro.model.planosaude.PlanoSaude"/>

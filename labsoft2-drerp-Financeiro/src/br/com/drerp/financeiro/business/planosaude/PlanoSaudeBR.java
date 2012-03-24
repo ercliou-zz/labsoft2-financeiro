@@ -5,17 +5,23 @@ import br.com.drerp.financeiro.business.GenericBR;
 import br.com.drerp.financeiro.dao.planosaude.PlanoSaudeDAOImpl;
 import br.com.drerp.financeiro.dao.planosaude.PlanoSaudeLogDAO;
 import br.com.drerp.financeiro.dao.planosaude.PlanoSaudeLogDAOImpl;
+import br.com.drerp.financeiro.dao.tabela.ColunaDAO;
+import br.com.drerp.financeiro.dao.tabela.ColunaDAOImpl;
 import br.com.drerp.financeiro.model.LogType;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaudeLog;
+import br.com.drerp.financeiro.model.tabela.Coluna;
 
 public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 	private PlanoSaudeLogDAO logDAO;
+	private ColunaDAO colDAO;
 
 	public PlanoSaudeBR() {
 		super();
 		GenericDAOFactory<PlanoSaudeLogDAO> factory = new GenericDAOFactory<PlanoSaudeLogDAO>();
 		logDAO = factory.createDAO(PlanoSaudeLogDAOImpl.class);
+		GenericDAOFactory<ColunaDAO> factoryColuna = new GenericDAOFactory<ColunaDAO>();
+		colDAO = factoryColuna.createDAO(ColunaDAOImpl.class);
 	}
 	
 	@Override
@@ -26,6 +32,11 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 			log.setTipo(LogType.CRIACAO);
 			log.setNomeNovo(planoSaude.getNome());
 			dao.save(planoSaude);
+			
+			Coluna col = new Coluna();
+			col.setPlanoSaude(planoSaude);
+			colDAO.save(col);
+			
 		} else {
 			log.setTipo(LogType.ALTERACAO);
 			PlanoSaude antigo = dao.getById(id);
@@ -47,6 +58,8 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 		log.setPlanoSaudeId(planoSaude.getId());
 		log.setNomeAntigo(planoSaude.getNome());
 		logDAO.save(log);
+		Coluna col = colDAO.getByPlano(planoSaude);
+		colDAO.delete(col);
 		dao.delete(planoSaude);
 	}
 	

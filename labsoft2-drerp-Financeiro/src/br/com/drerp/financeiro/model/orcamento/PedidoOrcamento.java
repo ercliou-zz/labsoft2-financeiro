@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import br.com.drerp.financeiro.model.GenericModel;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.planosaude.Procedimento;
-import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 
 
