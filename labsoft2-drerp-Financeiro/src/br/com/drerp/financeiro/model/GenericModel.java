@@ -1,4 +1,4 @@
-package br.com.drerp.financeiro.dao;
+package br.com.drerp.financeiro.model;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

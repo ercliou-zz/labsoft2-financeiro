@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import br.com.drerp.financeiro.dao.GenericModel;
+import br.com.drerp.financeiro.model.GenericModel;
 
 @Entity
 @Table(name="FIN_USUARIO", uniqueConstraints = {@UniqueConstraint(columnNames={"login"})})
