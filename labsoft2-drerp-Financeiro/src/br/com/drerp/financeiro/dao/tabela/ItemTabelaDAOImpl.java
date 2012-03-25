@@ -6,7 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.drerp.financeiro.dao.GenericDAOImpl;
-import br.com.drerp.financeiro.model.planosaude.Procedimento;
+import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 
 public class ItemTabelaDAOImpl extends GenericDAOImpl<ItemTabela> implements ItemTabelaDAO {

@@ -2,6 +2,7 @@ package br.com.drerp.financeiro.web.tabela;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -9,7 +10,7 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.drerp.financeiro.business.tabela.TabelaBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.planosaude.Procedimento;
+import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
@@ -40,7 +41,6 @@ public class TabelaBean {
 		valores.add(val);
 		valores.add(val2);
 		item1.setValores(valores);
-		List<ItemTabela> itens = new ArrayList<ItemTabela>();
 		itens.add(item1);
 		
 		PlanoSaude ps1 = new PlanoSaude();
@@ -61,6 +61,7 @@ public class TabelaBean {
 	}
 
 	public List<Coluna> getColunas() {
+		Collections.sort(colunas, new ColunaComparator());
 		return colunas;
 	}
 	

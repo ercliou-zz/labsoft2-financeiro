@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.planosaude.Procedimento;
+import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.transferencia.Beneficiario;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 

@@ -22,7 +22,7 @@ public abstract class GenericDAOImpl <T> implements GenericDAO<T> {
 	
 	public void save(T entidade) {
 		session.save(entidade);
-		
+		session.flush();
 	}
 
 	public void delete(T entidade) {
