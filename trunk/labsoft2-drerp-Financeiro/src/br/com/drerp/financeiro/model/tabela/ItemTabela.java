@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.drerp.financeiro.model.GenericModel;
-import br.com.drerp.financeiro.model.planosaude.Procedimento;
+import br.com.drerp.financeiro.model.procedimento.Procedimento;
 
 @Entity
 @Table(name="FIN_ITEMTABELA")

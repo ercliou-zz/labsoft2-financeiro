@@ -7,7 +7,7 @@ import java.util.List;
 import br.com.drerp.financeiro.business.orcamento.PedidoOrcamentoBR;
 import br.com.drerp.financeiro.business.transferencia.RequisicaoTransferenciaBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.planosaude.Procedimento;
+import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.transferencia.Beneficiario;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 import br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia;

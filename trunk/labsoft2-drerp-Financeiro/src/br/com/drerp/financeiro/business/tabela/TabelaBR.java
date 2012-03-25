@@ -9,7 +9,7 @@ import br.com.drerp.financeiro.dao.tabela.ColunaDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAO;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAOImpl;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.planosaude.Procedimento;
+import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Valor;

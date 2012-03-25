@@ -11,7 +11,7 @@ import br.com.drerp.financeiro.dao.orcamento.PedidoOrcamentoDAOImpl;
 import br.com.drerp.financeiro.model.orcamento.Orcamento;
 import br.com.drerp.financeiro.model.orcamento.PedidoOrcamento;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.planosaude.Procedimento;
+import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 
 public class PedidoOrcamentoBR extends GenericBR<PedidoOrcamentoDAOImpl, PedidoOrcamento> {
