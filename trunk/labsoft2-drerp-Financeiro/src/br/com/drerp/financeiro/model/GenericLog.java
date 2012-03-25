@@ -8,9 +8,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
 @MappedSuperclass
-public class GenericLog {
+public class GenericLog extends GenericModel{
 	
-	private Long id;
 	private Long dataMS;
 	private LogType tipo;
 	
@@ -18,14 +17,6 @@ public class GenericLog {
 		this.dataMS = (new Date()).getTime();
 	}
 	
-	@Id
-	@GeneratedValue
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	@Transient
 	public Date getData() {
 		return new Date(dataMS);

@@ -24,6 +24,12 @@ INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (5, 'Mamil');
 INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (6, 'Mamilu');
 INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (7, 'Murilo');
 
+-- PLANOSAUDELOG
+INSERT INTO `financeiro-db`.`fin_log_planosaude` (`id`, `dataMS`, `tipo`, `nomeAntigo`, `nomeNovo`, `planoSaudeId`) VALUES (1, 1323741600000, 0, 'aaa', 'AAA', 1);
+INSERT INTO `financeiro-db`.`fin_log_planosaude` (`id`, `dataMS`, `tipo`, `nomeAntigo`, `nomeNovo`, `planoSaudeId`) VALUES (2, 1327111200000, 1, 'bbb', 'BBB', 2);
+INSERT INTO `financeiro-db`.`fin_log_planosaude` (`id`, `dataMS`, `tipo`, `nomeAntigo`, `nomeNovo`, `planoSaudeId`) VALUES (3, 1329789600000, 2, 'ccc', 'CCC', 3);
+INSERT INTO `financeiro-db`.`fin_log_planosaude` (`id`, `dataMS`, `tipo`, `nomeAntigo`, `nomeNovo`, `planoSaudeId`) VALUES (4, 1323828000000, 1, 'ddd', 'DDD', 4);
+
 
 -- PEDIDOORCAMENTO
 --Dec 13 2011
@@ -45,3 +51,4 @@ INSERT INTO `financeiro-db`.`fin_orcamento` (`id`, `valorFinal`, `pedido_fk`) VA
 INSERT INTO `financeiro-db`.`fin_orcamento` (`id`, `valorFinal`, `pedido_fk`) VALUES (4, 400.44, 4);
 INSERT INTO `financeiro-db`.`fin_orcamento` (`id`, `valorFinal`, `pedido_fk`) VALUES (5, 500.55, 5);
 INSERT INTO `financeiro-db`.`fin_orcamento` (`id`, `valorFinal`, `pedido_fk`) VALUES (6, 600.66, 6);
+
