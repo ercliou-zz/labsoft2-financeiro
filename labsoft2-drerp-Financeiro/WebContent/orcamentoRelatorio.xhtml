@@ -31,7 +31,7 @@
 		
 		<h:outputText value="Planos de Saúde: " />
 		<h:selectManyCheckbox layout="pageDirection"
-				value="#{orcamentoBean.planosSelecionados}" required="true">
+				value="#{orcamentoBean.planosSelecionados}">
 			<c:forEach var="plano" items="#{orcamentoBean.planosList}">
 				<f:selectItem itemLabel="#{plano.nome}" itemValue="#{plano.id}" />
 			</c:forEach>
