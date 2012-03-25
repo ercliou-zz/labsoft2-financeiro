@@ -10,13 +10,13 @@
 			<h:form>
 				<table>
 					<tr>
-						<h:inputHidden value="#{planoSaudeBean.plano.id}" />
+						<h:inputHidden value="#{procedimentoBean.procedimento.id}" />
 						<h:outputLabel value="Nome: " for="nome" />
 						<h:inputText id="nome" label="nome"
-							value="#{planoSaudeBean.plano.nome}" />
+							value="#{procedimentoBean.procedimento.nome}" />
 					</tr>
 				</table>
-				<h:commandButton action="#{planoSaudeBean.save}" class="ui-state-default ui-corner-all login_button" value="Salvar" />
+				<h:commandButton action="#{procedimentoBean.save}" class="ui-state-default ui-corner-all login_button" value="Salvar" />
 				<h:commandButton action="list.xhtml" class="ui-state-default ui-corner-all login_button" value="Cancelar" />
 			</h:form>
 		</h:panelGrid>
