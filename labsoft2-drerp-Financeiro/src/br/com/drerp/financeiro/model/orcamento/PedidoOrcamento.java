@@ -7,7 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,11 +24,26 @@ public class PedidoOrcamento extends GenericModel {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Pagador pagador;
 	
-	@OneToMany
-    @JoinTable(
-            name="FIN_PEDIDO_PROCEDIMENTO",
-            joinColumns = { @JoinColumn( name="PEDIDO_ID") },
-            inverseJoinColumns = @JoinColumn( name="PROCEDIMENTO_ID"))
+//	@OneToMany
+//    @JoinTable(
+//            name="FIN_PEDIDO_PROCEDIMENTO",
+//            joinColumns = { @JoinColumn( name="PEDIDO_ID") },
+//            inverseJoinColumns = @JoinColumn( name="PROCEDIMENTO_ID"))
+//	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+//    @JoinColumn(name="PEDIDO_ID")
+	
+//	@ManyToMany(cascade = CascadeType.PERSIST)
+	
+	
+	@ManyToMany(
+	        targetEntity=br.com.drerp.financeiro.model.procedimento.Procedimento.class,
+	        cascade={CascadeType.PERSIST, CascadeType.MERGE}
+	    )
+	    @JoinTable(
+	        name="FIN_PEDIDO_PROCEDIMENTO",
+	        joinColumns={@JoinColumn(name="PEDIDO_ID")},
+	        inverseJoinColumns={@JoinColumn(name="PROCEDIMENTO_ID")}
+	    )
 	private List<Procedimento> procedimentos;
 	
 	@OneToOne(cascade = CascadeType.ALL)
