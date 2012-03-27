@@ -6,8 +6,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
-		<h:form id="form">
-			<h:commandLink action="#{tabelaBean.createItem}">Novo Procedimento</h:commandLink>
+		<h:form id="formTabela">
 			<p:dataTable var="itemTabela" value="#{tabelaBean.itens}">
 
 				<p:column id="headerModel">
@@ -17,22 +16,27 @@
 	            #{itemTabela.procedimento.nome}
 			</p:column>
 
-				<p:columns value="#{tabelaBean.colunas}" var="coluna"
-					columnIndexVar="colIndex"
-					sortBy="#{itemTabela.valores[colIndex].valorMoeda}">
-					<f:facet name="header">  
+			<p:columns value="#{tabelaBean.colunas}" var="coluna"
+				columnIndexVar="colIndex"
+				sortBy="#{itemTabela.valores[colIndex].valorMoeda}">
+				<f:facet name="header">  
 	                #{coluna.planoSaude.nome}
 	            </f:facet>
 	            #{itemTabela.valores[colIndex].valorMoeda}
+	            <h:commandLink onclick="alert('#{colIndex} #{coluna} #{itemTabela}');" action="#{tabelaBean.teste}">Editar
+	            	<f:setPropertyActionListener target="#{tabelaBean.colunaIndex}"
+							value="#{colIndex}" />
+					<f:setPropertyActionListener target="#{tabelaBean.itemTabela}"
+					value="#{itemTabela}" />
+	            	
+	            </h:commandLink>
 			</p:columns>
 
 				<p:column>
 					<f:facet name="header">Operação</f:facet>
-					<h:commandLink>Editar</h:commandLink>
 				</p:column>
 
 			</p:dataTable>
 		</h:form>
-		</h:body>
 	</ui:define>
 </ui:composition>

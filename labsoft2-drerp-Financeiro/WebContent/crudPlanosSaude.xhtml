@@ -53,54 +53,10 @@
 			<div>
 				<p:tabView id="tabView" dynamic="true" activeIndex="#{planoSaudeBean.tabIndex}">
 					<p:tab id="tab1" title="Listar">  
-        				<h:panelGrid columns="2" cellpadding="10">
-							<h:form>
-								<h:dataTable value="#{planoSaudeBean.planos}" var="planoSaude" rules="rows">
-									<f:facet name="caption"></f:facet>
-						
-									<f:facet name="footer"></f:facet>
-						
-									<h:column>
-										<f:facet name="header"></f:facet>
-										<h:outputText value="#{planoSaude.nome}"></h:outputText>
-									</h:column>
-									<h:column>
-										<f:facet name="header"></f:facet>
-										<h:commandLink action="#{planoSaudeBean.edit}">edit
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}" value="#{planoSaude}" />
-										</h:commandLink>
-									</h:column>
-						
-									<h:column>
-										<f:facet name="header"></f:facet>
-										<h:commandLink action="#{planoSaudeBean.delete}">delete
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}" value="#{planoSaude}" />
-										</h:commandLink>
-									</h:column>
-						
-								</h:dataTable>
-							</h:form>
-						</h:panelGrid>  
+        				LISTA
     				</p:tab>
 					<p:tab id="tab2" title="Editar">  
-        				<h:panelGrid columns="2" cellpadding="10">
-							<h:form>
-								<table>
-									<tr>
-										<h:inputHidden value="#{planoSaudeBean.plano.id}" />
-										<h:outputLabel value="Nome: " for="nome"/>
-										<h:inputText id="nome" label="nome" value="#{planoSaudeBean.plano.nome}"/>
-									</tr>
-								</table>
-							<h:panelGroup rendered="#{planoSaudeBean.plano.id == null}">
-								<h:commandButton action="#{planoSaudeBean.create}" class="ui-state-default ui-corner-all login_button"  value="Criar" />
-							</h:panelGroup>
-							<h:panelGroup rendered="#{planoSaudeBean.plano.id != null}">
-								<h:commandButton action="#{planoSaudeBean.update}" class="ui-state-default ui-corner-all login_button"  value="Salvar" />
-							</h:panelGroup>
-										
-							</h:form>
-						</h:panelGrid>  
+        				EDITAR  
     				</p:tab>
 				</p:tabView>
 			</div>
