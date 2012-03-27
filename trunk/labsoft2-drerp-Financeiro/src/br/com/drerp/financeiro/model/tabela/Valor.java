@@ -42,9 +42,12 @@ public class Valor extends GenericModel{
 		return valor;
 	}
 	public String getValorMoeda(){
+		if(valor != null){
 		DecimalFormat formatter = new DecimalFormat();
 		formatter.setMaximumFractionDigits(2);
 		return formatter.format(valor);
+		}
+		return "-";
 	}
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;

@@ -1,62 +1,40 @@
 package br.com.drerp.financeiro.web.tabela;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.drerp.financeiro.business.tabela.TabelaBR;
-import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
 
-@ManagedBean(name="tabelaBean")
-@RequestScoped
+@ManagedBean(name = "tabelaBean")
+@SessionScoped
 public class TabelaBean {
-	
+
 	private TabelaBR tabelaBR;
 	private List<ItemTabela> itens;
 	private List<Coluna> colunas;
-	
+
+	private Valor valor;
+	private Long colunaId;
+	private Long itemTabelaId;
+
 	private ItemTabela itemTabela;
-	private int colunaIndex;
-	
+	private Long colunaIndex;
+
 	public TabelaBean() {
+		valor = new Valor();
+
 		tabelaBR = new TabelaBR();
 		itens = tabelaBR.listarItens();
 		colunas = tabelaBR.listarColunas();
-		
-		//para teste
-		Procedimento pro1 = new Procedimento();
-		pro1.setNome("Consulta");
-		ItemTabela item1 = new ItemTabela();
-		item1.setProcedimento(pro1);
-		Valor val = new Valor();
-		val.setValor((new BigDecimal(1.1)));
-		Valor val2 = new Valor();
-		val2.setValor(new BigDecimal(2.1));
-		List<Valor> valores = new ArrayList<Valor>();
-		valores.add(val);
-		valores.add(val2);
-		item1.setValores(valores);
-		itens.add(item1);
-		
-		PlanoSaude ps1 = new PlanoSaude();
-		ps1.setNome("PLANO1");
-		PlanoSaude ps2 = new PlanoSaude();
-		ps2.setNome("PLANO2");
-		Coluna col1 = new Coluna();
-		col1.setPlanoSaude(ps1);
-		Coluna col2 = new Coluna();
-		col2.setPlanoSaude(ps2);
-		List<Coluna> cols = new ArrayList<Coluna>();
-		cols.add(col1);
-		cols.add(col2);
+
 	}
 
 	public List<ItemTabela> getItens() {
@@ -76,22 +54,52 @@ public class TabelaBean {
 		this.itemTabela = itemTabela;
 	}
 
-	public int getColunaIndex() {
+	public Long getColunaIndex() {
 		return colunaIndex;
 	}
 
-	public void setColunaIndex(int colunaIndex) {
+	public void setColunaIndex(Long colunaIndex) {
 		this.colunaIndex = colunaIndex;
 	}
 
-	public String teste(){
-		Coluna colunaSelecionada = this.colunas.get(this.colunaIndex);
-		List<Valor> valores = this.itemTabela.getValores();
-		for (Valor valor : valores) {
-			if(valor.getColuna().equals(colunaSelecionada)){
-				System.out.println(valor.getValorMoeda());
-			}
-		}
-		return null;
+	public Valor getValor() {
+		return valor;
 	}
+
+	public void setValor(Valor valor) {
+		this.valor = valor;
+	}
+
+	public Long getColunaId() {
+		return colunaId;
+	}
+
+	public void setColunaId(Long colunaId) {
+		this.colunaId = colunaId;
+	}
+
+	public Long getItemTabelaId() {
+		return itemTabelaId;
+	}
+
+	public void setItemTabelaId(Long itemTabelaId) {
+		this.itemTabelaId = itemTabelaId;
+	}
+
+	public String editValor() {
+
+		Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		String colIndex = params.get("colIndex");
+
+		this.valor = this.itemTabela.getValores().get(Integer.parseInt(colIndex));
+		this.colunaId = this.valor.getColuna().getId();
+		this.itemTabelaId = this.valor.getItemTabela().getId();
+		return "valorEdit";
+	}
+
+	public String saveValor() {
+		this.tabelaBR.updateValor(valor, colunaId, itemTabelaId);
+		return "tabela";
+	}
+
 }

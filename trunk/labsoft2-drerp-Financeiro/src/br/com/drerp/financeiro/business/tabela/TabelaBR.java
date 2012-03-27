@@ -8,6 +8,8 @@ import br.com.drerp.financeiro.dao.tabela.ColunaDAO;
 import br.com.drerp.financeiro.dao.tabela.ColunaDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAO;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAOImpl;
+import br.com.drerp.financeiro.dao.tabela.ValorDAO;
+import br.com.drerp.financeiro.dao.tabela.ValorDAOImpl;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
@@ -18,6 +20,7 @@ public class TabelaBR {
 	
 	private ItemTabelaDAO itemTabelaDAO;
 	private ColunaDAO colunaDAO;
+	private ValorDAO valorDAO;
 	
 	public TabelaBR() {
 		super();
@@ -25,6 +28,8 @@ public class TabelaBR {
 		itemTabelaDAO = factory.createDAO(ItemTabelaDAOImpl.class);
 		GenericDAOFactory<ColunaDAO> factoryColuna = new GenericDAOFactory<ColunaDAO>();
 		colunaDAO = factoryColuna.createDAO(ColunaDAOImpl.class);
+		GenericDAOFactory<ValorDAO> factoryValor = new GenericDAOFactory<ValorDAO>();
+		valorDAO = factoryValor.createDAO(ValorDAOImpl.class);
 	}
 	
 	/**
@@ -59,6 +64,12 @@ public class TabelaBR {
 	
 	public List<Coluna> listarColunas(){
 		return this.colunaDAO.list();
+	}
+	
+	public void updateValor (Valor valor, Long colunaId, Long itemTabelaId){
+		valor.setColuna(colunaDAO.getById(colunaId));
+		valor.setItemTabela(itemTabelaDAO.getById(itemTabelaId));
+		this.valorDAO.edit(valor);
 	}
 	
 }
