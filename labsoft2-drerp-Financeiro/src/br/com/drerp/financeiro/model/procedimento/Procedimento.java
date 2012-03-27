@@ -13,12 +13,19 @@ public class Procedimento extends GenericModel implements Serializable{
 
 	private static final long serialVersionUID = 5563295864678578999L;
 	private String nome;
+	private TipoProcedimento tipo;
 	
 	public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public TipoProcedimento getTipo() {
+		return tipo;
+	}
+	public void setTipo(TipoProcedimento tipo) {
+		this.tipo = tipo;
 	}
 	
 }
