@@ -94,7 +94,6 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 			valorDAO.delete(valor);
 		}
 		colDAO.delete(col);
-		dao.delete(planoSaude);
 	}
 	
 }
