@@ -59,7 +59,6 @@ public class ProcedimentoBR extends GenericBR<ProcedimentoDAOImpl, Procedimento>
 			valorDAO.delete(valor);
 		}
 		itemTabelaDAO.delete(item);
-		dao.delete(procedimento);
 	}
 	
 	private void criarValores(ItemTabela item){

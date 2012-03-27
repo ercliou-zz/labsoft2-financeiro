@@ -27,10 +27,12 @@ public abstract class GenericDAOImpl <T> implements GenericDAO<T> {
 
 	public void delete(T entidade) {
 		session.delete(entidade);
+		session.flush();
 	}
 
 	public void edit(T entidade) {
 		session.update(entidade);
+		session.flush();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -48,6 +50,7 @@ public abstract class GenericDAOImpl <T> implements GenericDAO<T> {
 	@Override
 	public void merge(T entidade) {
 		session.merge(entidade);
+		session.flush();
 	}
 
 }

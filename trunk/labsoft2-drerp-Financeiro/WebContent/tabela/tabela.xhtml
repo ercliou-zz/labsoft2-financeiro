@@ -18,17 +18,17 @@
 
 			<p:columns value="#{tabelaBean.colunas}" var="coluna"
 				columnIndexVar="colIndex">
-	            <h:form id="formValor#{colIndex}">
-				<f:facet name="header">  
+	            
+				<f:facet name="header">
 	                #{coluna.planoSaude.nome}
 	            </f:facet>
-	            #{itemTabela.valores[colIndex].valorMoeda}*#{colIndex}
-	            	<h:inputHidden value="tabelaBean.colunaIndex" >#{itemTabela.valores[colIndex].coluna.id}</h:inputHidden>
-					<h:commandButton value="Editar" action="#{tabelaBean.editValor}">
+	            
+	            <h:form id="formValor">
+					<h:commandLink value="#{itemTabela.valores[colIndex].valorMoeda}" action="#{tabelaBean.editValor}">
 						<f:param name="colIndex" value="#{colIndex}" />
 						<f:setPropertyActionListener target="#{tabelaBean.itemTabela}"
 							value="#{itemTabela}" />
-					</h:commandButton>
+					</h:commandLink>
 				</h:form>
 
 			</p:columns>
