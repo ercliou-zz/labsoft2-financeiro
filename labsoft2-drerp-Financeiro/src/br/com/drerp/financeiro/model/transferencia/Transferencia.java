@@ -3,30 +3,70 @@ package br.com.drerp.financeiro.model.transferencia;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.drerp.financeiro.model.GenericModel;
-import br.com.drerp.financeiro.model.tributo.Tributo;
 
-@Entity
-@Table(name = "FIN_TRANSFERENCIA")
-public class Transferencia extends GenericModel {
 
+@MappedSuperclass
+public abstract class Transferencia extends GenericModel {
+
+	@OneToOne
+	private Beneficiario beneficiario;
+	
+	@OneToOne
+	private Pagador pagador;
+	
 	private BigDecimal valor;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "requisicao_fk")
-	private RequisicaoTransferencia requisicao;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "tributo_fk")
-	private Tributo tributo;
-	private Long dataRealizacaoMilis;
+	
+	private StatusTransferencia status;
+	
+	private Long dataRequisicaoMilis;
+	
+	private Long dataLimiteMilis;
+	
+	public Beneficiario getBeneficiario() {
+		return beneficiario;
+	}
 
-	private CategoriaTransferencia categoria;
+	public void setBeneficiario(Beneficiario beneficiario) {
+		this.beneficiario = beneficiario;
+	}
+
+	public Pagador getPagador() {
+		return pagador;
+	}
+
+	public void setPagador(Pagador pagador) {
+		this.pagador = pagador;
+	}
+
+	public Long getDataRequisicaoMilis() {
+		return dataRequisicaoMilis;
+	}
+
+	public void setDataRequisicaoMilis(Long dataRequisicaoMilis) {
+		this.dataRequisicaoMilis = dataRequisicaoMilis;
+	}
+
+	@Transient
+	public Date getDataRequisicao() {
+		return new Date(this.dataRequisicaoMilis);
+	}
+
+	public Long getDataLimiteMilis() {
+		return dataLimiteMilis;
+	}
+
+	public void setDataLimiteMilis(Long dataLimiteMilis) {
+		this.dataLimiteMilis = dataLimiteMilis;
+	}
+
+	public Date getDataLimite() {
+		return new Date(this.dataLimiteMilis);
+	}
 
 	public BigDecimal getValor() {
 		return valor;
@@ -36,41 +76,12 @@ public class Transferencia extends GenericModel {
 		this.valor = valor;
 	}
 
-	public Tributo getTributo() {
-		return tributo;
+	public StatusTransferencia getStatus() {
+		return status;
 	}
 
-	public void setTributo(Tributo tributo) {
-		this.tributo = tributo;
-	}
-
-	public Long getDataRealizacaoMilis() {
-		return dataRealizacaoMilis;
-	}
-
-	public void setDataRealizacaoMilis(Long dataRealizacaoMilis) {
-		this.dataRealizacaoMilis = dataRealizacaoMilis;
-	}
-
-	@Transient
-	public Date getDataRealizacao() {
-		return new Date(this.dataRealizacaoMilis);
-	}
-
-	public RequisicaoTransferencia getRequisicao() {
-		return requisicao;
-	}
-
-	public void setRequisicao(RequisicaoTransferencia requisicao) {
-		this.requisicao = requisicao;
-	}
-
-	public CategoriaTransferencia getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(CategoriaTransferencia categoria) {
-		this.categoria = categoria;
+	public void setStatus(StatusTransferencia status) {
+		this.status = status;
 	}
 
 }
