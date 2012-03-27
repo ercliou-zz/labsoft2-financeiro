@@ -23,7 +23,7 @@
 				value="#{tabelaBean.colunas}" var="coluna" columnIndexVar="colIndex">
 
 				<h:form id="formValor">
-					<h:commandLink action="#{tabelaBean.editValor}">
+					<h:commandLink styleClass="celulaStyle" action="#{tabelaBean.editValor}">
 						<h:outputLabel value="#{itemTabela.valores[colIndex].valorMoeda}" />
 						<f:param name="colIndex" value="#{colIndex}" />
 						<f:setPropertyActionListener target="#{tabelaBean.itemTabela}"
