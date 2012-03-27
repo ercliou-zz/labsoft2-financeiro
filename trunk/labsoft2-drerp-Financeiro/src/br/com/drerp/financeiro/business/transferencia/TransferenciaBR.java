@@ -3,10 +3,10 @@ package br.com.drerp.financeiro.business.transferencia;
 import java.util.List;
 
 import br.com.drerp.financeiro.business.GenericBR;
-import br.com.drerp.financeiro.dao.transferencia.RequisicaoTransferenciaDAOImpl;
+import br.com.drerp.financeiro.dao.transferencia.TransferenciaDAOImpl;
 import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
-public class TransferenciaBR extends GenericBR<RequisicaoTransferenciaDAOImpl, Transferencia> {
+public class TransferenciaBR extends GenericBR<TransferenciaDAOImpl, Transferencia> {
 	
 	public List<Transferencia> listarAbertas(){
 		return super.dao.listarAbertas();
