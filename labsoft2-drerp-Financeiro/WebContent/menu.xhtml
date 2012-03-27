@@ -20,13 +20,21 @@
 		<p:tab title="Plano de Saúde">
 			<h:commandLink id="cadastroPlanoSaude"
 				action="../planoSaude/list.jsf">
-				        	Cadastro 
+				        	Cadastro de Planos de Saúde
 				        </h:commandLink>
 				        <br />
 	        <h:commandLink id="historicoPlanoSaude"
-				action="../planoSaude/historico.jsf">
-				        	Historico 
+				action="../planoSaude/planoSaudeLog.jsf">
+				        	Historico de Planos de Saúde
 				        </h:commandLink>
+	        <h:commandLink id="cadastroProcedimento"
+				action="../procedimento/list.jsf">
+				        	Cadastro de Procedimentos
+				        </h:commandLink>
+			<h:commandLink id="tabelaPreco"
+				action="../tabela/tabela.jsf">
+				        	Tabela
+				        </h:commandLink>	        
 		</p:tab>	
 	</p:accordionPanel>
 	</h:form>
