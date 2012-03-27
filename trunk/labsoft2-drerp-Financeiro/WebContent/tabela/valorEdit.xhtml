@@ -10,14 +10,24 @@
 			<h:form>
 				<table>
 					<tr>
-						<h:inputHidden value="#{tabelaBean.valor.id}" />
-						<h:inputHidden value="#{tabelaBean.colunaId}" />
-						<h:outputText value="Plano de Saúde: #{tabelaBean.valor.coluna.planoSaude.nome}"/>
-						<h:inputHidden value="#{tabelaBean.itemTabelaId}" />
-						<h:outputText value="Serviço: #{tabelaBean.valor.itemTabela.procedimento.nome}"/>
-						<h:outputLabel value="Preço: " for="preco" />
-						<h:inputText id="preco" label="preco"
+						<td>
+							<h:inputHidden value="#{tabelaBean.valor.id}" />
+							<h:inputHidden value="#{tabelaBean.colunaId}" />
+							<h:outputText value="Plano de Saúde: #{tabelaBean.valor.coluna.planoSaude.nome}"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:inputHidden value="#{tabelaBean.itemTabelaId}" />
+							<h:outputText value="Serviço: #{tabelaBean.valor.itemTabela.procedimento.nome}"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputLabel value="Preço: " for="preco" />
+							<h:inputText id="preco" label="preco"
 							value="#{tabelaBean.valor.valor}" />
+						</td>
 					</tr>
 				</table>
 				<h:commandButton action="#{tabelaBean.saveValor}" class="ui-state-default ui-corner-all login_button" value="Salvar" />
