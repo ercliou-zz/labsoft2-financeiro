@@ -7,24 +7,24 @@
 
 	<ui:define name="content">
 
-		<p:dataTable var="itemTabela" value="#{tabelaBean.itens}">
+		<p:dataTable var="itemTabela" value="#{tabelaBean.itens}"
+			paginator="true" rows="8">
 
-			<p:column id="headerModel">
-				<f:facet name="header">  
-	                Prodedimento
-	            </f:facet>
-	            #{itemTabela.procedimento.nome}
+			<p:column sortBy="#{itemTabela.procedimento.nome}"
+				headerText="Prodedimento">
+				<h:outputText value="#{itemTabela.procedimento.nome}" />
 			</p:column>
 
-			<p:columns value="#{tabelaBean.colunas}" var="coluna"
-				columnIndexVar="colIndex">
-	            
-				<f:facet name="header">
-	                #{coluna.planoSaude.nome}
-	            </f:facet>
-	            
-	            <h:form id="formValor">
-					<h:commandLink value="#{itemTabela.valores[colIndex].valorMoeda}" action="#{tabelaBean.editValor}">
+			<f:facet name="header">  
+	            <h:outputText value="Tabela de Preços"/>
+	        </f:facet>
+
+			<p:columns headerText="#{coluna.planoSaude.nome}"
+				value="#{tabelaBean.colunas}" var="coluna" columnIndexVar="colIndex">
+
+				<h:form id="formValor">
+					<h:commandLink action="#{tabelaBean.editValor}">
+						<h:outputLabel value="#{itemTabela.valores[colIndex].valorMoeda}" />
 						<f:param name="colIndex" value="#{colIndex}" />
 						<f:setPropertyActionListener target="#{tabelaBean.itemTabela}"
 							value="#{itemTabela}" />
