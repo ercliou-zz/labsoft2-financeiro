@@ -5,25 +5,20 @@ import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.drerp.financeiro.dao.GenericDAOImpl;
-import br.com.drerp.financeiro.model.transferencia.RequisicaoTransferencia;
-import br.com.drerp.financeiro.model.transferencia.StatusRequisicaoTransferencia;
+import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
+import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
-public class RequisicaoTransferenciaDAOImpl extends GenericDAOImpl<RequisicaoTransferencia> implements RequisicaoTransferenciaDAO{
+public class RequisicaoTransferenciaDAOImpl extends GenericDAOImpl<Transferencia> implements RequisicaoTransferenciaDAO{
 
 	@SuppressWarnings("unchecked")
-	public List<RequisicaoTransferencia> listarAbertas() {
-		List<RequisicaoTransferencia> list = super.session.createCriteria(RequisicaoTransferencia.class).add(Restrictions.eq("status", StatusRequisicaoTransferencia.ABERTA)).list();
+	public List<Transferencia> listarAbertas() {
+		List<Transferencia> list = super.session.createCriteria(Transferencia.class).add(Restrictions.eq("status", StatusTransferencia.PENDENTE)).list();
 		return list;
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<RequisicaoTransferencia> listarAceitas() {
-		return session.createCriteria(RequisicaoTransferencia.class).add(Restrictions.eq("status", StatusRequisicaoTransferencia.ACEITA)).list();
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<RequisicaoTransferencia> listarEfetuadas() {
-		return session.createCriteria(RequisicaoTransferencia.class).add(Restrictions.eq("status", StatusRequisicaoTransferencia.EFETUADA)).list();
+	public List<Transferencia> listarEfetuadas() {
+		return session.createCriteria(Transferencia.class).add(Restrictions.eq("status", StatusTransferencia.EFETUADA)).list();
 	}
 
 }
