@@ -2,37 +2,37 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
-		Edição de Preço
-		<h:panelGrid columns="2" cellpadding="10">
-			<h:form>
-				<table>
-					<tr>
-						<td>
-							<h:inputHidden value="#{tabelaBean.valor.id}" />
-							<h:inputHidden value="#{tabelaBean.colunaId}" />
-							<h:outputText value="Plano de Saúde: #{tabelaBean.valor.coluna.planoSaude.nome}"/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h:inputHidden value="#{tabelaBean.itemTabelaId}" />
-							<h:outputText value="Serviço: #{tabelaBean.valor.itemTabela.procedimento.nome}"/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h:outputLabel value="Preço: " for="preco" />
-							<h:inputText id="preco" label="preco"
+		<h:form>
+
+			<p:fieldset legend="Edição de Preço">
+				<h:panelGrid columns="1" cellpadding="10">
+
+					<p:row>
+						<h:inputHidden value="#{tabelaBean.valor.id}" />
+						<h:inputHidden value="#{tabelaBean.colunaId}" />
+						<h:outputText
+							value="Plano de Saúde: #{tabelaBean.valor.coluna.planoSaude.nome}" />
+					</p:row>
+					<p:row>
+						<h:inputHidden value="#{tabelaBean.itemTabelaId}" />
+						<h:outputText
+							value="Serviço: #{tabelaBean.valor.itemTabela.procedimento.nome}" />
+					</p:row>
+					<p:row>
+						<h:outputLabel value="Preço: " for="preco" />
+						<h:inputText id="preco" label="preco"
 							value="#{tabelaBean.valor.valor}" />
-						</td>
-					</tr>
-				</table>
-				<h:commandButton action="#{tabelaBean.saveValor}" class="ui-state-default ui-corner-all login_button" value="Salvar" />
-				<h:commandLink action="tabela.xhtml" class="ui-state-default ui-corner-all login_button" value="Cancelar" />
-			</h:form>
-		</h:panelGrid>
+					</p:row>
+					<p:row>
+						<p:commandButton action="#{tabelaBean.saveValor}" value="Salvar" />
+						<p:commandButton action="tabela.xhtml" value="Cancelar" />
+					</p:row>
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
 	</ui:define>
 </ui:composition>

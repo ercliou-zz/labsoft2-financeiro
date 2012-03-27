@@ -2,23 +2,37 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
-		Edição de Procedimento
-		<h:panelGrid columns="2" cellpadding="10">
-			<h:form>
-				<table>
-					<tr>
-						<h:inputHidden value="#{procedimentoBean.procedimento.id}" />
-						<h:outputLabel value="Nome: " for="nome" />
-						<h:inputText id="nome" label="nome"
-							value="#{procedimentoBean.procedimento.nome}" />
-					</tr>
-				</table>
-				<h:commandButton action="#{procedimentoBean.save}" class="ui-state-default ui-corner-all login_button" value="Salvar" />
-				<h:commandButton action="list.xhtml" class="ui-state-default ui-corner-all login_button" value="Cancelar" />
-			</h:form>
-		</h:panelGrid>
+
+		<h:form>
+
+			<p:fieldset legend="Edição de Procedimentos, Materiais, Medicamentos e Uso de Equipamentos">
+
+				<h:panelGrid columns="2" cellpadding="10">
+					
+					<h:outputLabel value="Nome: " />
+					<h:inputText value="#{procedimentoBean.procedimento.nome}" />
+					
+					<h:outputLabel value="Tipo: " />
+					<h:selectOneMenu id="tipoProcedimento"
+						value="#{procedimentoBean.procedimento.tipo}">
+						<f:selectItem itemLabel="Procedimento" itemValue="PROCEDIMENTO" />
+						<f:selectItem itemLabel="Material" itemValue="MATERIAL" />
+						<f:selectItem itemLabel="Medicamento" itemValue="MEDICAMENTO" />
+						<f:selectItem itemLabel="Uso de Equipamento"
+							itemValue="USO_DE_EQUIPAMENTO" />
+					</h:selectOneMenu>
+					
+					<p:commandButton action="#{procedimentoBean.save}" value="Salvar" />
+					<p:commandButton action="list.xhtml" value="Cancelar" />
+					
+					<h:inputHidden value="#{procedimentoBean.procedimento.id}" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
 	</ui:define>
 </ui:composition>

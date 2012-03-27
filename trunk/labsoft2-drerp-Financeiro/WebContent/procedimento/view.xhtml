@@ -2,21 +2,25 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
-		Vizualização de Procedimentos, Materiais, Medicamentos e Uso de Equipamentos
-		<h:panelGrid columns="2" cellpadding="10">
-			<h:form>
-				<table>
-					<tr>
-						<h:outputLabel value="Nome: " for="nome" />
-						<h:outputText id="nome" label="nome"
-							value="#{procedimentoBean.procedimento.nome}" />
-					</tr>
-				</table>
-				<h:commandButton action="list.xhtml" class="ui-state-default ui-corner-all login_button" value="Voltar" />
-			</h:form>
-		</h:panelGrid>
+
+		<h:form>
+
+			<p:fieldset
+				legend="Vizualização de Procedimentos, Materiais, Medicamentos e Uso de Equipamentos">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:outputLabel value="Nome: " />
+					<h:outputText value="#{procedimentoBean.procedimento.nome}" />
+
+					<h:outputLabel value="Tipo: " />
+					<h:outputText value="#{procedimentoBean.procedimento.tipo}" />
+
+					<p:commandButton action="list.xhtml" value="Voltar" />
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
 	</ui:define>
 </ui:composition>
