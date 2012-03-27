@@ -13,4 +13,5 @@ public abstract interface GenericDAO<T> {
 	public void edit(T entidade);
 	public T getById(Long id);
 	public List<T> list();
+	public void merge(T entidade);
 }

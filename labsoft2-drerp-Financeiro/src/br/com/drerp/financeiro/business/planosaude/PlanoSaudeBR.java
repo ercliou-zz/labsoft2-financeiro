@@ -9,18 +9,22 @@ import br.com.drerp.financeiro.dao.planosaude.PlanoSaudeLogDAO;
 import br.com.drerp.financeiro.dao.planosaude.PlanoSaudeLogDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ColunaDAO;
 import br.com.drerp.financeiro.dao.tabela.ColunaDAOImpl;
+import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAO;
+import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ValorDAO;
 import br.com.drerp.financeiro.dao.tabela.ValorDAOImpl;
 import br.com.drerp.financeiro.model.LogType;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaudeLog;
 import br.com.drerp.financeiro.model.tabela.Coluna;
+import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
 
 public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 	private PlanoSaudeLogDAO logDAO;
 	private ColunaDAO colDAO;
 	private ValorDAO valorDAO;
+	private ItemTabelaDAO itemTabelaDAO;
 
 	public PlanoSaudeBR() {
 		super();
@@ -30,6 +34,9 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 		colDAO = factoryColuna.createDAO(ColunaDAOImpl.class);
 		GenericDAOFactory<ValorDAO> factoryValor = new GenericDAOFactory<ValorDAO>();
 		valorDAO = factoryValor.createDAO(ValorDAOImpl.class);
+		GenericDAOFactory<ItemTabelaDAO> factoryItemTabela = new GenericDAOFactory<ItemTabelaDAO>();
+		itemTabelaDAO = factoryItemTabela.createDAO(ItemTabelaDAOImpl.class);
+		
 	}
 	
 	@Override
@@ -44,6 +51,8 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 			Coluna col = new Coluna();
 			col.setPlanoSaude(planoSaude);
 			colDAO.save(col);
+
+			this.criarValores(col);
 			
 		} else {
 			log.setTipo(LogType.ALTERACAO);
@@ -57,6 +66,18 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 		}
 		log.setPlanoSaudeId(planoSaude.getId());
 		logDAO.save(log);
+	}
+	
+	private void criarValores(Coluna coluna){
+		List<ItemTabela> lista = this.itemTabelaDAO.list();
+		for (ItemTabela itemTabela : lista) {
+			Valor val = new Valor();
+			val.setColuna(coluna);
+			val.setItemTabela(itemTabela);
+			this.valorDAO.save(val);
+			itemTabela.getValores().add(val);
+			this.itemTabelaDAO.merge(itemTabela);
+		}
 	}
 	
 	@Override

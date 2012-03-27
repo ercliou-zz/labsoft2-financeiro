@@ -1,6 +1,7 @@
 package br.com.drerp.financeiro.model.tabela;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,6 +26,10 @@ public class ItemTabela extends GenericModel implements Serializable{
 	
 	@OneToMany(mappedBy="itemTabela")
 	private List<Valor> valores;
+	
+	public ItemTabela() {
+		this.valores = new ArrayList<Valor>();
+	}
 	
 	public Procedimento getProcedimento() {
 		return procedimento;

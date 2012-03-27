@@ -5,5 +5,4 @@ import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 
 public interface PlanoSaudeDAO extends GenericDAO<PlanoSaude>{
 	
-	public PlanoSaude merge(PlanoSaude plano);
 }
