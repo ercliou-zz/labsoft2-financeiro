@@ -8,7 +8,7 @@ import br.com.drerp.financeiro.dao.GenericDAOImpl;
 import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
 import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
-public class RequisicaoTransferenciaDAOImpl extends GenericDAOImpl<Transferencia> implements RequisicaoTransferenciaDAO{
+public class TransferenciaDAOImpl extends GenericDAOImpl<Transferencia> implements TransferenciaDAO{
 
 	@SuppressWarnings("unchecked")
 	public List<Transferencia> listarAbertas() {
