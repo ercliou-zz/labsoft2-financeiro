@@ -23,6 +23,9 @@ public class TabelaBean {
 	private List<ItemTabela> itens;
 	private List<Coluna> colunas;
 	
+	private ItemTabela itemTabela;
+	private int colunaIndex;
+	
 	public TabelaBean() {
 		tabelaBR = new TabelaBR();
 		itens = tabelaBR.listarItens();
@@ -64,5 +67,31 @@ public class TabelaBean {
 		Collections.sort(colunas, new ColunaComparator());
 		return colunas;
 	}
-	
+
+	public ItemTabela getItemTabela() {
+		return itemTabela;
+	}
+
+	public void setItemTabela(ItemTabela itemTabela) {
+		this.itemTabela = itemTabela;
+	}
+
+	public int getColunaIndex() {
+		return colunaIndex;
+	}
+
+	public void setColunaIndex(int colunaIndex) {
+		this.colunaIndex = colunaIndex;
+	}
+
+	public String teste(){
+		Coluna colunaSelecionada = this.colunas.get(this.colunaIndex);
+		List<Valor> valores = this.itemTabela.getValores();
+		for (Valor valor : valores) {
+			if(valor.getColuna().equals(colunaSelecionada)){
+				System.out.println(valor.getValorMoeda());
+			}
+		}
+		return null;
+	}
 }

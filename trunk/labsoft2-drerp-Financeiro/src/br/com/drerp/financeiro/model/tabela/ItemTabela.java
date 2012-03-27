@@ -1,5 +1,6 @@
 package br.com.drerp.financeiro.model.tabela;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,8 +15,10 @@ import br.com.drerp.financeiro.model.procedimento.Procedimento;
 
 @Entity
 @Table(name="FIN_ITEMTABELA")
-public class ItemTabela extends GenericModel{
+public class ItemTabela extends GenericModel implements Serializable{
 	
+	private static final long serialVersionUID = -6501298374086476473L;
+
 	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="procedimento_fk")
 	private Procedimento procedimento;

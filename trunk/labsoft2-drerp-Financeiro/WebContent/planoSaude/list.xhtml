@@ -8,37 +8,37 @@
     	LISTA
 		<h:panelGrid columns="2" cellpadding="10">
 			<h:form>
-				<h:dataTable value="#{planoSaudeBean.planos}" var="planoSaude"
+				<h:dataTable value="#{procedimentoBean.procedimentos}" var="procedimento"
 					rules="rows">
 					<h:column>
 						<f:facet name="header"></f:facet>
-						<h:outputText value="#{planoSaude.nome}"></h:outputText>
+						<h:outputText value="#{procedimento.nome}"></h:outputText>
 					</h:column>
 					<h:column>
 						<f:facet name="header"></f:facet>
-						<h:commandLink action="#{planoSaudeBean.view}">Vizualizar
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
+						<h:commandLink action="#{procedimentoBean.view}">Vizualizar
+											<f:setPropertyActionListener target="#{procedimentoBean.procedimento}"
+								value="#{procedimento}" />
 						</h:commandLink>
 					</h:column>
 					<h:column>
 						<f:facet name="header"></f:facet>
-						<h:commandLink action="#{planoSaudeBean.edit}">Editar
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
+						<h:commandLink action="#{procedimentoBean.edit}">Editar
+											<f:setPropertyActionListener target="#{procedimentoBean.procedimento}"
+								value="#{procedimento}" />
 						</h:commandLink>
 					</h:column>
 					<h:column>
 						<f:facet name="header"></f:facet>
-						<h:commandLink onclick="if(!confirm('Tem certeza que deseja remover este plano de saúde?')) return false;" action="#{planoSaudeBean.delete}">Excluir
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
+						<h:commandLink onclick="if(!confirm('Tem certeza que deseja remover este procedimento?')) return false;" action="#{procedimentoBean.delete}">Excluir
+											<f:setPropertyActionListener target="#{procedimentoBean.procedimento}"
+								value="#{procedimento}" />
 						</h:commandLink>
 					</h:column>
 
 				</h:dataTable>
 
-				<h:commandLink action="#{planoSaudeBean.create}">
+				<h:commandLink action="#{procedimentoBean.create}">
 					Novo
 				</h:commandLink>
 			</h:form>

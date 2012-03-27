@@ -1,5 +1,7 @@
 package br.com.drerp.financeiro.model.tabela;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -11,7 +13,9 @@ import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 
 @Entity
 @Table(name="FIN_COLUNA")
-public class Coluna extends GenericModel {
+public class Coluna extends GenericModel implements Serializable{
+	
+	private static final long serialVersionUID = -4247039522186908883L;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="planoSaude_fk")
