@@ -4,20 +4,31 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 	
-	<h:form id="form">
-		<h:commandLink id="cadastroPlanoSaude"
-			action="../planoSaude/list.jsf">
-			        	Cadastro 
-			        </h:commandLink>
-        <h:commandLink id="historicoPlanoSaude"
-			action="../planoSaude/historico.jsf">
-			        	Historico 
-			        </h:commandLink>
-		<br />
-		<h:commandLink id="cadastroTransferencia"
-			action="../transferencia/list.jsf">
-			        	Cadastro
-			        </h:commandLink>
+	<h:form>
+	<p:accordionPanel>
+		<p:tab title="Transferência">
+			<h:commandLink id="requsicaoTransferencia"
+				action="../requisicaoTransferenciaEdit.jsf">
+				        	Transferência 
+				        </h:commandLink>
+			<br />
+			<h:commandLink id="relatorioTransferencia"
+				action="../relatorioTransferencias.jsf">
+				        	Relatório 
+				        </h:commandLink>	        
+		</p:tab>
+		<p:tab title="Plano de Saúde">
+			<h:commandLink id="cadastroPlanoSaude"
+				action="../planoSaude/list.jsf">
+				        	Cadastro 
+				        </h:commandLink>
+				        <br />
+	        <h:commandLink id="historicoPlanoSaude"
+				action="../planoSaude/historico.jsf">
+				        	Historico 
+				        </h:commandLink>
+		</p:tab>	
+	</p:accordionPanel>
 	</h:form>
 	
 </html>
