@@ -1,0 +1,42 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+		<p:fieldset legend="Lista de Beneficiarios">
+				<h:form>
+					<p:dataTable value="#{beneficiarioBean.beneficiarios}"
+						var="beneficiario" paginator="true" rows="8">
+						
+						<p:column filterBy="#{beneficiario.nome}" filterMatchMode="contains" headerText="Nome">
+							<h:outputText value="#{beneficiario.nome}"></h:outputText>
+						</p:column>
+						<p:column headerText="Documento">
+							<h:outputText value="#{beneficiario.documento}"></h:outputText>
+						</p:column>
+						<p:column headerText="Info Bancária">
+							<h:outputText value="#{beneficiario.infoBancaria}"></h:outputText>
+						</p:column>
+						<p:column>
+							<h:commandLink style="padding:3px" action="#{beneficiarioBean.view}" value="Vizualizar">
+								<f:setPropertyActionListener target="#{beneficiarioBean.beneficiario}" value="#{beneficiario}" />
+							</h:commandLink>
+							<h:commandLink style="padding:3px" action="#{beneficiarioBean.edit}" value="Editar">
+								<f:setPropertyActionListener target="#{beneficiarioBean.beneficiario}" value="#{beneficiario}" />
+							</h:commandLink>
+							<h:commandLink style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{beneficiarioBean.delete}" value="Excluir">
+								<f:setPropertyActionListener target="#{beneficiarioBean.beneficiario}" value="#{beneficiario}" />
+							</h:commandLink>
+						</p:column>
+
+					</p:dataTable>
+					
+					<p:commandButton action="#{beneficiarioBean.create}" value="Novo"/>
+				
+				</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
