@@ -23,9 +23,6 @@ public class Guia extends GenericModel{
 	@OneToOne
 	private Pagador pagador;
 	
-	@OneToOne
-	private Beneficiario beneficiario;
-	
 	@ManyToMany
 	private List<Fatura> faturas;
 
@@ -43,14 +40,6 @@ public class Guia extends GenericModel{
 
 	public void setPagador(Pagador pagador) {
 		this.pagador = pagador;
-	}
-
-	public Beneficiario getBeneficiario() {
-		return beneficiario;
-	}
-
-	public void setBeneficiario(Beneficiario beneficiario) {
-		this.beneficiario = beneficiario;
 	}
 
 	public List<Fatura> getFaturas() {
