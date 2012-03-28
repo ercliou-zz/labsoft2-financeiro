@@ -1,32 +1,15 @@
-
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<title>lista</title>
 </h:head>
 
 <h:body>
-<!-- 	<h:form> -->
-<!-- 		<h:commandButton action="#{doencaBean.create}" value="Novo"></h:commandButton> -->
-<!-- 	</h:form> -->
-	
-<!-- 	<h:form>							 -->
-<!-- 		<h:panelGrid columns="2"> -->
-		
-<!-- 			<h:outputLabel value="Nome:" for="nome" /> -->
-<!-- 			<h:inputText id="doenca_nome" label="Nome" -->
-<!-- 				value="#{doencaBean.nome}">				 -->
-<!-- 			</h:inputText>			 -->
-		
-<!-- 		</h:panelGrid>			 -->
-
-<!-- 		<h:commandButton action="#{doencaBean.filter}" value="Filtrar"></h:commandButton>		 -->
-<!-- 	</h:form> -->
-
 		<h:messages />
-		<h:dataTable value="#{requisicaoTransferenciaBean.listaAprovada}" var="requisicao" rules="rows">
+		<p:dataTable value="#{transferenciaOutBean.contaPagarList}" var="requisicao" rules="rows">
 			<f:facet name="caption">
 				<!-- 							conteudo aqui  -->
 			</f:facet>
@@ -35,67 +18,67 @@
 
 			<f:facet name="footer">fim</f:facet>
 
-			<h:column>
+			<p:column>
 				<f:facet name="header">ID</f:facet>
 				<h:outputText value="#{requisicao.id}"></h:outputText>
-			</h:column>
-			<h:column>
+			</p:column>
+			<p:column>
 				<f:facet name="header">Beneficiario</f:facet>
 					#{requisicao.beneficiario.infoBancaria}
-			</h:column>	
-			<h:column>
+			</p:column>	
+			<p:column>
 				<f:facet name="header">Pagador</f:facet>
 					#{requisicao.pagador.infoBancaria}
-			</h:column>
-			<h:column>
+			</p:column>
+			<p:column>
 				<f:facet name="header">Data Requisição</f:facet>
-					#{requisicao.dataRequisicaoMilis}
-			</h:column>
-			<h:column>
+					#{requisicao.dataRequisicao}
+			</p:column>
+			<p:column>
 				<f:facet name="header">Data Limite</f:facet>
-					#{requisicao.dataLimiteMilis}
-			</h:column>
-			<h:column>
+					#{requisicao.dataLimite}
+			</p:column>
+			<p:column>
 				<f:facet name="header">Valor</f:facet>
 					#{requisicao.valor}
-			</h:column>
-
-			<h:column>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Status</f:facet>
+					#{requisicao.status}
+			</p:column>
+			<p:column>
 			<h:form>
 				<f:facet name="header">Valor da Transferência Realizada</f:facet>
-				<h:panelGroup rendered="#{requisicao.status == 'ACEITA'}">
-					<h:commandLink action="#{requisicaoTransferenciaBean.realizarTransferencia}">Realizar!
-						<f:setPropertyActionListener target="#{requisicaoTransferenciaBean.requisicaoTransferencia}"
+				<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
+					<h:commandLink action="#{transferenciaOutBean.realizarTransferencia}">Realizar
+						<f:setPropertyActionListener target="#{transferenciaOutBean.contaPagar}"
 							value="#{requisicao}" />
 					</h:commandLink>
-<!-- 					<h:outputLabel value="" for="propriedade"/> -->
-					<h:inputText id="valor" label="prop" value="#{requisicaoTransferenciaBean.valorTransferido}"/>
-				</h:panelGroup>
-				<h:panelGroup rendered="#{requisicao.status != 'ACEITA'}">
-					Ok :D
 				</h:panelGroup>
 			</h:form>
-			</h:column>
-
-<!-- 			<h:column> -->
-<!-- 				<f:facet name="header">Editar</f:facet> -->
-<!-- 				<h:commandLink action="#{doencaBean.edit}">edit -->
-<!-- 					<f:setPropertyActionListener target="#{doencaBean.doenca}" -->
-<!-- 						value="#{doenca}" /> -->
-<!-- 				</h:commandLink> -->
-<!-- 			</h:column> -->
-
-			<h:column>
+			</p:column>
+			<p:column>
 			<h:form>
-				<f:facet name="header">Deletar</f:facet>
-				<h:commandLink action="#{requisicaoTransferenciaBean.delete}">delete
-					<f:setPropertyActionListener target="#{requisicaoTransferenciaBean.requisicaoTransferencia}"
+				<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
+				<h:commandLink action="#{transferenciaOutBean.delete}">Deletar
+					<f:setPropertyActionListener target="#{transferenciaOutBean.contaPagar}"
 						value="#{requisicao}" />
 				</h:commandLink>
+				</h:panelGroup>
 			</h:form>
-			</h:column>
+			</p:column>
+			<p:column>
+			<h:form>
+				<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
+				<h:commandLink action="#{transferenciaOutBean.registrarErro}">Erro
+					<f:setPropertyActionListener target="#{transferenciaOutBean.contaPagar}"
+						value="#{requisicao}" />
+				</h:commandLink>
+				</h:panelGroup>
+			</h:form>
+			</p:column>
 
-		</h:dataTable>
+		</p:dataTable>
 
 </h:body>
 
