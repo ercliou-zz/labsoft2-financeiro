@@ -9,12 +9,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.drerp.financeiro.model.GenericModel;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
 
 @Entity
 @Table(name="FIN_FATURA")
-public class Fatura {
+public class Fatura extends GenericModel{
 	
 	@ManyToOne
 	private PlanoSaude planoSaude;
