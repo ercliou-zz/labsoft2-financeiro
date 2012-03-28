@@ -10,20 +10,20 @@
 
 		<h:form>
 
-			<p:fieldset legend="Edi‹o de Guias">
+			<p:fieldset legend="Edicao de Guias">
 
 				<h:panelGrid columns="2" cellpadding="10">
 					
 					<h:outputLabel value="Pagador: " />
-					<h:selectOneMenu value="#{guiaBean.pagador}">
+					<h:selectOneMenu value="#{guiaBean.guia.pagador}">
 						<f:selectItem itemLabel="Todos" itemValue="" />
 						<c:forEach var="pagador" items="#{pagadorBean.listaAprovada}">
 							<f:selectItem itemLabel="#{pagador.nome}" itemValue="#{pagador.id}" />
 						</c:forEach>
 					</h:selectOneMenu>
 					
-					<h:outputLabel value="Plano de Saœde: " />
-					<h:selectOneMenu value="#{guiaBean.planoSaude}">
+					<h:outputLabel value="Plano de Saude: " />
+					<h:selectOneMenu value="#{guiaBean.guia.planoSaude}">
 						<f:selectItem itemLabel="Todos" itemValue="" />
 						<c:forEach var="plano" items="#{planoSaudeBean.planos}">
 							<f:selectItem itemLabel="#{plano.nome}" itemValue="#{plano.id}" />
