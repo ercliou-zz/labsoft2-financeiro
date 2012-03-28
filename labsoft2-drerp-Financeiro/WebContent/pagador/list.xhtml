@@ -1,0 +1,42 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+		<p:fieldset legend="Lista de Pagadores">
+				<h:form>
+					<p:dataTable value="#{pagadorBean.pagadores}"
+						var="pagador" paginator="true" rows="8">
+						
+						<p:column filterBy="#{pagador.nome}" filterMatchMode="contains" headerText="Nome">
+							<h:outputText value="#{pagador.nome}"></h:outputText>
+						</p:column>
+						<p:column headerText="Documento">
+							<h:outputText value="#{pagador.documento}"></h:outputText>
+						</p:column>
+						<p:column headerText="Info Bancária">
+							<h:outputText value="#{pagador.infoBancaria}"></h:outputText>
+						</p:column>
+						<p:column>
+							<h:commandLink style="padding:3px" action="#{pagadorBean.view}" value="Vizualizar">
+								<f:setPropertyActionListener target="#{pagadorBean.pagador}" value="#{pagador}" />
+							</h:commandLink>
+							<h:commandLink style="padding:3px" action="#{pagadorBean.edit}" value="Editar">
+								<f:setPropertyActionListener target="#{pagadorBean.pagador}" value="#{pagador}" />
+							</h:commandLink>
+							<h:commandLink style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{pagadorBean.delete}" value="Excluir">
+								<f:setPropertyActionListener target="#{pagadorBean.pagador}" value="#{pagador}" />
+							</h:commandLink>
+						</p:column>
+
+					</p:dataTable>
+					
+					<p:commandButton action="#{pagadorBean.create}" value="Novo"/>
+				
+				</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
