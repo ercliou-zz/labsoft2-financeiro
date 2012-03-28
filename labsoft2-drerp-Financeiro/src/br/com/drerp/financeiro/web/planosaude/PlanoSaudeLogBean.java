@@ -29,19 +29,23 @@ public class PlanoSaudeLogBean {
 	private List<PlanoSaude> planosList;
 	
 	private List<PlanoSaudeLog> planoSaudeLogList;
+	private PlanoSaudeLog planoSaudeLog;
 	
 	public PlanoSaudeLogBean(){
 		this.planoBR = new PlanoSaudeBR();
 		this.planoLogBR = new PlanoSaudeLogBR();
 		this.planosList = new ArrayList<PlanoSaude>();
+		planoSaudeLogList = planoLogBR.filtrar(null, 0l, null, null);
 	}
 
-	
 	public String filtrar(){
 		planoSaudeLogList = planoLogBR.filtrar(tipoLog, planoSelecionado, dataInicial, dataFinal);
-		return null;
+		return "planoSaudeLog";
 	}
 	
+	public String view(){
+		return "planoSaudeLogView";
+	}
 	
 	public Long getPlanoSelecionado() {
 		return planoSelecionado;
@@ -90,6 +94,15 @@ public class PlanoSaudeLogBean {
 
 	public void setDataFinal(Date dataFinal) {
 		this.dataFinal = dataFinal;
+	}
+
+
+	public PlanoSaudeLog getPlanoSaudeLog() {
+		return planoSaudeLog;
+	}
+
+	public void setPlanoSaudeLog(PlanoSaudeLog planoSaudeLog) {
+		this.planoSaudeLog = planoSaudeLog;
 	}
 	
 }

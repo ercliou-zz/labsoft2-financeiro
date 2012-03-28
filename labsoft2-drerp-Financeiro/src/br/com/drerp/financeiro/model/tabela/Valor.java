@@ -46,7 +46,7 @@ public class Valor extends GenericModel{
 		formatter.setMaximumFractionDigits(2);
 		return formatter.format(valor);
 		}
-		return "-";
+		return "Indefinido";
 	}
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
