@@ -15,6 +15,9 @@
     
 		<mapping class="br.com.crud.model.Entidade"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Transferencia"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.ContaPagar"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.ContaReceber"/>
+	   	<mapping class="br.com.drerp.financeiro.model.transferencia.Salario"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Beneficiario"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Pagador"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Fatura"/>
@@ -29,6 +32,7 @@
     	<mapping class="br.com.drerp.financeiro.model.planosaude.PlanoSaudeLog"/>
     	<mapping class="br.com.drerp.financeiro.model.orcamento.PedidoOrcamento"/>
     	<mapping class="br.com.drerp.financeiro.model.orcamento.Orcamento"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.NotaFiscal"/>
     
     </session-factory>
     
