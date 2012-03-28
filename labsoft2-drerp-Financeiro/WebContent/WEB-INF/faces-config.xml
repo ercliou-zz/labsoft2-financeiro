@@ -46,6 +46,11 @@
 		<managed-bean-class>br.com.drerp.financeiro.web.planosaude.PlanoSaudeBean</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope> 
 	</managed-bean>
+	<managed-bean> 
+		<managed-bean-name>guiaBean</managed-bean-name> 
+		<managed-bean-class>br.com.drerp.financeiro.web.planosaude.GuiaBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope> 
+	</managed-bean>
 	<managed-bean>
     	<managed-bean-name>orcamentoBean</managed-bean-name>
     	<managed-bean-class>br.com.drerp.financeiro.web.orcamento.OrcamentoBean</managed-bean-class>
