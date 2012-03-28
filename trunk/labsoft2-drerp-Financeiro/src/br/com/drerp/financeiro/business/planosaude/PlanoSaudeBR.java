@@ -57,7 +57,7 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 			log.setTipo(LogType.ALTERACAO);
 			PlanoSaude antigo = dao.getById(id);
 			if(!planoSaude.getNome().equals(antigo.getNome())){
-				log.setNomeAntigo("a");
+				log.setNomeAntigo(antigo.getNome());
 				log.setNomeNovo(planoSaude.getNome());
 				antigo.setNome(planoSaude.getNome());
 			}

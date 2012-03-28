@@ -29,7 +29,7 @@ public class PlanoSaudeLogDAOImpl extends GenericDAOImpl<PlanoSaudeLog> implemen
 		if (tipo != null) {
 			criteria.add(Restrictions.eq("tipo",tipo));
 		}
-		if (id != 0) {
+		if (id != 0L) {
 			criteria.add(Restrictions.eq("planoSaudeId",id));
 		}
 		if (dataInicial != null) {
