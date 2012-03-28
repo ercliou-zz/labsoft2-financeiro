@@ -2,46 +2,37 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
-    	LISTA
-		<h:panelGrid columns="2" cellpadding="10">
+		<p:fieldset legend="Lista de Planos de Saúde">
 			<h:form>
-				<h:dataTable value="#{planoSaudeBean.planos}" var="planoSaude"
-					rules="rows">
-					<h:column>
-						<f:facet name="header"></f:facet>
+				<p:dataTable value="#{planoSaudeBean.planos}" var="planoSaude"
+					paginator="true" rows="8">
+
+					<p:column filterBy="#{planoSaude.nome}" filterMatchMode="contains"
+						headerText="Nome">
 						<h:outputText value="#{planoSaude.nome}"></h:outputText>
-					</h:column>
-					<h:column>
-						<f:facet name="header"></f:facet>
-						<h:commandLink action="#{planoSaudeBean.view}">Vizualizar
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
-						</h:commandLink>
-					</h:column>
-					<h:column>
-						<f:facet name="header"></f:facet>
-						<h:commandLink action="#{planoSaudeBean.edit}">Editar
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
-						</h:commandLink>
-					</h:column>
-					<h:column>
-						<f:facet name="header"></f:facet>
-						<h:commandLink onclick="if(!confirm('Tem certeza que deseja remover este plano de saúde?')) return false;" action="#{planoSaudeBean.delete}">Excluir
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
-						</h:commandLink>
-					</h:column>
+					</p:column>
 
-				</h:dataTable>
+					<p:column>
+						<h:commandLink style="padding:3px" action="#{planoSaudeBean.view}" value="Vizualizar">
+								<f:setPropertyActionListener target="#{planoSaudeBean.plano}" value="#{planoSaude}" />
+							</h:commandLink>
+							<h:commandLink style="padding:3px" action="#{planoSaudeBean.edit}" value="Editar">
+								<f:setPropertyActionListener target="#{planoSaudeBean.plano}" value="#{planoSaude}" />
+							</h:commandLink>
+							<h:commandLink style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{planoSaudeBean.delete}" value="Excluir">
+								<f:setPropertyActionListener target="#{planoSaudeBean.plano}" value="#{planoSaude}" />
+							</h:commandLink>
+					</p:column>
 
-				<h:commandLink action="#{planoSaudeBean.create}">
-					Novo
-				</h:commandLink>
+				</p:dataTable>
+
+				<p:commandButton action="#{planoSaudeBean.create}" value="Novo" />
+
 			</h:form>
-		</h:panelGrid>
+		</p:fieldset>
 	</ui:define>
 </ui:composition>

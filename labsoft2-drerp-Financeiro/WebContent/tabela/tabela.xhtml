@@ -6,33 +6,33 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
+		<p:fieldset legend="Tabela de Preços">
+			<p:dataTable var="itemTabela" value="#{tabelaBean.itens}"
+				paginator="true" rows="8">
 
-		<p:dataTable var="itemTabela" value="#{tabelaBean.itens}"
-			paginator="true" rows="8">
+				<p:column sortBy="#{itemTabela.procedimento.nome}"
+					headerText="Prodedimento">
+					<h:outputText value="#{itemTabela.procedimento.nome}" />
+				</p:column>
 
-			<p:column sortBy="#{itemTabela.procedimento.nome}"
-				headerText="Prodedimento">
-				<h:outputText value="#{itemTabela.procedimento.nome}" />
-			</p:column>
 
-			<f:facet name="header">  
-	            <h:outputText value="Tabela de Preços"/>
-	        </f:facet>
+				<p:columns headerText="#{coluna.planoSaude.nome}"
+					value="#{tabelaBean.colunas}" var="coluna"
+					columnIndexVar="colIndex">
 
-			<p:columns headerText="#{coluna.planoSaude.nome}"
-				value="#{tabelaBean.colunas}" var="coluna" columnIndexVar="colIndex">
+					<h:form id="formValor">
+						<h:commandLink styleClass="celulaStyle"
+							action="#{tabelaBean.editValor}">
+							<h:outputLabel value="#{itemTabela.valores[colIndex].valorMoeda}" />
+							<f:param name="colIndex" value="#{colIndex}" />
+							<f:setPropertyActionListener target="#{tabelaBean.itemTabela}"
+								value="#{itemTabela}" />
+						</h:commandLink>
+					</h:form>
 
-				<h:form id="formValor">
-					<h:commandLink styleClass="celulaStyle" action="#{tabelaBean.editValor}">
-						<h:outputLabel value="#{itemTabela.valores[colIndex].valorMoeda}" />
-						<f:param name="colIndex" value="#{colIndex}" />
-						<f:setPropertyActionListener target="#{tabelaBean.itemTabela}"
-							value="#{itemTabela}" />
-					</h:commandLink>
-				</h:form>
+				</p:columns>
 
-			</p:columns>
-
-		</p:dataTable>
+			</p:dataTable>
+		</p:fieldset>
 	</ui:define>
 </ui:composition>
