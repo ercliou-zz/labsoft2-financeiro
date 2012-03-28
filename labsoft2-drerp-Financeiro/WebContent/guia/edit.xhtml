@@ -14,10 +14,20 @@
 				<h:panelGrid columns="2" cellpadding="10">
 					
 					<h:outputLabel value="Pagador: " />
-					<h:inputText value="#{guiaBean.guia.pagador.nome}" />
+					<h:selectOneMenu value="#{guiaBean.pagador}">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<c:forEach var="pagador" items="#{pagadorBean.listaAprovada}">
+							<f:selectItem itemLabel="#{pagador.nome}" itemValue="#{pagador.id}" />
+						</c:forEach>
+					</h:selectOneMenu>
 					
 					<h:outputLabel value="Plano de Saœde: " />
-					<h:inputText value="#{guiaBean.guia.planoSaude.nome}" />
+					<h:selectOneMenu value="#{guiaBean.planoSaude}">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<c:forEach var="plano" items="#{planoSaudeBean.planos}">
+							<f:selectItem itemLabel="#{plano.nome}" itemValue="#{plano.id}" />
+						</c:forEach>
+					</h:selectOneMenu>
 					
 					<p:commandButton action="#{guiaBean.save}" value="Salvar" />
 					<p:commandButton action="list.xhtml" value="Cancelar" />
