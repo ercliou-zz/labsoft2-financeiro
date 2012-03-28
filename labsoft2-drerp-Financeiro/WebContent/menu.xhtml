@@ -3,8 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<h:form>
+
+<h:form>
 	<p:accordionPanel activeIndex="">
 		<p:tab title="Transferência">
 			<h:commandLink id="requsicaoTransferencia"
@@ -15,28 +15,37 @@
 			<h:commandLink id="relatorioTransferencia"
 				action="../relatorioTransferencias.jsf">
 				        	Relatório 
-				        </h:commandLink>	        
+				        </h:commandLink>
+			<br />
+			<h:commandLink id="cadastroBeneficiario"
+				action="../beneficiario/list.jsf">
+				        	Beneficiários 
+				        </h:commandLink>
+			<br />
+			<h:commandLink id="cadastroPagador"
+				action="../pagador/list.jsf">
+				        	Pagadores 
+				        </h:commandLink>
 		</p:tab>
 		<p:tab title="Plano de Saúde">
 			<h:commandLink id="cadastroPlanoSaude"
 				action="../planoSaude/list.jsf">
 				        	Cadastro de Planos de Saúde
 				        </h:commandLink>
-				        <br />
-	        <h:commandLink id="historicoPlanoSaude"
+			<br />
+			<h:commandLink id="historicoPlanoSaude"
 				action="../planoSaude/planoSaudeLog.jsf">
 				        	Historico de Planos de Saúde
 				        </h:commandLink>
-	        <h:commandLink id="cadastroProcedimento"
+			<h:commandLink id="cadastroProcedimento"
 				action="../procedimento/list.jsf">
 				        	Cadastro de Procedimentos
 				        </h:commandLink>
-			<h:commandLink id="tabelaPreco"
-				action="../tabela/tabela.jsf">
+			<h:commandLink id="tabelaPreco" action="../tabela/tabela.jsf">
 				        	Tabela
-				        </h:commandLink>	        
-		</p:tab>	
+				        </h:commandLink>
+		</p:tab>
 	</p:accordionPanel>
-	</h:form>
-	
+</h:form>
+
 </html>
