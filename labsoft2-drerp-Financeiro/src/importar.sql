@@ -25,33 +25,12 @@ INSERT INTO `financeiro-db`.`fin_contapagar` (`id`, `dataLimiteMilis`, `dataReal
 --March 14 2012
 
 
---PROCEDIMENTO
-INSERT INTO `financeiro-db`.`fin_procedimento` (`id`, `nome`) VALUES (1, 'Siringa');
-INSERT INTO `financeiro-db`.`fin_procedimento` (`id`, `nome`) VALUES (2, 'Extração do globo ocular esquerdo');
-INSERT INTO `financeiro-db`.`fin_procedimento` (`id`, `nome`) VALUES (3, 'Implante de ímã');
-INSERT INTO `financeiro-db`.`fin_procedimento` (`id`, `nome`) VALUES (4, 'Remoção do terceiro mamilo');
-INSERT INTO `financeiro-db`.`fin_procedimento` (`id`, `nome`) VALUES (5, 'Sangue tipo AB');
-INSERT INTO `financeiro-db`.`fin_procedimento` (`id`, `nome`) VALUES (6, 'Fígado');
 
 -- PAGADOR
 INSERT INTO `financeiro-db`.`fin_pagador` (`id`, `documento`, `infoBancaria`, `nome`) VALUES (1, '1111', '11110', 'Joao');
 INSERT INTO `financeiro-db`.`fin_pagador` (`id`, `documento`, `infoBancaria`, `nome`) VALUES (2, '2222', '22220', 'Marolias');
 INSERT INTO `financeiro-db`.`fin_pagador` (`id`, `documento`, `infoBancaria`, `nome`) VALUES (3, '3333', '33330', 'Eric');
 
--- PLANOS SAUDE
-INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (1, 'Unimed');
-INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (2, 'Nipomed');
-INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (3, 'Intermedica');
-INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (4, 'Amil');
-INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (5, 'Mamil');
-INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (6, 'Mamilu');
-INSERT INTO `financeiro-db`.`fin_planosaude` (`id`, `nome`) VALUES (7, 'Murilo');
-
--- PLANOSAUDELOG
-INSERT INTO `financeiro-db`.`fin_log_planosaude` (`id`, `dataMS`, `tipo`, `nomeAntigo`, `nomeNovo`, `planoSaudeId`) VALUES (1, 1323741600000, 0, 'aaa', 'AAA', 1);
-INSERT INTO `financeiro-db`.`fin_log_planosaude` (`id`, `dataMS`, `tipo`, `nomeAntigo`, `nomeNovo`, `planoSaudeId`) VALUES (2, 1327111200000, 1, 'bbb', 'BBB', 2);
-INSERT INTO `financeiro-db`.`fin_log_planosaude` (`id`, `dataMS`, `tipo`, `nomeAntigo`, `nomeNovo`, `planoSaudeId`) VALUES (3, 1329789600000, 2, 'ccc', 'CCC', 3);
-INSERT INTO `financeiro-db`.`fin_log_planosaude` (`id`, `dataMS`, `tipo`, `nomeAntigo`, `nomeNovo`, `planoSaudeId`) VALUES (4, 1323828000000, 1, 'ddd', 'DDD', 4);
 
 
 -- PEDIDOORCAMENTO

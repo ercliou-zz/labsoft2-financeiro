@@ -3,31 +3,37 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<h:form>
+
+<h:form>
 	<p:accordionPanel activeIndex="">
 		<p:tab title="Transferência">
-			<h:commandLink style="margin:5px;" id="requsicaoTransferencia"
-				action="../requisicaoTransferenciaEdit.jsf" value="Transferência"/>
+			<h:commandLink style="margin:5px;" id="cadastroPagador"
+				action="../pagador/list.jsf" value="Pagador" />
 			<br />
-			<h:commandLink style="margin:5px;" id="relatorioTransferencia"
-				action="../relatorioTransferencias.jsf" value="Relatório"/>
+			<h:commandLink style="margin:5px;" id="cadastroBeneficiario"
+				action="../beneficiario/list.jsf" value="Beneficiario" />
+			<br />
+			<h:commandLink style="margin:5px;" id="graficoOrcamento"
+				action="../tabela/orcamentoGraficos.jsf" value="Graficos Orçamento" />
+			<br />
+			<h:commandLink style="margin:5px;" id="MUDAR123"
+				action="../tabela/requisicaoAprovadaList.jsf" value="Contas a Pagar" />
 		</p:tab>
 		<p:tab title="Plano de Saúde">
 			<h:commandLink style="margin:5px;" id="cadastroPlanoSaude"
-				action="../planoSaude/list.jsf" value="Cadastro"/>
-				        <br />
-	        <h:commandLink style="margin:5px;" id="historicoPlanoSaude"
-				action="../planoSaude/planoSaudeLog.jsf" value="Histórico"/>
+				action="../planoSaude/list.jsf" value="Cadastro" />
+			<br />
+			<h:commandLink style="margin:5px;" id="historicoPlanoSaude"
+				action="../planoSaude/planoSaudeLog.jsf" value="Histórico" />
 		</p:tab>
 		<p:tab title="Procedimento">
-	        <p:commandLink value="Cadastro" style="margin:5px;" id="cadastroProcedimento"
-				action="../procedimento/list.jsf"/>
-				        <br />
-			<p:commandLink id="tabelaPreco"
-				action="../tabela/tabela.jsf" value="Tabela"/>
-		</p:tab>	
+			<p:commandLink value="Cadastro" style="margin:5px;"
+				id="cadastroProcedimento" action="../procedimento/list.jsf" />
+			<br />
+			<p:commandLink id="tabelaPreco" action="../tabela/tabela.jsf"
+				value="Tabela" />
+		</p:tab>
 	</p:accordionPanel>
-	</h:form>
-	
+</h:form>
+
 </html>

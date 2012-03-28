@@ -44,7 +44,7 @@ public class Valor extends GenericModel{
 		if(valor != null){
 		DecimalFormat formatter = new DecimalFormat();
 		formatter.setMaximumFractionDigits(2);
-		return formatter.format(valor);
+		return "R$ " + formatter.format(valor);
 		}
 		return "Indefinido";
 	}
