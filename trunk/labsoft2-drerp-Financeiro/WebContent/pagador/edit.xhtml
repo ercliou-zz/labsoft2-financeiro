@@ -1,0 +1,34 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+
+		<h:form>
+
+			<p:fieldset legend="Edição de Pagadores">
+
+				<h:panelGrid columns="2" cellpadding="10">
+					
+					<h:outputLabel value="Nome: " />
+					<h:inputText value="#{pagadorBean.pagador.nome}" />
+					
+					<h:outputLabel value="Documento: " />
+					<h:inputText value="#{pagadorBean.pagador.documento}" />
+					
+					<h:outputLabel value="Info Bancária: " />
+					<h:inputText value="#{pagadorBean.pagador.infoBancaria}" />
+
+					<p:commandButton action="#{pagadorBean.save}" value="Salvar" />
+					<p:commandButton action="list.xhtml" value="Cancelar" />
+					
+					<h:inputHidden value="#{pagadorBean.pagador.id}" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
