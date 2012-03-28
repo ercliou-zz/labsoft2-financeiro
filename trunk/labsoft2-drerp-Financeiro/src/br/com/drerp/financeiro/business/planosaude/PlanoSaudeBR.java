@@ -36,7 +36,6 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 		valorDAO = factoryValor.createDAO(ValorDAOImpl.class);
 		GenericDAOFactory<ItemTabelaDAO> factoryItemTabela = new GenericDAOFactory<ItemTabelaDAO>();
 		itemTabelaDAO = factoryItemTabela.createDAO(ItemTabelaDAOImpl.class);
-		
 	}
 	
 	@Override

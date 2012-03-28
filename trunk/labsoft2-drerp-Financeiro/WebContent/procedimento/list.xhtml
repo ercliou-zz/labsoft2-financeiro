@@ -18,15 +18,15 @@
 							<h:outputText value="#{procedimento.tipo}"></h:outputText>
 						</p:column>
 						<p:column>
-							<p:commandButton style="padding:3px" action="#{procedimentoBean.view}" value="Vizualizar">
+							<h:commandLink style="padding:3px" action="#{procedimentoBean.view}" value="Vizualizar">
 								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
-							</p:commandButton>
-							<p:commandButton style="padding:3px" action="#{procedimentoBean.edit}" value="Editar">
+							</h:commandLink>
+							<h:commandLink style="padding:3px" action="#{procedimentoBean.edit}" value="Editar">
 								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
-							</p:commandButton>
-							<p:commandButton style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{procedimentoBean.delete}" value="Excluir">
+							</h:commandLink>
+							<h:commandLink style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{procedimentoBean.delete}" value="Excluir">
 								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
-							</p:commandButton>
+							</h:commandLink>
 						</p:column>
 
 					</p:dataTable>
