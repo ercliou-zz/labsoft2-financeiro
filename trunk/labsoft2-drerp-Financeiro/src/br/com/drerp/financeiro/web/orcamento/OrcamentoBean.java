@@ -17,9 +17,12 @@ import org.primefaces.model.chart.PieChartModel;
 
 import br.com.drerp.financeiro.business.orcamento.PedidoOrcamentoBR;
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
+import br.com.drerp.financeiro.business.procedimento.ProcedimentoBR;
+import br.com.drerp.financeiro.business.transferencia.PagadorBR;
 import br.com.drerp.financeiro.model.orcamento.TipoGrafico;
 import br.com.drerp.financeiro.model.orcamento.TipoParametroGrafico;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
+import br.com.drerp.financeiro.model.procedimento.Procedimento;
 
 @ManagedBean(name="orcamentoBean")
 @RequestScoped
@@ -60,6 +63,19 @@ public class OrcamentoBean implements Serializable {
     }
     
     public String gerarGrafico(){
+    	
+    	PagadorBR pagadorBR = new PagadorBR();
+    	ProcedimentoBR procedimentoBR = new ProcedimentoBR();
+    	
+    	List<Procedimento> procedimentos = new ArrayList<Procedimento>();
+    	procedimentos.add(procedimentoBR.getById(1l));
+    	procedimentos.add(procedimentoBR.getById(2l));
+    	procedimentos.add(procedimentoBR.getById(3l));
+    	procedimentos.add(procedimentoBR.getById(4l));
+    	
+    	
+    	
+    	pedidoOrcamentoBR.pedirOrcamento(pagadorBR.getById(1l), procedimentos, planoSaudeBR.getById(1l));
     	
     	switch (tipoGrafico) {
 		case BARRA:

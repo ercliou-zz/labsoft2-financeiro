@@ -11,7 +11,7 @@ import br.com.drerp.financeiro.model.GenericModel;
 
 
 @MappedSuperclass
-public abstract class Transferencia extends GenericModel {
+public class Transferencia extends GenericModel {
 
 	@OneToOne
 	private Beneficiario beneficiario;
@@ -26,6 +26,8 @@ public abstract class Transferencia extends GenericModel {
 	private Long dataRequisicaoMilis;
 	
 	private Long dataLimiteMilis;
+	
+	private Long dataRealizacaoMilis;
 	
 	public Beneficiario getBeneficiario() {
 		return beneficiario;
@@ -66,6 +68,18 @@ public abstract class Transferencia extends GenericModel {
 
 	public Date getDataLimite() {
 		return new Date(this.dataLimiteMilis);
+	}
+	
+	public Long getDataRealizacaoMilis() {
+		return dataRealizacaoMilis;
+	}
+
+	public void setDataRealizacaoMilis(Long dataRealizacaoMilis) {
+		this.dataRealizacaoMilis = dataRealizacaoMilis;
+	}
+	
+	public Date getDataRealizacao() {
+		return new Date(this.dataRealizacaoMilis);
 	}
 
 	public BigDecimal getValor() {

@@ -5,22 +5,21 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.drerp.financeiro.business.orcamento.PedidoOrcamentoBR;
-import br.com.drerp.financeiro.business.transferencia.TransferenciaBR;
+import br.com.drerp.financeiro.business.transferencia.ContaPagarBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.transferencia.Beneficiario;
 import br.com.drerp.financeiro.model.transferencia.ContaPagar;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
-import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
 public class FinanceiroFacadeImpl implements FinanceiroFacade {
 
-	private TransferenciaBR requisicaoBR;
+	private ContaPagarBR requisicaoBR;
 	private PedidoOrcamentoBR pedidoBR;
 
 	public FinanceiroFacadeImpl() {
-		this.requisicaoBR = new TransferenciaBR();
+		this.requisicaoBR = new ContaPagarBR();
 		this.pedidoBR = new PedidoOrcamentoBR();
 	}
 
@@ -30,7 +29,7 @@ public class FinanceiroFacadeImpl implements FinanceiroFacade {
 
 		// helderrrrrr acho que isso deveria ta no BR
 		try {
-			Transferencia req = new ContaPagar();
+			ContaPagar req = new ContaPagar();
 			req.setBeneficiario(beneficiario);
 			req.setDataRequisicaoMilis((new Date().getTime()));
 			req.setPagador(pagador);

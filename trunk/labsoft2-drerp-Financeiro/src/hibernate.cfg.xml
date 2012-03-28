@@ -21,6 +21,7 @@
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Beneficiario"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Pagador"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Fatura"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.Hollerith"/>
     	<mapping class="br.com.drerp.financeiro.model.planosaude.Guia"/>
     	<mapping class="br.com.drerp.financeiro.model.planosaude.Glosa"/>
     	<mapping class="br.com.drerp.financeiro.model.usuario.Usuario"/>

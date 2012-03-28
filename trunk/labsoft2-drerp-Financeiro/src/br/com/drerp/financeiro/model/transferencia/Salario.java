@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="FIN_SALARIO")
-public class Salario extends ContaPagar{
+public class Salario extends Transferencia{
 	
 	private Integer horasTrabalhadas;
 	private String cargo;
@@ -16,6 +16,16 @@ public class Salario extends ContaPagar{
 	@OneToOne
 	@JoinColumn(name="hollertih_fk")
 	private Hollerith hollerith;
+	
+	private Departamento departamento;
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
 	
 	public Integer getHorasTrabalhadas() {
 		return horasTrabalhadas;
