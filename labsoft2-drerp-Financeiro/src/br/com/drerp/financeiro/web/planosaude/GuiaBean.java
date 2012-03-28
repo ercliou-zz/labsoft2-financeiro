@@ -8,9 +8,8 @@ import javax.faces.bean.RequestScoped;
 
 import br.com.drerp.financeiro.business.planosaude.GuiaBR;
 import br.com.drerp.financeiro.model.planosaude.Guia;
-import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 
-@ManagedBean(name="GuiaBean")
+@ManagedBean(name="guiaBean")
 @RequestScoped
 public class GuiaBean {
 
