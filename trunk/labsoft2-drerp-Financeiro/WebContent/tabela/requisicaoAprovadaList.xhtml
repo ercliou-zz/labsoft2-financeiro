@@ -1,0 +1,82 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+
+		<p:dataTable value="#{transferenciaOutBean.contaPagarList}"
+			var="requisicao" rules="rows">
+			<f:facet name="header">Lista de Requisições</f:facet>
+
+			<p:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{requisicao.id}"></h:outputText>
+			</p:column>
+			<p:column>
+				<f:facet name="header">Beneficiario</f:facet>
+					#{requisicao.beneficiario.infoBancaria}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Pagador</f:facet>
+					#{requisicao.pagador.infoBancaria}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Data Requisição</f:facet>
+					#{requisicao.dataRequisicao}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Data Limite</f:facet>
+					#{requisicao.dataLimite}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Valor</f:facet>
+					#{requisicao.valor}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Status</f:facet>
+					#{requisicao.status}
+			</p:column>
+			<p:column>
+				<h:form>
+					<f:facet name="header">Valor da Transferência Realizada</f:facet>
+					<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
+						<h:commandLink
+							action="#{transferenciaOutBean.realizarTransferencia}">Realizar
+						<f:setPropertyActionListener
+								target="#{transferenciaOutBean.contaPagar}"
+								value="#{requisicao}" />
+						</h:commandLink>
+					</h:panelGroup>
+				</h:form>
+			</p:column>
+			<p:column>
+				<h:form>
+					<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
+						<h:commandLink action="#{transferenciaOutBean.delete}">Deletar
+					<f:setPropertyActionListener
+								target="#{transferenciaOutBean.contaPagar}"
+								value="#{requisicao}" />
+						</h:commandLink>
+					</h:panelGroup>
+				</h:form>
+			</p:column>
+			<p:column>
+				<h:form>
+					<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
+						<h:commandLink action="#{transferenciaOutBean.registrarErro}">Erro
+					<f:setPropertyActionListener
+								target="#{transferenciaOutBean.contaPagar}"
+								value="#{requisicao}" />
+						</h:commandLink>
+					</h:panelGroup>
+				</h:form>
+			</p:column>
+
+		</p:dataTable>
+
+	</ui:define>
+</ui:composition>
