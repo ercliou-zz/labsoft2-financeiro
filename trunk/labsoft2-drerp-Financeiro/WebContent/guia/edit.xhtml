@@ -1,0 +1,31 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+
+		<h:form>
+
+			<p:fieldset legend="Edi‹o de Guias">
+
+				<h:panelGrid columns="2" cellpadding="10">
+					
+					<h:outputLabel value="Pagador: " />
+					<h:inputText value="#{guiaBean.guia.pagador.nome}" />
+					
+					<h:outputLabel value="Plano de Saœde: " />
+					<h:inputText value="#{guiaBean.guia.planoSaude.nome}" />
+					
+					<p:commandButton action="#{guiaBean.save}" value="Salvar" />
+					<p:commandButton action="list.xhtml" value="Cancelar" />
+					
+					<h:inputHidden value="#{guiaBean.guia.id}" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

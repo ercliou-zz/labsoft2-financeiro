@@ -1,0 +1,39 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+		<p:fieldset legend="Lista de Guias">
+				<h:form>
+					<p:dataTable value="#{procedimentoBean.procedimentos}"
+						var="procedimento" paginator="true" rows="8">
+						
+						<p:column filterBy="#{procedimento.nome}" filterMatchMode="contains" headerText="Nome">
+							<h:outputText value="#{procedimento.nome}"></h:outputText>
+						</p:column>
+						<p:column headerText="Tipo">
+							<h:outputText value="#{procedimento.tipo}"></h:outputText>
+						</p:column>
+						<p:column>
+							<h:commandLink style="padding:3px" action="#{procedimentoBean.view}" value="Vizualizar">
+								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
+							</h:commandLink>
+							<h:commandLink style="padding:3px" action="#{procedimentoBean.edit}" value="Editar">
+								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
+							</h:commandLink>
+							<h:commandLink style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{procedimentoBean.delete}" value="Excluir">
+								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
+							</h:commandLink>
+						</p:column>
+
+					</p:dataTable>
+					
+					<p:commandButton action="#{procedimentoBean.create}" value="Novo"/>
+				
+				</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
