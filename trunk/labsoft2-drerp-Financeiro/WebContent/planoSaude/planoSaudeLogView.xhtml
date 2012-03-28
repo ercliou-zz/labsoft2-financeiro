@@ -1,0 +1,36 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:fieldset
+				legend="Vizualização de Alteração nos Planos de Saúde">
+				<h:panelGrid columns="2" cellpadding="10">
+				
+					<h:outputLabel value="Tipo de Operação: " />
+					<h:outputText value="#{planoSaudeLogBean.planoSaudeLog.tipo}" />
+					
+					<h:outputLabel value="Data da Operação: " />
+					<h:outputText value="#{planoSaudeLogBean.planoSaudeLog.data}" />
+					
+					<h:outputLabel value="ID do Plano de Saúde: " />
+					<h:outputText value="#{planoSaudeLogBean.planoSaudeLog.planoSaudeId}" />
+					
+					<h:outputLabel value="Nome Original: " />
+					<h:outputText value="#{planoSaudeLogBean.planoSaudeLog.nomeAntigo}" />
+					
+					<h:outputLabel value="Nome Alterado: " />
+					<h:outputText value="#{planoSaudeLogBean.planoSaudeLog.nomeNovo}" />
+					
+					<p:commandButton action="planoSaudeLog.xhtml" value="Voltar" />
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

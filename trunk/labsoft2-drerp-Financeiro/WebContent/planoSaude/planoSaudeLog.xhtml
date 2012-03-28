@@ -8,71 +8,63 @@
 
 	<ui:define name="content">
 
+
 		<h:form>
+			<p:fieldset toggleable="true" legend="Histórico de Planos de Saúde">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Tipo de Operação: " />
+					<h:selectOneMenu id="tipoOperacao"
+						value="#{planoSaudeLogBean.tipoLog}">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<f:selectItem itemLabel="Criação" itemValue="CRIACAO" />
+						<f:selectItem itemLabel="Alteração" itemValue="ALTERACAO" />
+						<f:selectItem itemLabel="Deleção" itemValue="DELECAO	" />
+					</h:selectOneMenu>
 
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Tipo de Operação: " />
-				<h:selectOneMenu id="tipoOperacao"
-					value="#{planoSaudeLogBean.tipoLog}">
-					<f:selectItem itemLabel="Todos" itemValue="" />
-					<f:selectItem itemLabel="Criação" itemValue="CRIACAO" />
-					<f:selectItem itemLabel="Alteração" itemValue="ALTERACAO" />
-					<f:selectItem itemLabel="Deleção" itemValue="DELECAO	" />
-				</h:selectOneMenu>
+					<h:outputText value="Plano de Saúde: " />
+					<h:selectOneMenu value="#{planoSaudeLogBean.planoSelecionado}">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<c:forEach var="plano" items="#{planoSaudeLogBean.planosList}">
+							<f:selectItem itemLabel="#{plano.nome}" itemValue="#{plano.id}" />
+						</c:forEach>
+					</h:selectOneMenu>
 
-				<h:outputText value="Plano de Saúde: " />
-				<h:selectOneMenu value="#{planoSaudeLogBean.planoSelecionado}">
-					<f:selectItem itemLabel="Todos" itemValue="" />
-					<c:forEach var="plano" items="#{planoSaudeLogBean.planosList}">
-						<f:selectItem itemLabel="#{plano.nome}" itemValue="#{plano.id}" />
-					</c:forEach>
-				</h:selectOneMenu>
+					<h:outputText value="Data Inicial: " />
+					<p:calendar value="#{planoSaudeLogBean.dataInicial}" />
 
-				<h:outputText value="Data Inicial: " />
-				<p:calendar value="#{planoSaudeLogBean.dataInicial}" />
+					<h:outputText value="Data Final: " />
+					<p:calendar value="#{planoSaudeLogBean.dataFinal}" />
 
-				<h:outputText value="Data Final: " />
-				<p:calendar value="#{planoSaudeLogBean.dataFinal}" />
+					<p:commandButton ajax="false" action="#{planoSaudeLogBean.filtrar}"
+						value="Filtrar" />
 
-			</h:panelGrid>
+				</h:panelGrid>
 
-			<h:commandButton action="#{planoSaudeLogBean.filtrar}"
-				value="Filtrar" />
+			</p:fieldset>
 
-		</h:form>
-
-		<h:panelGroup
-			rendered="#{planoSaudeLogBean.planoSaudeLogList != null}">
-			<h:form prependId="false">
-				<p:dataTable id="planoSaudeLogs" var="log"
+			<p:fieldset legend="Lista das Alterações dos Planos de Saúde"
+				style="margin-top:10px">
+				<p:dataTable paginator="true" rows="8"  id="planoSaudeLogs" var="log"
 					value="#{planoSaudeLogBean.planoSaudeLogList}">
-					<p:column id="modelHeader">
-						<f:facet name="header">id</f:facet>
-						<h:outputText value="#{log.id}" />
-					</p:column>
-					<p:column>
-						<f:facet name="header">Tipo Operação</f:facet>
+					<p:column sortBy="{log.tipo}" headerText="Tipo de Operação">
 						<h:outputText value="#{log.tipo}" />
 					</p:column>
-					<p:column>
-						<f:facet name="header">Data</f:facet>
+					<p:column sortBy="{log.data}" headerText="Data">
 						<h:outputText value="#{log.data}" />
 					</p:column>
-					<p:column>
-						<f:facet name="header">Plano de Saude</f:facet>
+					<p:column sortBy="{log.planoSaudeId}" headerText="Plano de Saude">
 						<h:outputText value="#{log.planoSaudeId}" />
 					</p:column>
 					<p:column>
-						<f:facet name="header">Nome Antigo</f:facet>
-						<h:outputText value="#{log.nomeAntigo}" />
-					</p:column>
-					<p:column>
-						<f:facet name="header">Nome Novo</f:facet>
-						<h:outputText value="#{log.nomeNovo}" />
+						<h:commandLink style="padding:3px"
+							action="#{planoSaudeLogBean.view}" value="Vizualizar">
+							<f:setPropertyActionListener
+								target="#{planoSaudeLogBean.planoSaudeLog}" value="#{log}" />
+						</h:commandLink>
+
 					</p:column>
 				</p:dataTable>
-			</h:form>
-		</h:panelGroup>
-
+			</p:fieldset>
+		</h:form>
 	</ui:define>
 </ui:composition>
