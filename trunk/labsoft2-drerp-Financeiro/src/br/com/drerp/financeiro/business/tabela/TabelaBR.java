@@ -3,7 +3,6 @@ package br.com.drerp.financeiro.business.tabela;
 import java.math.BigDecimal;
 import java.util.List;
 
-import br.com.crud.util.GenericDAOFactory;
 import br.com.drerp.financeiro.dao.tabela.ColunaDAO;
 import br.com.drerp.financeiro.dao.tabela.ColunaDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAO;
@@ -15,6 +14,7 @@ import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
+import br.com.drerp.financeiro.util.GenericDAOFactory;
 
 public class TabelaBR {
 	

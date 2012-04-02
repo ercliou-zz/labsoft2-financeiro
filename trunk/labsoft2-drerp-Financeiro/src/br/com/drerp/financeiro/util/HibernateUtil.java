@@ -1,4 +1,4 @@
-package br.com.crud.util;
+package br.com.drerp.financeiro.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

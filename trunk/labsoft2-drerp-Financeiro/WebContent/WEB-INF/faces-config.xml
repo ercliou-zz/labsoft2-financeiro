@@ -21,6 +21,11 @@
 		<managed-bean-class>br.com.drerp.financeiro.web.transferencia.PagadorBean</managed-bean-class> 
 		<managed-bean-scope>request</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>contaPagarBean</managed-bean-name> 
+		<managed-bean-class>br.com.drerp.financeiro.web.transferencia.ContaPagarBean</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>	
 	<managed-bean> 
 		<managed-bean-name>loginBean</managed-bean-name> 
 		<managed-bean-class>br.com.drerp.financeiro.web.login.LoginBean</managed-bean-class>

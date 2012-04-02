@@ -2,7 +2,6 @@ package br.com.drerp.financeiro.business.planosaude;
 
 import java.util.List;
 
-import br.com.crud.util.GenericDAOFactory;
 import br.com.drerp.financeiro.business.GenericBR;
 import br.com.drerp.financeiro.dao.planosaude.PlanoSaudeDAOImpl;
 import br.com.drerp.financeiro.dao.planosaude.PlanoSaudeLogDAO;
@@ -19,6 +18,7 @@ import br.com.drerp.financeiro.model.planosaude.PlanoSaudeLog;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
+import br.com.drerp.financeiro.util.GenericDAOFactory;
 
 public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 	private PlanoSaudeLogDAO logDAO;

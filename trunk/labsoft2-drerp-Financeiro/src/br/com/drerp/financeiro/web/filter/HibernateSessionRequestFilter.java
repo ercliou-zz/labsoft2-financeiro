@@ -1,4 +1,4 @@
-package br.com.crud.web.filter;
+package br.com.drerp.financeiro.web.filter;
 
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import javax.servlet.ServletResponse;
 
 import org.hibernate.SessionFactory;
 
-import br.com.crud.util.HibernateUtil;
+import br.com.drerp.financeiro.util.HibernateUtil;
 
 public class HibernateSessionRequestFilter implements Filter{
 

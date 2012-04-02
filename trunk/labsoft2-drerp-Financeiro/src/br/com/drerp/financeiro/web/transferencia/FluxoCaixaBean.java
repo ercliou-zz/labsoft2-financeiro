@@ -19,10 +19,10 @@ import br.com.drerp.financeiro.business.orcamento.PedidoOrcamentoBR;
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
 import br.com.drerp.financeiro.business.procedimento.ProcedimentoBR;
 import br.com.drerp.financeiro.business.transferencia.PagadorBR;
-import br.com.drerp.financeiro.model.orcamento.TipoGrafico;
-import br.com.drerp.financeiro.model.orcamento.TipoParametroGrafico;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
+import br.com.drerp.financeiro.util.TipoGrafico;
+import br.com.drerp.financeiro.util.TipoParametroGrafico;
 
 @ManagedBean(name="fluxoCaixaBean")
 @RequestScoped

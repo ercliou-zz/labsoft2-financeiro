@@ -1,4 +1,4 @@
-package br.com.drerp.financeiro.model.orcamento;
+package br.com.drerp.financeiro.util;
 
 public enum TipoParametroGrafico {
 	TEMPO, N_PEDIDOS, VAL_PEDIDOS, PLANOS
