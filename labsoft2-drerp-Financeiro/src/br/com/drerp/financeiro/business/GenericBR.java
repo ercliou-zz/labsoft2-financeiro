@@ -3,9 +3,9 @@ package br.com.drerp.financeiro.business;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
-import br.com.crud.util.GenericDAOFactory;
 import br.com.drerp.financeiro.dao.GenericDAO;
 import br.com.drerp.financeiro.model.GenericModel;
+import br.com.drerp.financeiro.util.GenericDAOFactory;
 
 public abstract class GenericBR<T extends GenericDAO<Y>, Y extends GenericModel> {
 

@@ -1,4 +1,4 @@
-package br.com.crud.util;
+package br.com.drerp.financeiro.util;
 
 public class BusinessException extends Exception {
 

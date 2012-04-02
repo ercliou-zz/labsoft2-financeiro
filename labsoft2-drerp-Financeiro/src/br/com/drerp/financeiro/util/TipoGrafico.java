@@ -1,4 +1,4 @@
-package br.com.drerp.financeiro.model.orcamento;
+package br.com.drerp.financeiro.util;
 
 public enum TipoGrafico {
 	BARRA, LINHA, PIZZA

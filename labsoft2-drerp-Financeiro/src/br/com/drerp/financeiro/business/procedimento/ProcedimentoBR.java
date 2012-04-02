@@ -2,7 +2,6 @@ package br.com.drerp.financeiro.business.procedimento;
 
 import java.util.List;
 
-import br.com.crud.util.GenericDAOFactory;
 import br.com.drerp.financeiro.business.GenericBR;
 import br.com.drerp.financeiro.dao.procedimento.ProcedimentoDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ColunaDAO;
@@ -15,6 +14,7 @@ import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
+import br.com.drerp.financeiro.util.GenericDAOFactory;
 
 public class ProcedimentoBR extends GenericBR<ProcedimentoDAOImpl, Procedimento>{
 	private ItemTabelaDAO itemTabelaDAO;

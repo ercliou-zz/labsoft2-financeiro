@@ -1,27 +1,27 @@
-package br.com.crud.util;
+package br.com.drerp.financeiro.util;
 
-public class UtilException extends Exception {
+public class DAOException extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public UtilException() {
+	public DAOException() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public UtilException(String message) {
+	public DAOException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public UtilException(Throwable cause) {
+	public DAOException(Throwable cause) {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public UtilException(String message, Throwable cause) {
+	public DAOException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -17,12 +18,9 @@ import org.primefaces.model.chart.PieChartModel;
 
 import br.com.drerp.financeiro.business.orcamento.PedidoOrcamentoBR;
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
-import br.com.drerp.financeiro.business.procedimento.ProcedimentoBR;
-import br.com.drerp.financeiro.business.transferencia.PagadorBR;
-import br.com.drerp.financeiro.model.orcamento.TipoGrafico;
-import br.com.drerp.financeiro.model.orcamento.TipoParametroGrafico;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.procedimento.Procedimento;
+import br.com.drerp.financeiro.util.TipoGrafico;
+import br.com.drerp.financeiro.util.TipoParametroGrafico;
 
 @ManagedBean(name="orcamentoBean")
 @RequestScoped
@@ -39,6 +37,10 @@ public class OrcamentoBean implements Serializable {
 	private TipoParametroGrafico eixoY;
 	
 	private int maxEixoY;
+	
+	private Date dataInicio;
+	
+	private Date dataFim;
 	
 	private List<PlanoSaude> planosList;
 	
@@ -57,25 +59,25 @@ public class OrcamentoBean implements Serializable {
     	pieModel = new PieChartModel();
     	maxEixoY= 0;
     	
-    	planosSelecionados.add("1");
-    	planosSelecionados.add("2");
-    	planosSelecionados.add("3");
+//    	planosSelecionados.add("1");
+//    	planosSelecionados.add("2");
+//    	planosSelecionados.add("3");
     }
     
     public String gerarGrafico(){
     	
-    	PagadorBR pagadorBR = new PagadorBR();
-    	ProcedimentoBR procedimentoBR = new ProcedimentoBR();
-    	
-    	List<Procedimento> procedimentos = new ArrayList<Procedimento>();
-    	procedimentos.add(procedimentoBR.getById(1l));
-    	procedimentos.add(procedimentoBR.getById(2l));
-    	procedimentos.add(procedimentoBR.getById(3l));
-    	procedimentos.add(procedimentoBR.getById(4l));
-    	
-    	
-    	
-    	pedidoOrcamentoBR.pedirOrcamento(pagadorBR.getById(1l), procedimentos, planoSaudeBR.getById(1l));
+//    	PagadorBR pagadorBR = new PagadorBR();
+//    	ProcedimentoBR procedimentoBR = new ProcedimentoBR();
+//    	
+//    	List<Procedimento> procedimentos = new ArrayList<Procedimento>();
+//    	procedimentos.add(procedimentoBR.getById(1l));
+//    	procedimentos.add(procedimentoBR.getById(2l));
+//    	procedimentos.add(procedimentoBR.getById(3l));
+//    	procedimentos.add(procedimentoBR.getById(4l));
+//    	
+//    	
+//    	
+//    	pedidoOrcamentoBR.pedirOrcamento(pagadorBR.getById(1l), procedimentos, planoSaudeBR.getById(1l));
     	
     	switch (tipoGrafico) {
 		case BARRA:
@@ -104,7 +106,7 @@ public class OrcamentoBean implements Serializable {
     	Calendar dataFim;
     	int mes;
     	int ano;
-    	int novoDadoInt = 0;
+    	int maxDadoTemp = 0;
     	ChartSeries planoSeries;
 		BigDecimal novoDado = new BigDecimal(0);
 		PlanoSaude plano;
@@ -153,9 +155,9 @@ public class OrcamentoBean implements Serializable {
     				mes=0;
     			}
     			
-    			novoDadoInt = novoDado.intValue(); 
-    			if(novoDadoInt > maxEixoY){
-    				maxEixoY = (novoDadoInt/10)*10+10;
+    			maxDadoTemp = novoDado.intValue(); 
+    			if(maxDadoTemp > maxEixoY){
+    				maxEixoY = (maxDadoTemp/10)*10+10;
     			}
     			
 			}
@@ -194,7 +196,23 @@ public class OrcamentoBean implements Serializable {
     }
     
   
-    public CartesianChartModel getCategoryModel() {  
+    public Date getDataInicio() {
+		return dataInicio;
+	}
+
+	public void setDataInicio(Date dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+	public Date getDataFim() {
+		return dataFim;
+	}
+
+	public void setDataFim(Date dataFim) {
+		this.dataFim = dataFim;
+	}
+
+	public CartesianChartModel getCategoryModel() {  
         return categoryModel;  
     }
   
