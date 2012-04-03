@@ -1,5 +1,6 @@
 package br.com.drerp.financeiro.model.transferencia;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -12,7 +13,12 @@ import br.com.drerp.financeiro.model.GenericModel;
 
 @Entity
 @Table(name = "FIN_NOTAFISCAL")
-public class NotaFiscal extends GenericModel {
+public class NotaFiscal extends GenericModel implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2949266713763971487L;
 
 	@OneToOne
 	@JoinColumn(name = "contaReceber_fk")
