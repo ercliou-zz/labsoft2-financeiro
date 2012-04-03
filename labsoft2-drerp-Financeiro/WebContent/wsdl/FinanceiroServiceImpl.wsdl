@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://service.financeiro.drerp.com.br" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://service.financeiro.drerp.com.br" xmlns:intf="http://service.financeiro.drerp.com.br" xmlns:tns1="http://procedimento.model.financeiro.drerp.com.br" xmlns:tns2="http://model.financeiro.drerp.com.br" xmlns:tns3="http://planosaude.model.financeiro.drerp.com.br" xmlns:tns4="http://transferencia.model.financeiro.drerp.com.br" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://service.financeiro.drerp.com.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://transferencia.model.financeiro.drerp.com.br"/>
+   <import namespace="http://model.financeiro.drerp.com.br"/>
+   <import namespace="http://planosaude.model.financeiro.drerp.com.br"/>
+   <import namespace="http://procedimento.model.financeiro.drerp.com.br"/>
+   <element name="listarProcedimentos">
+    <complexType/>
+   </element>
+   <element name="listarProcedimentosResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="listarProcedimentosReturn" type="tns1:Procedimento"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pagarConsultaParticular">
+    <complexType>
+     <sequence>
+      <element name="planoSaude" type="tns3:PlanoSaude"/>
+      <element maxOccurs="unbounded" name="listaProcedimentos" type="tns1:Procedimento"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pagarConsultaParticularResponse">
+    <complexType>
+     <sequence>
+      <element name="pagarConsultaParticularReturn" type="tns4:NotaFiscal"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pagarConsultaPlanoSaude">
+    <complexType>
+     <sequence>
+      <element name="planoSaude" type="tns3:PlanoSaude"/>
+      <element maxOccurs="unbounded" name="listaProcedimentos" type="tns1:Procedimento"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pagarConsultaPlanoSaudeResponse">
+    <complexType>
+     <sequence>
+      <element name="pagarConsultaPlanoSaudeReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="listarPlanosSaude">
+    <complexType/>
+   </element>
+   <element name="listarPlanosSaudeResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="listarPlanosSaudeReturn" type="tns3:PlanoSaude"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pagarProduto">
+    <complexType>
+     <sequence>
+      <element name="valor" type="xsd:decimal"/>
+      <element name="empresa" type="tns4:Beneficiario"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pagarProdutoResponse">
+    <complexType>
+     <sequence>
+      <element name="pagarProdutoReturn" type="xsd:boolean"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pagarSalario">
+    <complexType>
+     <sequence>
+      <element name="valor" type="xsd:decimal"/>
+      <element name="funcionario" type="tns4:Beneficiario"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="pagarSalarioResponse">
+    <complexType>
+     <sequence>
+      <element name="pagarSalarioReturn" type="xsd:decimal"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://model.financeiro.drerp.com.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://transferencia.model.financeiro.drerp.com.br"/>
+   <import namespace="http://planosaude.model.financeiro.drerp.com.br"/>
+   <import namespace="http://procedimento.model.financeiro.drerp.com.br"/>
+   <complexType abstract="true" name="GenericModel">
+    <sequence>
+     <element name="id" nillable="true" type="xsd:long"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://procedimento.model.financeiro.drerp.com.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://transferencia.model.financeiro.drerp.com.br"/>
+   <import namespace="http://model.financeiro.drerp.com.br"/>
+   <import namespace="http://planosaude.model.financeiro.drerp.com.br"/>
+   <complexType name="Procedimento">
+    <complexContent>
+     <extension base="tns2:GenericModel">
+      <sequence>
+       <element name="nome" nillable="true" type="xsd:string"/>
+       <element name="tipo" nillable="true" type="xsd:anyType"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://planosaude.model.financeiro.drerp.com.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://transferencia.model.financeiro.drerp.com.br"/>
+   <import namespace="http://model.financeiro.drerp.com.br"/>
+   <import namespace="http://procedimento.model.financeiro.drerp.com.br"/>
+   <complexType name="PlanoSaude">
+    <complexContent>
+     <extension base="tns2:GenericModel">
+      <sequence>
+       <element name="nome" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://transferencia.model.financeiro.drerp.com.br" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://model.financeiro.drerp.com.br"/>
+   <import namespace="http://planosaude.model.financeiro.drerp.com.br"/>
+   <import namespace="http://procedimento.model.financeiro.drerp.com.br"/>
+   <complexType name="Beneficiario">
+    <complexContent>
+     <extension base="tns2:GenericModel">
+      <sequence>
+       <element name="documento" nillable="true" type="xsd:string"/>
+       <element name="infoBancaria" nillable="true" type="xsd:string"/>
+       <element name="nome" nillable="true" type="xsd:string"/>
+       <element name="tipoBeneficiario" nillable="true" type="xsd:anyType"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="Pagador">
+    <complexContent>
+     <extension base="tns2:GenericModel">
+      <sequence>
+       <element name="documento" nillable="true" type="xsd:string"/>
+       <element name="infoBancaria" nillable="true" type="xsd:string"/>
+       <element name="nome" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="Transferencia">
+    <complexContent>
+     <extension base="tns2:GenericModel">
+      <sequence>
+       <element name="beneficiario" nillable="true" type="tns4:Beneficiario"/>
+       <element name="dataLimite" nillable="true" type="xsd:dateTime"/>
+       <element name="dataLimiteMilis" nillable="true" type="xsd:long"/>
+       <element name="dataRealizacao" nillable="true" type="xsd:dateTime"/>
+       <element name="dataRealizacaoMilis" nillable="true" type="xsd:long"/>
+       <element name="dataRequisicao" nillable="true" type="xsd:dateTime"/>
+       <element name="dataRequisicaoMilis" nillable="true" type="xsd:long"/>
+       <element name="pagador" nillable="true" type="tns4:Pagador"/>
+       <element name="status" nillable="true" type="xsd:anyType"/>
+       <element name="valor" nillable="true" type="xsd:decimal"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="ContaReceber">
+    <complexContent>
+     <extension base="tns4:Transferencia">
+      <sequence>
+       <element name="notaFiscal" nillable="true" type="tns4:NotaFiscal"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="NotaFiscal">
+    <complexContent>
+     <extension base="tns2:GenericModel">
+      <sequence>
+       <element name="aliquotaIcms" nillable="true" type="xsd:int"/>
+       <element name="aliquotaIpi" nillable="true" type="xsd:int"/>
+       <element name="aliquotaIss" nillable="true" type="xsd:int"/>
+       <element name="contaReceber" nillable="true" type="tns4:ContaReceber"/>
+       <element name="dataEmissao" nillable="true" type="xsd:dateTime"/>
+       <element name="icms" nillable="true" type="xsd:decimal"/>
+       <element name="ipi" nillable="true" type="xsd:decimal"/>
+       <element name="iss" nillable="true" type="xsd:decimal"/>
+       <element name="valorFinal" nillable="true" type="xsd:decimal"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="pagarProdutoRequest">
+
+      <wsdl:part element="impl:pagarProduto" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="pagarConsultaParticularRequest">
+
+      <wsdl:part element="impl:pagarConsultaParticular" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listarPlanosSaudeRequest">
+
+      <wsdl:part element="impl:listarPlanosSaude" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="pagarConsultaPlanoSaudeResponse">
+
+      <wsdl:part element="impl:pagarConsultaPlanoSaudeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="pagarProdutoResponse">
+
+      <wsdl:part element="impl:pagarProdutoResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="pagarConsultaParticularResponse">
+
+      <wsdl:part element="impl:pagarConsultaParticularResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listarProcedimentosRequest">
+
+      <wsdl:part element="impl:listarProcedimentos" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="pagarSalarioResponse">
+
+      <wsdl:part element="impl:pagarSalarioResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="pagarConsultaPlanoSaudeRequest">
+
+      <wsdl:part element="impl:pagarConsultaPlanoSaude" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listarPlanosSaudeResponse">
+
+      <wsdl:part element="impl:listarPlanosSaudeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="listarProcedimentosResponse">
+
+      <wsdl:part element="impl:listarProcedimentosResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="pagarSalarioRequest">
+
+      <wsdl:part element="impl:pagarSalario" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="FinanceiroServiceImpl">
+
+      <wsdl:operation name="listarProcedimentos">
+
+         <wsdl:input message="impl:listarProcedimentosRequest" name="listarProcedimentosRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:listarProcedimentosResponse" name="listarProcedimentosResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pagarConsultaParticular">
+
+         <wsdl:input message="impl:pagarConsultaParticularRequest" name="pagarConsultaParticularRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:pagarConsultaParticularResponse" name="pagarConsultaParticularResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pagarConsultaPlanoSaude">
+
+         <wsdl:input message="impl:pagarConsultaPlanoSaudeRequest" name="pagarConsultaPlanoSaudeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:pagarConsultaPlanoSaudeResponse" name="pagarConsultaPlanoSaudeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listarPlanosSaude">
+
+         <wsdl:input message="impl:listarPlanosSaudeRequest" name="listarPlanosSaudeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:listarPlanosSaudeResponse" name="listarPlanosSaudeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pagarProduto">
+
+         <wsdl:input message="impl:pagarProdutoRequest" name="pagarProdutoRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:pagarProdutoResponse" name="pagarProdutoResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pagarSalario">
+
+         <wsdl:input message="impl:pagarSalarioRequest" name="pagarSalarioRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:pagarSalarioResponse" name="pagarSalarioResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="FinanceiroServiceImplSoapBinding" type="impl:FinanceiroServiceImpl">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="listarProcedimentos">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listarProcedimentosRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listarProcedimentosResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pagarConsultaParticular">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="pagarConsultaParticularRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="pagarConsultaParticularResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pagarConsultaPlanoSaude">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="pagarConsultaPlanoSaudeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="pagarConsultaPlanoSaudeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="listarPlanosSaude">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="listarPlanosSaudeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="listarPlanosSaudeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pagarProduto">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="pagarProdutoRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="pagarProdutoResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="pagarSalario">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="pagarSalarioRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="pagarSalarioResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="FinanceiroServiceImplService">
+
+      <wsdl:port binding="impl:FinanceiroServiceImplSoapBinding" name="FinanceiroServiceImpl">
+
+         <wsdlsoap:address location="http://localhost:8080/DRERPPPP/services/FinanceiroServiceImpl"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
