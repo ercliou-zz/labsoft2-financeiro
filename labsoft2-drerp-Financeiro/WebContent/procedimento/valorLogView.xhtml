@@ -1,0 +1,39 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:fieldset
+				legend="Vizualização de Alteração de Preços">
+				<h:panelGrid columns="2" cellpadding="10">
+				
+					<h:outputLabel value="Tipo de Operação: " />
+					<h:outputText value="#{valorLogBean.valorLog.tipo}" />
+					
+					<h:outputLabel value="Data da Operação: " />
+					<h:outputText value="#{valorLogBean.valorLog.data}" />
+					
+					<h:outputLabel value="ID do Plano de Saúde: " />
+					<h:outputText value="#{valorLogBean.valorLog.planoSaudeId}" />
+					
+					<h:outputLabel value="ID do Procedimento: " />
+					<h:outputText value="#{valorLogBean.valorLog.procedimentoId}" />
+					
+					<h:outputLabel value="Preço Original: " />
+					<h:outputText value="#{valorLogBean.valorLog.valorAntigo}" />
+					
+					<h:outputLabel value="Preço Alterado: " />
+					<h:outputText value="#{valorLogBean.valorLog.valorNovo}" />
+					
+					<p:commandButton action="valorLog.xhtml" value="Voltar" />
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -36,6 +36,7 @@
     	<mapping class="br.com.drerp.financeiro.model.orcamento.PedidoOrcamento"/>
     	<mapping class="br.com.drerp.financeiro.model.orcamento.Orcamento"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.NotaFiscal"/>
+    	<mapping class="br.com.drerp.financeiro.model.tabela.ValorLog"/>
     
     </session-factory>
     

@@ -1,26 +1,32 @@
 package br.com.drerp.financeiro.business.tabela;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
+import br.com.drerp.financeiro.util.GenericDAOFactory;
 import br.com.drerp.financeiro.dao.tabela.ColunaDAO;
 import br.com.drerp.financeiro.dao.tabela.ColunaDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAO;
 import br.com.drerp.financeiro.dao.tabela.ItemTabelaDAOImpl;
 import br.com.drerp.financeiro.dao.tabela.ValorDAO;
 import br.com.drerp.financeiro.dao.tabela.ValorDAOImpl;
+import br.com.drerp.financeiro.dao.tabela.ValorLogDAO;
+import br.com.drerp.financeiro.dao.tabela.ValorLogDAOImpl;
+import br.com.drerp.financeiro.model.LogType;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.tabela.Coluna;
 import br.com.drerp.financeiro.model.tabela.ItemTabela;
 import br.com.drerp.financeiro.model.tabela.Valor;
-import br.com.drerp.financeiro.util.GenericDAOFactory;
+import br.com.drerp.financeiro.model.tabela.ValorLog;
 
 public class TabelaBR {
 	
 	private ItemTabelaDAO itemTabelaDAO;
 	private ColunaDAO colunaDAO;
 	private ValorDAO valorDAO;
+	private ValorLogDAO valorLogDAO;
 	
 	public TabelaBR() {
 		super();
@@ -30,6 +36,8 @@ public class TabelaBR {
 		colunaDAO = factoryColuna.createDAO(ColunaDAOImpl.class);
 		GenericDAOFactory<ValorDAO> factoryValor = new GenericDAOFactory<ValorDAO>();
 		valorDAO = factoryValor.createDAO(ValorDAOImpl.class);
+		GenericDAOFactory<ValorLogDAO> factoryValorLog = new GenericDAOFactory<ValorLogDAO>();
+		valorLogDAO = factoryValorLog.createDAO(ValorLogDAOImpl.class);
 	}
 	
 	/**
@@ -67,9 +75,17 @@ public class TabelaBR {
 	}
 	
 	public void updateValor (Valor valor, Long colunaId, Long itemTabelaId){
+		ValorLog log = new ValorLog();
+		log.setDataMS((new Date()).getTime());
+		log.setProcedimentoId(this.itemTabelaDAO.getById(itemTabelaId).getProcedimento().getId());
+		log.setPlanoSaudeId(this.colunaDAO.getById(colunaId).getPlanoSaude().getId());
+		log.setTipo(LogType.ALTERACAO);
+		log.setValorAntigo(this.valorDAO.getById(valor.getId()).getValor());
+		log.setValorNovo(valor.getValor());
+		this.valorLogDAO.save(log);
 		valor.setColuna(colunaDAO.getById(colunaId));
 		valor.setItemTabela(itemTabelaDAO.getById(itemTabelaId));
-		this.valorDAO.edit(valor);
+		this.valorDAO.merge(valor);
 	}
 	
 }

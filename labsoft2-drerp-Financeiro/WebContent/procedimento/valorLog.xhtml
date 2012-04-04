@@ -1,0 +1,80 @@
+<ui:composition template="index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:fieldset toggleable="true" legend="Histórico de Preço">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Tipo de Operação: " />
+					<h:selectOneMenu id="tipoOperacao"
+						value="#{valorLogBean.tipoLog}">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<f:selectItem itemLabel="Criação" itemValue="CRIACAO" />
+						<f:selectItem itemLabel="Alteração" itemValue="ALTERACAO" />
+						<f:selectItem itemLabel="Deleção" itemValue="DELECAO" />
+					</h:selectOneMenu>
+
+					<h:outputText value="Plano de Saúde: " />
+					<h:selectOneMenu value="#{valorLogBean.planoSelecionado}">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<c:forEach var="plano" items="#{valorLogBean.planosList}">
+							<f:selectItem itemLabel="#{plano.nome}" itemValue="#{plano.id}" />
+						</c:forEach>
+					</h:selectOneMenu>
+					
+					<h:outputText value="Procedimento: " />
+					<h:selectOneMenu value="#{valorLogBean.procedimentoSelecionado}">
+						<f:selectItem itemLabel="Todos" itemValue="" />
+						<c:forEach var="procedimento" items="#{valorLogBean.procedimentosList}">
+							<f:selectItem itemLabel="#{procedimento.nome}" itemValue="#{procedimento.id}" />
+						</c:forEach>
+					</h:selectOneMenu>
+
+					<h:outputText value="Data Inicial: " />
+					<p:calendar value="#{valorLogBean.dataInicial}" />
+
+					<h:outputText value="Data Final: " />
+					<p:calendar value="#{valorLogBean.dataFinal}" />
+
+					<p:commandButton ajax="false" action="#{valorLogBean.filtrar}"
+						value="Filtrar" />
+
+				</h:panelGrid>
+
+			</p:fieldset>
+
+			<p:fieldset legend="Lista das Alterações dos Preços de Procedimentos"
+				style="margin-top:10px">
+				<p:dataTable paginator="true" rows="8"  id="valorLogs" var="log"
+					value="#{valorLogBean.valorLogList}">
+					<p:column sortBy="{log.tipo}" headerText="Tipo de Operação">
+						<h:outputText value="#{log.tipo}" />
+					</p:column>
+					<p:column sortBy="{log.data}" headerText="Data">
+						<h:outputText value="#{log.data}" />
+					</p:column>
+					<p:column sortBy="{log.planoSaudeId}" headerText="Plano de Saude">
+						<h:outputText value="#{log.planoSaudeId}" />
+					</p:column>
+					<p:column sortBy="{log.procedimentoId}" headerText="Procedimento">
+						<h:outputText value="#{log.procedimentoId}" />
+					</p:column>
+					<p:column>
+						<h:commandLink style="padding:3px"
+							action="#{valorLogBean.view}" value="Vizualizar">
+							<f:setPropertyActionListener
+								target="#{valorLogBean.valorLog}" value="#{log}" />
+						</h:commandLink>
+
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
