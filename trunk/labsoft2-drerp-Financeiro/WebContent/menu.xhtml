@@ -30,8 +30,11 @@
 			<p:commandLink value="Cadastro" style="margin:5px;"
 				id="cadastroProcedimento" action="../procedimento/list.jsf" />
 			<br />
-			<p:commandLink id="tabelaPreco" action="../tabela/tabela.jsf"
+			<p:commandLink style="margin:5px;" id="tabelaPreco" action="../tabela/tabela.jsf"
 				value="Tabela" />
+			<br />
+			<h:commandLink style="margin:5px;" id="historicoValores"
+				action="../procedimento/valorLog.jsf" value="Histórico" />
 		</p:tab>
 	</p:accordionPanel>
 </h:form>
