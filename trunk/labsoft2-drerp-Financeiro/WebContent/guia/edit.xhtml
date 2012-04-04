@@ -7,20 +7,10 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
-
 		<h:form>
-
-			<p:fieldset legend="Edicao de Guias">
+			<p:fieldset toggleable="true" legend="Edicao de Guias">
 
 				<h:panelGrid columns="2" cellpadding="10">
-					
-					<h:outputLabel value="Pagador: " />
-					<h:selectOneMenu value="#{guiaBean.guia.pagador}">
-						<f:selectItem itemLabel="Todos" itemValue="" />
-						<c:forEach var="pagador" items="#{pagadorBean.listaAprovada}">
-							<f:selectItem itemLabel="#{pagador.nome}" itemValue="#{pagador.id}" />
-						</c:forEach>
-					</h:selectOneMenu>
 					
 					<h:outputLabel value="Plano de Saude: " />
 					<h:selectOneMenu value="#{guiaBean.guia.planoSaude}">
@@ -30,13 +20,29 @@
 						</c:forEach>
 					</h:selectOneMenu>
 					
-					<p:commandButton action="#{guiaBean.save}" value="Salvar" />
-					<p:commandButton action="list.xhtml" value="Cancelar" />
+					<h:outputText value="Data Inicial: " />
+					<p:calendar value="#{guiaBean.guia.dataInicial}" />
+
+					<h:outputText value="Data Final: " />
+					<p:calendar value="#{guiaBean.guia.dataFinal}" />
 					
-					<h:inputHidden value="#{guiaBean.guia.id}" />
+					<p:commandButton action="#{guiaBean.listarFaturas}" value="Procurar Faturas" />
 					
 				</h:panelGrid>
 			</p:fieldset>
+	
+			<p:fieldset legend="Lista de Faturas" style="margin-top:10px">
+					<p:pickList id="pickList" value="#{guiaBean.faturas}"  
+				                var="fatura"  
+				                itemLabel="#{fatura.planoData}"  
+				                itemValue="#{fatura.id}" />  
+				  
+				    <p:commandButton value="Criar" action="#{guiaBean.save}" />  
+					<p:commandButton action="list.xhtml" value="Cancelar" />
+					
+					<h:inputHidden value="#{guiaBean.guia.id}" />
+			</p:fieldset>		
+				
 		</h:form>
 	</ui:define>
 </ui:composition>
