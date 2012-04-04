@@ -1,4 +1,4 @@
-<ui:composition template="index.xhtml"
+<ui:composition template="../index.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -30,7 +30,7 @@
 					<h:outputLabel value="Preço Alterado: " />
 					<h:outputText value="#{valorLogBean.valorLog.valorNovo}" />
 					
-					<p:commandButton action="valorLog.xhtml" value="Voltar" />
+					<h:commandButton action="valorLog.xhtml" value="Voltar" />
 				</h:panelGrid>
 			</p:fieldset>
 		</h:form>

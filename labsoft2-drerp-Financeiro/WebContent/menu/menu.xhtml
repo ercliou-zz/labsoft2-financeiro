@@ -8,33 +8,33 @@
 	<p:accordionPanel activeIndex="">
 		<p:tab title="Transferência">
 			<h:commandLink style="margin:5px;" id="cadastroPagador"
-				action="../pagador/list.jsf" value="Pagador" />
+				action="../pagador/list.xhtml" value="Pagador" />
 			<br />
 			<h:commandLink style="margin:5px;" id="cadastroBeneficiario"
-				action="../beneficiario/list.jsf" value="Beneficiario" />
+				action="../beneficiario/list.xhtml" value="Beneficiario" />
 			<br />
 			<h:commandLink style="margin:5px;" id="graficoOrcamento"
-				action="../tabela/orcamentoGraficos.jsf" value="Graficos Orçamento" />
+				action="../tabela/orcamentoGraficos.xhtml" value="Graficos Orçamento" />
 			<br />
 			<h:commandLink style="margin:5px;" id="MUDAR123"
-				action="../tabela/requisicaoAprovadaList.jsf" value="Contas a Pagar" />
+				action="../tabela/requisicaoAprovadaList.xhtml" value="Contas a Pagar" />
 		</p:tab>
 		<p:tab title="Plano de Saúde">
 			<h:commandLink style="margin:5px;" id="cadastroPlanoSaude"
-				action="../planoSaude/list.jsf" value="Cadastro" />
+				action="../planoSaude/list.xhtml" value="Cadastro" />
 			<br />
 			<h:commandLink style="margin:5px;" id="historicoPlanoSaude"
-				action="../planoSaude/planoSaudeLog.jsf" value="Histórico" />
+				action="../planoSaude/planoSaudeLog.xhtml" value="Histórico" />
 		</p:tab>
 		<p:tab title="Procedimento">
-			<p:commandLink value="Cadastro" style="margin:5px;"
-				id="cadastroProcedimento" action="../procedimento/list.jsf" />
+			<h:commandLink value="Cadastro" style="margin:5px;"
+				id="cadastroProcedimento" action="../procedimento/list.xhtml" />
 			<br />
-			<p:commandLink style="margin:5px;" id="tabelaPreco" action="../tabela/tabela.jsf"
+			<h:commandLink style="margin:5px;" id="tabelaPreco" action="../tabela/tabela.xhtml"
 				value="Tabela" />
 			<br />
 			<h:commandLink style="margin:5px;" id="historicoValores"
-				action="../procedimento/valorLog.jsf" value="Histórico" />
+				action="../procedimento/valorLog.xhtml" value="Histórico" />
 		</p:tab>
 	</p:accordionPanel>
 </h:form>
