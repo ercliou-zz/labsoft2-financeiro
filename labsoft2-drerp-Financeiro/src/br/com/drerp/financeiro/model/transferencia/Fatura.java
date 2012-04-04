@@ -1,5 +1,7 @@
 package br.com.drerp.financeiro.model.transferencia;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.drerp.financeiro.model.GenericModel;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
@@ -31,6 +34,7 @@ public class Fatura extends GenericModel{
 	@JoinColumn(name="beneficiario_fk")
 	private Beneficiario beneficiario;
 	
+	private Long dataMS;
 	
 	public PlanoSaude getPlanoSaude() {
 		return planoSaude;
@@ -55,6 +59,20 @@ public class Fatura extends GenericModel{
 	}
 	public void setBeneficiario(Beneficiario beneficiario) {
 		this.beneficiario = beneficiario;
+	}
+	@Transient
+	public Date getData() {
+		return new Date(dataMS);
+	}
+	public Long getDataMS() {
+		return dataMS;
+	}
+	public void setDataMS(Long dataMS) {
+		this.dataMS = dataMS;
+	}
+	public String getPlanoData(){
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		return this.planoSaude.getNome() + ", " + format.format(new Date(dataMS));
 	}
 	
 }
