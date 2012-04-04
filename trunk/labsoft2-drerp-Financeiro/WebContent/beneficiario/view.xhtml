@@ -1,4 +1,4 @@
-<ui:composition template="index.xhtml"
+<ui:composition template="../index.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -21,7 +21,7 @@
 					<h:outputLabel value="Info Bancária: " />
 					<h:outputText value="#{beneficiarioBean.beneficiario.infoBancaria}" />
 
-					<p:commandButton action="list.xhtml" value="Voltar" />
+					<h:commandButton action="list.xhtml" value="Voltar" />
 				</h:panelGrid>
 			</p:fieldset>
 		</h:form>

@@ -1,4 +1,4 @@
-<ui:composition template="index.xhtml"
+<ui:composition template="../index.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -26,7 +26,7 @@
 					<h:outputText value="Data Final: " />
 					<p:calendar value="#{guiaBean.guia.dataFinal}" />
 					
-					<p:commandButton action="#{guiaBean.listarFaturas}" value="Procurar Faturas" />
+<!-- 					<h:commandButton action="#{guiaBean.listarFaturas}" value="Procurar Faturas" /> -->
 					
 				</h:panelGrid>
 			</p:fieldset>
@@ -37,8 +37,8 @@
 				                itemLabel="#{fatura.planoData}"  
 				                itemValue="#{fatura.id}" />  
 				  
-				    <p:commandButton value="Criar" action="#{guiaBean.save}" />  
-					<p:commandButton action="list.xhtml" value="Cancelar" />
+				    <h:commandButton value="Criar" action="#{guiaBean.save}" />  
+					<h:commandButton action="list.xhtml" value="Cancelar" />
 					
 					<h:inputHidden value="#{guiaBean.guia.id}" />
 			</p:fieldset>		

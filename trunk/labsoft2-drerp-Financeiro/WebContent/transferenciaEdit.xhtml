@@ -1,24 +1,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	>
-	
-	
-	<h:body>
-	
+	xmlns:h="http://java.sun.com/jsf/html">
+
+
+<h:body>
+
 	<h:form>
-		<h:messages/>
+		<h:messages />
 		<h:inputHidden value="#{transferenciaBean.entidade.id}" />
-		
+
 		<h:panelGrid columns="2">
-			<h:outputLabel value="prop:" for="propriedade"/>
-			<h:inputText id="propriedade" label="prop" value="#{entidadeBean.entidade.propriedade}"/>
-			
+			<h:outputLabel value="prop:" for="propriedade" />
+			<h:inputText id="propriedade" label="prop"
+				value="#{entidadeBean.entidade.propriedade}" />
+
 		</h:panelGrid>
 		<h:commandButton action="#{entidadeBean.salvar}" value="Salvar" />
-		
+
 	</h:form>
-	</h:body>
-	
-	
+</h:body>
+
+
 </html>

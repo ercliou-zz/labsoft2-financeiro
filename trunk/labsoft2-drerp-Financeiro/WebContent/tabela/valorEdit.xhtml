@@ -1,4 +1,4 @@
-<ui:composition template="index.xhtml"
+<ui:composition template="../index.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -28,8 +28,8 @@
 							value="#{tabelaBean.valor.valor}" />
 					</p:row>
 					<p:row>
-						<p:commandButton action="#{tabelaBean.saveValor}" value="Salvar" />
-						<p:commandButton action="tabela.xhtml" value="Cancelar" />
+						<h:commandButton action="#{tabelaBean.saveValor}" value="Salvar" />
+						<h:commandButton action="tabela.xhtml" value="Cancelar" />
 					</p:row>
 				</h:panelGrid>
 			</p:fieldset>

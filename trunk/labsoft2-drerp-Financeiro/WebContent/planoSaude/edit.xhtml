@@ -1,4 +1,4 @@
-<ui:composition template="index.xhtml"
+<ui:composition template="../index.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -16,8 +16,8 @@
 					<h:outputLabel value="Nome: " />
 					<h:inputText value="#{planoSaudeBean.plano.nome}" />
 					
-					<p:commandButton action="#{planoSaudeBean.save}" value="Salvar" />
-					<p:commandButton action="list.xhtml" value="Cancelar" />
+					<h:commandButton action="#{planoSaudeBean.save}" value="Salvar" />
+					<h:commandButton action="list.xhtml" value="Cancelar" />
 					
 					<h:inputHidden value="#{planoSaudeBean.plano.id}" />
 					
