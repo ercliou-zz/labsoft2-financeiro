@@ -1,15 +1,17 @@
 package br.com.drerp.financeiro.web.transferencia;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
-import org.primefaces.model.chart.CartesianChartModel;
-
-import br.com.drerp.financeiro.util.TipoGrafico;
-import br.com.drerp.financeiro.util.TipoParametroGrafico;
+import br.com.drerp.financeiro.business.transferencia.ContaPagarBR;
+import br.com.drerp.financeiro.business.transferencia.SalarioBR;
+import br.com.drerp.financeiro.model.transferencia.ContaPagar;
+import br.com.drerp.financeiro.model.transferencia.Transferencia;
+import br.com.drerp.financeiro.model.transferencia.Salario;
 
 @ManagedBean(name="transferenciaOutBean")
 @RequestScoped
@@ -17,91 +19,110 @@ public class TransferenciaOutBean implements Serializable{
 	
 	private static final long serialVersionUID = -3229300148690484732L;
 
-	private CartesianChartModel categoryModel;
+	private Transferencia contaPagar;
 	
-	private TipoGrafico tipoGrafico;
+	private List<Transferencia> contaPagarList;
 	
-	private TipoParametroGrafico eixoY;
+	private ContaPagarBR contaPagarBR;
 	
-	private int maxEixoY;
+	private SalarioBR salarioBR;
 	
-	private Date dataInicio;
+	public TransferenciaOutBean() {
+		contaPagarBR = new ContaPagarBR();
+		salarioBR = new SalarioBR();
+		contaPagar = new ContaPagar();
+	}
+
+//	public String create(){
+//		requisicaoTransferencia = new RequisicaoTransferencia();
+//		return "requisicaoTransferenciaNovo";
+//	}
+//	
 	
-	private Date dataFim;
+//	public String save(){
+//		contaPagarBR.save(contaPagar);
+//		return "RequisicaoTransferenciaLista";
+//	}
 	
-	public String gerarGrafico(){
-    	
-    	switch (tipoGrafico) {
-		case BARRA:
-//			this.gerarBarraOuLinha();
-			break;
-			
-		case LINHA:
-//			this.gerarBarraOuLinha();
-			break;
-			
-		case PIZZA:
-//			this.gerarPizza();
-			break;
-			
-		default:
-			break;
+//	public String alter(){
+//		contaPagar = new ContaPagar();
+//		return "requisicaoTransferenciaNovo";
+//	}
+	
+	public String listarAprovadas(){
+		return "requisicaoAprovadaList";
+	}
+	
+	public String realizarTransferencia(){
+		// falta umas condicoes aquiiii !! verificar o status antes!!
+		if(contaPagar.getClass().equals(ContaPagar.class)){
+			contaPagarBR.realizarTransferencia((ContaPagar)contaPagar);
+		} else if(contaPagar.getClass().equals(Salario.class)){
+			salarioBR.realizarTransferencia((Salario)contaPagar);
 		}
-    	
-    	return null;
-    }
+		
+		// para atualizar a lista
+		this.contaPagarList = null;
+		return null;
+	}
 	
+	public String delete() {
+		if(contaPagar.getClass().equals(ContaPagar.class)){
+			contaPagarBR.delete((ContaPagar)this.contaPagar);
+		} else if(contaPagar.getClass().equals(Salario.class)){
+			salarioBR.delete((Salario)this.contaPagar);
+		}
+		// para atualizar a lista
+		this.contaPagarList = null;
+		return null;
+	}
 	
-
-	public CartesianChartModel getCategoryModel() {
-		return categoryModel;
+	public String registrarErro() {
+		if(contaPagar.getClass().equals(ContaPagar.class)){
+			contaPagarBR.registrarErro((ContaPagar)this.contaPagar);
+		} else if(contaPagar.getClass().equals(Salario.class)){
+			salarioBR.registrarErro((Salario)this.contaPagar);
+		}
+		// para atualizar a lista
+		this.contaPagarList = null;
+		return null;
+	}
+	
+	public List<Transferencia> getContaPagarList() {
+		contaPagarList = new ArrayList<Transferencia>();
+		contaPagarList.addAll(contaPagarBR.listarAbertas());
+		contaPagarList.addAll(salarioBR.listarPendentes());
+		contaPagarList.addAll(contaPagarBR.listarEfetuadas());
+		contaPagarList.addAll(salarioBR.listarEfetuadas());
+		return contaPagarList;
 	}
 
-	public void setCategoryModel(CartesianChartModel categoryModel) {
-		this.categoryModel = categoryModel;
+	public void setContaPagarList(List<Transferencia> listaAprovada) {
+		this.contaPagarList = listaAprovada;
 	}
 
-	public TipoGrafico getTipoGrafico() {
-		return tipoGrafico;
+	public Transferencia getContaPagar() {
+		return contaPagar;
 	}
 
-	public void setTipoGrafico(TipoGrafico tipoGrafico) {
-		this.tipoGrafico = tipoGrafico;
-	}
-
-	public TipoParametroGrafico getEixoY() {
-		return eixoY;
-	}
-
-	public void setEixoY(TipoParametroGrafico eixoY) {
-		this.eixoY = eixoY;
-	}
-
-	public int getMaxEixoY() {
-		return maxEixoY;
-	}
-
-	public void setMaxEixoY(int maxEixoY) {
-		this.maxEixoY = maxEixoY;
-	}
-
-	public Date getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public Date getDataFim() {
-		return dataFim;
-	}
-
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
+	public void setContaPagar(Transferencia contaPagar) {
+		this.contaPagar = contaPagar;
 	}
 	
 	
-	
-	
+//
+//	public String salvar(){
+//		//FacesContext context = FacesContext.getCurrentInstance();
+//		TransferenciaBR transferenciaBR = new TransferenciaBR();
+//		transferenciaBR.save(transferencia);
+//		return "usuarioList";
+//	}
+//
+//	public Transferencia getTransferencia() {
+//		return transferencia;
+//	}
+//
+//	public void setTransferencia(Transferencia transferencia) {
+//		this.transferencia = transferencia;
+//	}
 }
