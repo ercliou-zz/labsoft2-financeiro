@@ -17,6 +17,19 @@
 					<f:selectItem itemLabel="Linha" itemValue="LINHA" />
 					<f:selectItem itemLabel="Pizza" itemValue="PIZZA" />
 				</h:selectOneMenu>
+				
+				<h:outputText value="Data Inicial: " />
+				<p:calendar value="#{orcamentoBean.dataInicial}" />
+
+				<h:outputText value="Data Final: " />
+				<p:calendar value="#{orcamentoBean.dataFinal}" />
+				
+				<h:outputText value="Granularidade: " />
+				<h:selectOneMenu value="#{orcamentoBean.step}">
+					<f:selectItem itemLabel="Dia" itemValue="DIA" />
+					<f:selectItem itemLabel="Mes" itemValue="MES" />
+					<f:selectItem itemLabel="Ano" itemValue="ANO" />
+				</h:selectOneMenu>
 
 				<h:outputLabel value="Eixo Y: " for="eixoY" />
 				<h:selectOneMenu id="eixoY" value="#{orcamentoBean.eixoY}">
@@ -24,8 +37,6 @@
 						itemValue="N_PEDIDOS" />
 					<f:selectItem itemLabel="Valor Total de Pedidos de Orçamento"
 						itemValue="VAL_PEDIDOS" />
-					<!-- 		  <f:selectItem itemLabel="Plano Saude" itemValue="PIE" /> -->
-					<!-- 		  <f:selectItem itemLabel="Tempo" itemValue="PIE1" /> -->
 				</h:selectOneMenu>
 
 				<h:outputText value="Planos de Saúde: " />
