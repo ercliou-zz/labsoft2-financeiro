@@ -13,7 +13,8 @@ public class PedidoOrcamentoDAOImpl extends GenericDAOImpl<PedidoOrcamento> impl
 	@SuppressWarnings("unchecked")
 	public List<PedidoOrcamento> listByDataPedido(PlanoSaude plano, Long inicio, Long fim) { // DATAREQUISICAOMILIS
 		return session.createCriteria(PedidoOrcamento.class).
-				add(Restrictions.between("dataPedidoMilis", inicio, fim)).
+				add(Restrictions.ge("dataPedidoMilis", inicio)).
+				add(Restrictions.lt("dataPedidoMilis", fim)).
 				add(Restrictions.eq("plano", plano)).list();
 	}
 	
