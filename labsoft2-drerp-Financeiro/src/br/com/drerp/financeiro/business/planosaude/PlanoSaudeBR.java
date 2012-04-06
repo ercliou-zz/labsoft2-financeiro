@@ -95,4 +95,8 @@ public class PlanoSaudeBR extends GenericBR<PlanoSaudeDAOImpl, PlanoSaude>{
 		colDAO.delete(col);
 	}
 	
+	public PlanoSaude getByNome(String nome){
+		return dao.getByNome(nome);
+	}
+	
 }

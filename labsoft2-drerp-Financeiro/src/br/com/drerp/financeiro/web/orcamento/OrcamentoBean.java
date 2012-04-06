@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -21,6 +22,7 @@ import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.util.TipoGrafico;
 import br.com.drerp.financeiro.util.TipoParametroGrafico;
+import br.com.drerp.financeiro.util.TipoStepGrafico;
 
 @ManagedBean(name="orcamentoBean")
 @RequestScoped
@@ -38,9 +40,11 @@ public class OrcamentoBean implements Serializable {
 	
 	private int maxEixoY;
 	
-	private Date dataInicio;
+	private GregorianCalendar dataInicial;
 	
-	private Date dataFim;
+	private GregorianCalendar dataFinal;
+	
+	private TipoStepGrafico step;
 	
 	private List<PlanoSaude> planosList;
 	
@@ -58,26 +62,9 @@ public class OrcamentoBean implements Serializable {
     	categoryModel = new CartesianChartModel();
     	pieModel = new PieChartModel();
     	maxEixoY= 0;
-    	
-//    	planosSelecionados.add("1");
-//    	planosSelecionados.add("2");
-//    	planosSelecionados.add("3");
     }
     
     public String gerarGrafico(){
-    	
-//    	PagadorBR pagadorBR = new PagadorBR();
-//    	ProcedimentoBR procedimentoBR = new ProcedimentoBR();
-//    	
-//    	List<Procedimento> procedimentos = new ArrayList<Procedimento>();
-//    	procedimentos.add(procedimentoBR.getById(1l));
-//    	procedimentos.add(procedimentoBR.getById(2l));
-//    	procedimentos.add(procedimentoBR.getById(3l));
-//    	procedimentos.add(procedimentoBR.getById(4l));
-//    	
-//    	
-//    	
-//    	pedidoOrcamentoBR.pedirOrcamento(pagadorBR.getById(1l), procedimentos, planoSaudeBR.getById(1l));
     	
     	switch (tipoGrafico) {
 		case BARRA:
@@ -101,16 +88,14 @@ public class OrcamentoBean implements Serializable {
     
     
     private void gerarBarraOuLinha(){
+    	
+    	int calendarField = getCalendarField();
+    	List<GregorianCalendar> listaDatas = getListaDatas();
     	categoryModel = new CartesianChartModel();
-    	Calendar data = new GregorianCalendar();
-    	Calendar dataFim;
-    	int mes;
-    	int ano;
     	int maxDadoTemp = 0;
     	ChartSeries planoSeries;
 		BigDecimal novoDado = new BigDecimal(0);
 		PlanoSaude plano;
-		
     	for (String psId : planosSelecionados) {
     		
     		plano = planoSaudeBR.getById(Long.parseLong(psId));
@@ -123,43 +108,24 @@ public class OrcamentoBean implements Serializable {
     		
     		planoSeries.setLabel(plano.getNome());
     		
-    		mes = data.get(Calendar.MONTH) - 11;
-    		ano = data.get(Calendar.YEAR);
-    		if(mes<0){
-    			mes +=12;
-    			ano --;
-    		}
-    		
-    		for (int i = 0; i < 12; i++) {
-    			if(mes+1==12){
-    				dataFim = new GregorianCalendar(ano+1, 0, 1);
-    			} else{
-    				dataFim = new GregorianCalendar(ano, mes+1, 1);
-    			}
+    		for (int i = 1; i < listaDatas.size(); i++) {
     			switch (eixoY) {
 				case N_PEDIDOS:
-					novoDado = new BigDecimal(pedidoOrcamentoBR.getQtdOrcamentoByPeriodo(plano, new GregorianCalendar(ano, mes, 1), dataFim));
-					planoSeries.set((mes+1)+"-"+ano, novoDado);
+					novoDado = new BigDecimal(pedidoOrcamentoBR.getQtdOrcamentoByPeriodo(plano, listaDatas.get(i-1), listaDatas.get(i)));
 					break;
 				case VAL_PEDIDOS:
-					novoDado = pedidoOrcamentoBR.getValorOrcamentoByPeriodo(plano, new GregorianCalendar(ano, mes, 1), dataFim);
-					planoSeries.set((mes+1)+"-"+ano, novoDado);
+					novoDado = pedidoOrcamentoBR.getValorOrcamentoByPeriodo(plano, listaDatas.get(i-1), listaDatas.get(i));
+					
 					break;
 				default:
 					break;
 				}
-    			
-    			mes++;
-    			if(mes==12){
-    				ano++;
-    				mes=0;
-    			}
+    			planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
     			
     			maxDadoTemp = novoDado.intValue(); 
     			if(maxDadoTemp > maxEixoY){
     				maxEixoY = (maxDadoTemp/10)*10+10;
     			}
-    			
 			}
     		categoryModel.addSeries(planoSeries);
 		}
@@ -168,26 +134,19 @@ public class OrcamentoBean implements Serializable {
     private void gerarPizza(){
     	
     	pieModel = new PieChartModel();
-    	Calendar data = new GregorianCalendar();
-    	int mes = data.get(Calendar.MONTH);
-    	int ano = data.get(Calendar.YEAR);
-    	
-    	if(mes+1==12){
-    		mes = 0;
-    		ano--;
-    	} else {
-    		mes++;
-    	}
     	
     	for (String psId : planosSelecionados) {
     		PlanoSaude plano = planoSaudeBR.getById(Long.parseLong(psId));
+    		GregorianCalendar dataFinalLimite = new GregorianCalendar();
+    		dataFinalLimite.setTime(dataFinal.getTime());
+    		dataFinalLimite.add(Calendar.DATE, 1); //granularidade nao faz efeito em pizzas
     		
     		switch (eixoY) {
 			case N_PEDIDOS:
-				pieModel.set(plano.getNome(), pedidoOrcamentoBR.getQtdOrcamentoByPeriodo(plano, new GregorianCalendar(ano-1, mes, 1), new GregorianCalendar(ano, mes, 1)));
+				pieModel.set(plano.getNome(), pedidoOrcamentoBR.getQtdOrcamentoByPeriodo(plano, dataInicial, dataFinalLimite));
 				break;
 			case VAL_PEDIDOS:
-				pieModel.set(plano.getNome(), pedidoOrcamentoBR.getValorOrcamentoByPeriodo(plano, new GregorianCalendar(ano-1, mes, 1), new GregorianCalendar(ano, mes, 1)));
+				pieModel.set(plano.getNome(), pedidoOrcamentoBR.getValorOrcamentoByPeriodo(plano, dataInicial, dataFinalLimite));
 				break;
 			default:
 				break;
@@ -195,21 +154,96 @@ public class OrcamentoBean implements Serializable {
     	}
     }
     
+    private int getCalendarField(){
+    	switch (step) {
+		case DIA:
+			return Calendar.DATE;
+		case MES:
+			return Calendar.MONTH;
+		case ANO:
+			return Calendar.YEAR;
+		default:
+			return -1;
+		}
+    }
+    
+    private List<GregorianCalendar> getListaDatas(){
+    	
+    	List<GregorianCalendar> lista = new ArrayList<GregorianCalendar>();
+    	int calendarField = getCalendarField();
+    	
+    	GregorianCalendar primeiraData = new GregorianCalendar();
+    	primeiraData.setTime(dataInicial.getTime());
+    	primeiraData.set(proxGranularidadeFina(calendarField), dataInicial.getMinimum(proxGranularidadeFina(calendarField)));
+    	
+    	GregorianCalendar ultimaData = new GregorianCalendar();
+    	ultimaData.setTime(dataFinal.getTime());
+    	ultimaData.set(proxGranularidadeFina(calendarField), dataFinal.getMinimum(proxGranularidadeFina(calendarField)));
+    	ultimaData.add(calendarField, 1);
+    	
+    	for (GregorianCalendar data = primeiraData; primeiraData.before(dataFinal); data.add(calendarField, 1)){
+    		GregorianCalendar temp = new GregorianCalendar();
+    		temp.setTime(data.getTime());
+    		lista.add(temp);
+    	}
+    	lista.add(ultimaData);
+    	return lista;
+    }
+    
+    private int proxGranularidadeFina(int gran){
+    	switch (gran) {
+		case Calendar.DATE:
+			return Calendar.HOUR;
+		case Calendar.MONTH:
+			return Calendar.DATE;
+		case Calendar.YEAR:
+			return Calendar.MONTH;
+		default:
+			return -1;
+		}
+    }
+    
+    private int proxGranularidadeGrossa(int gran){
+    	switch (gran) {
+		case Calendar.DATE:
+			return Calendar.MONTH;
+		case Calendar.MONTH:
+			return Calendar.YEAR;
+		case Calendar.YEAR:
+			return Calendar.ERA;
+		default:
+			return -1;
+		}
+    }
   
-    public Date getDataInicio() {
-		return dataInicio;
+    public Date getDataInicial() {
+    	if(this.dataInicial == null)
+    		return null;
+		return dataInicial.getTime();
 	}
 
-	public void setDataInicio(Date dataInicio) {
-		this.dataInicio = dataInicio;
+	public void setDataInicial(Date dataInicio) {
+		if(dataInicio == null){
+			this.dataInicial = null;
+		} else {
+			this.dataInicial = new GregorianCalendar();
+			this.dataInicial.setTimeInMillis(dataInicio.getTime());
+		}
 	}
 
-	public Date getDataFim() {
-		return dataFim;
+	public Date getDataFinal() {
+		if(this.dataFinal == null)
+			return null;
+		return dataFinal.getTime();
 	}
 
-	public void setDataFim(Date dataFim) {
-		this.dataFim = dataFim;
+	public void setDataFinal(Date dataFinal) {
+		if(dataFinal == null){
+			this.dataFinal = null;
+		} else {
+			this.dataFinal = new GregorianCalendar();
+			this.dataFinal.setTimeInMillis(dataFinal.getTime());
+		}
 	}
 
 	public CartesianChartModel getCategoryModel() {  
@@ -260,8 +294,14 @@ public class OrcamentoBean implements Serializable {
 	public void setMaxEixoY(int maxEixoY) {
 		this.maxEixoY = maxEixoY;
 	}
-	
-	
+
+	public TipoStepGrafico getStep() {
+		return step;
+	}
+
+	public void setStep(TipoStepGrafico step) {
+		this.step = step;
+	}
 	
     
 }

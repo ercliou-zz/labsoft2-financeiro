@@ -1,35 +1,40 @@
 package br.com.drerp.financeiro.web.transferencia;
 
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
+import org.primefaces.model.DualListModel;
 import org.primefaces.model.chart.CartesianChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.PieChartModel;
 
-import br.com.drerp.financeiro.business.orcamento.PedidoOrcamentoBR;
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
-import br.com.drerp.financeiro.business.procedimento.ProcedimentoBR;
-import br.com.drerp.financeiro.business.transferencia.PagadorBR;
+import br.com.drerp.financeiro.business.transferencia.ContaPagarBR;
+import br.com.drerp.financeiro.business.transferencia.SalarioBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.procedimento.Procedimento;
+import br.com.drerp.financeiro.model.transferencia.Departamento;
 import br.com.drerp.financeiro.util.TipoGrafico;
 import br.com.drerp.financeiro.util.TipoParametroGrafico;
+import br.com.drerp.financeiro.util.TipoSentidoFluxoGrafico;
+import br.com.drerp.financeiro.util.TipoStepGrafico;
 
 @ManagedBean(name="fluxoCaixaBean")
 @RequestScoped
-public class FluxoCaixaBean implements Serializable {
+public class FluxoCaixaBean implements Serializable{
 	
-	private static final long serialVersionUID = 7458469470665154192L;
-	
+	private static final long serialVersionUID = -3229300148690484732L;
+
 	private CartesianChartModel categoryModel;
 	
 	private PieChartModel pieModel;
@@ -40,42 +45,50 @@ public class FluxoCaixaBean implements Serializable {
 	
 	private int maxEixoY;
 	
+	private GregorianCalendar dataInicial;
+	
+	private GregorianCalendar dataFinal;
+	
+	private TipoStepGrafico step;
+	
+	private List<Departamento> dptosSelecionados;
+	
+	private DualListModel<Departamento> dptosDual;
+	
 	private List<PlanoSaude> planosList;
+	
+	private List<PlanoSaude> planosSel;
 	
 	private List<String> planosSelecionados;
 	
+	private DualListModel<PlanoSaude> planosDual;
+	
+	private TipoSentidoFluxoGrafico sentidoSelecionado; 
+	
 	private PlanoSaudeBR planoSaudeBR;
 	
-	private PedidoOrcamentoBR pedidoOrcamentoBR;
-	  
-    public FluxoCaixaBean() {
-    	planoSaudeBR = new PlanoSaudeBR();
-    	pedidoOrcamentoBR = new PedidoOrcamentoBR();
-    	planosList = planoSaudeBR.list();
-    	planosSelecionados = new ArrayList<String>();
+	private ContaPagarBR contaPagarBR;
+	
+	private SalarioBR salarioBR;
+	
+	public FluxoCaixaBean() {
+		planoSaudeBR = new PlanoSaudeBR();
+		contaPagarBR = new ContaPagarBR();
+		salarioBR = new SalarioBR();
+		
+		planosList = planoSaudeBR.list();
+		planosSel = new ArrayList<PlanoSaude>();
+		planosDual = new DualListModel<PlanoSaude>(planosList, planosSel);
+		
+		dptosSelecionados = new ArrayList<Departamento>();
+		dptosDual = new DualListModel<Departamento>(Arrays.asList(Departamento.values()), dptosSelecionados);
+		
     	categoryModel = new CartesianChartModel();
     	pieModel = new PieChartModel();
     	maxEixoY= 0;
-    	
-    	planosSelecionados.add("1");
-    	planosSelecionados.add("2");
-    	planosSelecionados.add("3");
-    }
-    
-    public String gerarGrafico(){
-    	
-    	PagadorBR pagadorBR = new PagadorBR();
-    	ProcedimentoBR procedimentoBR = new ProcedimentoBR();
-    	
-    	List<Procedimento> procedimentos = new ArrayList<Procedimento>();
-    	procedimentos.add(procedimentoBR.getById(1l));
-    	procedimentos.add(procedimentoBR.getById(2l));
-    	procedimentos.add(procedimentoBR.getById(3l));
-    	procedimentos.add(procedimentoBR.getById(4l));
-    	
-    	
-    	
-    	pedidoOrcamentoBR.pedirOrcamento(pagadorBR.getById(1l), procedimentos, planoSaudeBR.getById(1l));
+	}
+	
+	public String gerarGrafico(){
     	
     	switch (tipoGrafico) {
 		case BARRA:
@@ -96,110 +109,198 @@ public class FluxoCaixaBean implements Serializable {
     	
     	return null;
     }
-    
-    
-    private void gerarBarraOuLinha(){
+	
+	
+private void gerarBarraOuLinha(){
+    	
+    	int calendarField = getCalendarField();
+    	List<GregorianCalendar> listaDatas = getListaDatas();
     	categoryModel = new CartesianChartModel();
-    	Calendar data = new GregorianCalendar();
-    	Calendar dataFim;
-    	int mes;
-    	int ano;
-    	int novoDadoInt = 0;
+    	int maxDadoTemp = 0;
     	ChartSeries planoSeries;
 		BigDecimal novoDado = new BigDecimal(0);
-		PlanoSaude plano;
 		
-    	for (String psId : planosSelecionados) {
-    		
-    		plano = planoSaudeBR.getById(Long.parseLong(psId));
-    		
-    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
-    			planoSeries = new ChartSeries();
-    		} else {
-    			planoSeries = new LineChartSeries();
-    		}
-    		
-    		planoSeries.setLabel(plano.getNome());
-    		
-    		mes = data.get(Calendar.MONTH) - 11;
-    		ano = data.get(Calendar.YEAR);
-    		if(mes<0){
-    			mes +=12;
-    			ano --;
-    		}
-    		
-    		for (int i = 0; i < 12; i++) {
-    			if(mes+1==12){
-    				dataFim = new GregorianCalendar(ano+1, 0, 1);
-    			} else{
-    				dataFim = new GregorianCalendar(ano, mes+1, 1);
-    			}
-    			switch (eixoY) {
-				case N_PEDIDOS:
-					novoDado = new BigDecimal(pedidoOrcamentoBR.getQtdOrcamentoByPeriodo(plano, new GregorianCalendar(ano, mes, 1), dataFim));
-					planoSeries.set((mes+1)+"-"+ano, novoDado);
-					break;
-				case VAL_PEDIDOS:
-					novoDado = pedidoOrcamentoBR.getValorOrcamentoByPeriodo(plano, new GregorianCalendar(ano, mes, 1), dataFim);
-					planoSeries.set((mes+1)+"-"+ano, novoDado);
-					break;
-				default:
-					break;
+		switch (sentidoSelecionado) {
+		case OUT:
+			for (Departamento dpto : dptosDual.getTarget()) {
+	    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
+	    			planoSeries = new ChartSeries();
+	    		} else {
+	    			planoSeries = new LineChartSeries();
+	    		}
+	    		planoSeries.setLabel(dpto.toString());
+	    		
+	    		for (int i = 1; i < listaDatas.size(); i++) {
+					novoDado = contaPagarBR.getGastoByDpto(dpto, listaDatas.get(i-1), listaDatas.get(i));
+					novoDado = novoDado.add(salarioBR.getSalarioByDpto(dpto, listaDatas.get(i-1), listaDatas.get(i)));
+	    			planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+	    			
+	    			maxDadoTemp = novoDado.intValue(); 
+	    			if(maxDadoTemp > maxEixoY){
+	    				maxEixoY = (maxDadoTemp/10)*10+10;
+	    			}
 				}
-    			
-    			mes++;
-    			if(mes==12){
-    				ano++;
-    				mes=0;
-    			}
-    			
-    			novoDadoInt = novoDado.intValue(); 
-    			if(novoDadoInt > maxEixoY){
-    				maxEixoY = (novoDadoInt/10)*10+10;
-    			}
-    			
+	    		categoryModel.addSeries(planoSeries);
 			}
-    		categoryModel.addSeries(planoSeries);
+			break;
+		case IN:
+//			PlanoSaude plano;
+//			for (String psId : planosSelecionados) {
+//				plano = planoSaudeBR.getById(Long.parseLong(psId));
+//	    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
+//	    			planoSeries = new ChartSeries();
+//	    		} else {
+//	    			planoSeries = new LineChartSeries();
+//	    		}
+//	    		planoSeries.setLabel(plano.getNome());
+//	    		
+//	    		for (int i = 1; i < listaDatas.size(); i++) {
+//					novoDado = contaPagarBR.getGastoByDpto(dpto, listaDatas.get(i-1), listaDatas.get(i));
+//	    			planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+//	    			
+//	    			maxDadoTemp = novoDado.intValue(); 
+//	    			if(maxDadoTemp > maxEixoY){
+//	    				maxEixoY = (maxDadoTemp/10)*10+10;
+//	    			}
+//				}
+//	    		categoryModel.addSeries(planoSeries);
+//			}
+			break;
+		case INOUT:
+//			grupos = new ArrayList<String>();
+//			grupos.add("in");
+//			grupos.add("out");
+			break;
+		default:
+			break;
 		}
     }
-    
+
     private void gerarPizza(){
     	
     	pieModel = new PieChartModel();
-    	Calendar data = new GregorianCalendar();
-    	int mes = data.get(Calendar.MONTH);
-    	int ano = data.get(Calendar.YEAR);
+    	GregorianCalendar dataFinalLimite = new GregorianCalendar();
+		dataFinalLimite.setTime(dataFinal.getTime());
+		dataFinalLimite.add(Calendar.DATE, 1);
     	
-    	if(mes+1==12){
-    		mes = 0;
-    		ano--;
-    	} else {
-    		mes++;
-    	}
-    	
-    	for (String psId : planosSelecionados) {
-    		PlanoSaude plano = planoSaudeBR.getById(Long.parseLong(psId));
-    		
-    		switch (eixoY) {
-			case N_PEDIDOS:
-				pieModel.set(plano.getNome(), pedidoOrcamentoBR.getQtdOrcamentoByPeriodo(plano, new GregorianCalendar(ano-1, mes, 1), new GregorianCalendar(ano, mes, 1)));
-				break;
-			case VAL_PEDIDOS:
-				pieModel.set(plano.getNome(), pedidoOrcamentoBR.getValorOrcamentoByPeriodo(plano, new GregorianCalendar(ano-1, mes, 1), new GregorianCalendar(ano, mes, 1)));
-				break;
-			default:
-				break;
+    	switch (sentidoSelecionado) {
+		case OUT:
+    		for (Departamento dpto : dptosDual.getTarget()) {
+    			pieModel.set(dpto.toString(), 
+    					contaPagarBR.getGastoByDpto(dpto, dataInicial, dataFinalLimite).add(salarioBR.getSalarioByDpto(dpto, dataInicial, dataFinalLimite)));
 			}
-    	}
+			break;
+		case IN:
+//			PlanoSaude plano;
+//			for (String psId : planosSelecionados) {
+//				plano = planoSaudeBR.getById(Long.parseLong(psId));
+//	    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
+//	    			planoSeries = new ChartSeries();
+//	    		} else {
+//	    			planoSeries = new LineChartSeries();
+//	    		}
+//	    		planoSeries.setLabel(plano.getNome());
+//	    		
+//	    		for (int i = 1; i < listaDatas.size(); i++) {
+//					novoDado = contaPagarBR.getGastoByDpto(dpto, listaDatas.get(i-1), listaDatas.get(i));
+//	    			planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+//	    			
+//	    			maxDadoTemp = novoDado.intValue(); 
+//	    			if(maxDadoTemp > maxEixoY){
+//	    				maxEixoY = (maxDadoTemp/10)*10+10;
+//	    			}
+//				}
+//	    		categoryModel.addSeries(planoSeries);
+//			}
+			break;
+		case INOUT:
+//			grupos = new ArrayList<String>();
+//			grupos.add("in");
+//			grupos.add("out");
+			break;
+		default:
+			break;
+		}
+    }
+	
+	
+	private int getCalendarField(){
+    	switch (step) {
+		case DIA:
+			return Calendar.DATE;
+		case MES:
+			return Calendar.MONTH;
+		case ANO:
+			return Calendar.YEAR;
+		default:
+			return -1;
+		}
     }
     
-  
-    public CartesianChartModel getCategoryModel() {  
-        return categoryModel;  
+    private List<GregorianCalendar> getListaDatas(){
+    	
+    	List<GregorianCalendar> lista = new ArrayList<GregorianCalendar>();
+    	int calendarField = getCalendarField();
+    	
+    	GregorianCalendar primeiraData = new GregorianCalendar();
+    	primeiraData.setTime(dataInicial.getTime());
+    	primeiraData.set(proxGranularidadeFina(calendarField), dataInicial.getMinimum(proxGranularidadeFina(calendarField)));
+    	
+    	GregorianCalendar ultimaData = new GregorianCalendar();
+    	ultimaData.setTime(dataFinal.getTime());
+    	ultimaData.set(proxGranularidadeFina(calendarField), dataFinal.getMinimum(proxGranularidadeFina(calendarField)));
+    	ultimaData.add(calendarField, 1);
+    	
+    	for (GregorianCalendar data = primeiraData; primeiraData.before(dataFinal); data.add(calendarField, 1)){
+    		GregorianCalendar temp = new GregorianCalendar();
+    		temp.setTime(data.getTime());
+    		lista.add(temp);
+    	}
+    	lista.add(ultimaData);
+    	return lista;
     }
-  
-    public PieChartModel getPieModel() {
-		return pieModel;
+    
+    private int proxGranularidadeFina(int gran){
+    	switch (gran) {
+		case Calendar.DATE:
+			return Calendar.HOUR;
+		case Calendar.MONTH:
+			return Calendar.DATE;
+		case Calendar.YEAR:
+			return Calendar.MONTH;
+		default:
+			return -1;
+		}
+    }
+    
+    private int proxGranularidadeGrossa(int gran){
+    	switch (gran) {
+		case Calendar.DATE:
+			return Calendar.MONTH;
+		case Calendar.MONTH:
+			return Calendar.YEAR;
+		case Calendar.YEAR:
+			return Calendar.ERA;
+		default:
+			return -1;
+		}
+    }
+    
+//    private List<PlanoSaude> getPlanos(List<String> ids){
+//    	List<PlanoSaude> dptos = new ArrayList<PlanoSaude>();
+//    	for (String id : ids) {
+//			dptos.add(planoSaudeBR.getById(Long.parseLong(id)));
+//		}
+//    	return dptos;
+//    }
+	
+
+	public CartesianChartModel getCategoryModel() {
+		return categoryModel;
+	}
+
+	public void setCategoryModel(CartesianChartModel categoryModel) {
+		this.categoryModel = categoryModel;
 	}
 
 	public TipoGrafico getTipoGrafico() {
@@ -210,7 +311,6 @@ public class FluxoCaixaBean implements Serializable {
 		this.tipoGrafico = tipoGrafico;
 	}
 
-
 	public TipoParametroGrafico getEixoY() {
 		return eixoY;
 	}
@@ -218,13 +318,67 @@ public class FluxoCaixaBean implements Serializable {
 	public void setEixoY(TipoParametroGrafico eixoY) {
 		this.eixoY = eixoY;
 	}
-	
-	public List<PlanoSaude> getPlanosList() {
-		return planosList;
+
+	public int getMaxEixoY() {
+		return maxEixoY;
 	}
 
-	public void setPlanosList(List<PlanoSaude> planosList) {
-		this.planosList = planosList;
+	public void setMaxEixoY(int maxEixoY) {
+		this.maxEixoY = maxEixoY;
+	}
+
+	public Date getDataInicial() {
+    	if(this.dataInicial == null)
+    		return null;
+		return dataInicial.getTime();
+	}
+
+	public void setDataInicial(Date dataInicio) {
+		if(dataInicio == null){
+			this.dataInicial = null;
+		} else {
+			this.dataInicial = new GregorianCalendar();
+			this.dataInicial.setTimeInMillis(dataInicio.getTime());
+		}
+	}
+
+	public Date getDataFinal() {
+		if(this.dataFinal == null)
+			return null;
+		return dataFinal.getTime();
+	}
+
+	public void setDataFinal(Date dataFinal) {
+		if(dataFinal == null){
+			this.dataFinal = null;
+		} else {
+			this.dataFinal = new GregorianCalendar();
+			this.dataFinal.setTimeInMillis(dataFinal.getTime());
+		}
+	}
+
+	public TipoStepGrafico getStep() {
+		return step;
+	}
+
+	public void setStep(TipoStepGrafico step) {
+		this.step = step;
+	}
+	
+	public List<Departamento> getDptosSelecionados() {
+		return dptosSelecionados;
+	}
+
+	public void setDptosSelecionados(List<Departamento> dptosSelecionados) {
+		this.dptosSelecionados = dptosSelecionados;
+	}
+
+	public TipoSentidoFluxoGrafico getSentidoSelecionado() {
+		return sentidoSelecionado;
+	}
+
+	public void setSentidoSelecionado(TipoSentidoFluxoGrafico sentidoSelecionado) {
+		this.sentidoSelecionado = sentidoSelecionado;
 	}
 
 	public List<String> getPlanosSelecionados() {
@@ -235,15 +389,37 @@ public class FluxoCaixaBean implements Serializable {
 		this.planosSelecionados = planosSelecionados;
 	}
 
-	public int getMaxEixoY() {
-		return maxEixoY;
+	public List<PlanoSaude> getPlanosList() {
+		return planosList;
 	}
 
-	public void setMaxEixoY(int maxEixoY) {
-		this.maxEixoY = maxEixoY;
+	public void setPlanosList(List<PlanoSaude> planosList) {
+		this.planosList = planosList;
+	}
+
+	public DualListModel<PlanoSaude> getPlanosDual() {
+		return planosDual;
+	}
+
+	public void setPlanosDual(DualListModel<PlanoSaude> planosDual) {
+		this.planosDual = planosDual;
+	}
+
+	public DualListModel<Departamento> getDptosDual() {
+		return dptosDual;
+	}
+
+	public void setDptosDual(DualListModel<Departamento> dptosDual) {
+		this.dptosDual = dptosDual;
+	}
+
+	public PieChartModel getPieModel() {
+		return pieModel;
+	}
+
+	public void setPieModel(PieChartModel pieModel) {
+		this.pieModel = pieModel;
 	}
 	
 	
-	
-    
 }
