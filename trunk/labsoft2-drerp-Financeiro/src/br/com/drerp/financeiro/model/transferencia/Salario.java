@@ -26,7 +26,10 @@ public class Salario extends Transferencia implements Serializable{
 	public Departamento getDepartamento() {
 		return departamento;
 	}
-	
+	public Salario () {
+		super();
+	}
+		
 	public Salario (Transferencia transferencia) {
 		this.setBeneficiario(transferencia.getBeneficiario());
 		this.setDataLimiteMilis(transferencia.getDataLimiteMilis());

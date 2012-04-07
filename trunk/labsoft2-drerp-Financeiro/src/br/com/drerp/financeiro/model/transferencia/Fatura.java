@@ -1,20 +1,22 @@
 package br.com.drerp.financeiro.model.transferencia;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.drerp.financeiro.model.GenericModel;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
-import br.com.drerp.financeiro.model.procedimento.Procedimento;
 
 @Entity
 @Table(name="FIN_FATURA")
@@ -23,42 +25,50 @@ public class Fatura extends GenericModel{
 	@ManyToOne
 	private PlanoSaude planoSaude;
 	
-	@ManyToMany
-	private List<Procedimento> procedimentos;
+	@OneToMany(mappedBy="fatura", cascade=CascadeType.ALL)
+	private List<ItemFatura> itens;
 	
 	@OneToOne
 	@JoinColumn(name="pagador_fk")
 	private Pagador pagador;
 	
-	@OneToOne
-	@JoinColumn(name="beneficiario_fk")
-	private Beneficiario beneficiario;
-	
 	private Long dataMS;
 	
+	private Boolean paga;
+	
+	private BigDecimal valor;
+	
+	public BigDecimal getValor() {
+		return valor;
+	}
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+	public String getValorFormatado(){
+		if (valor != null) {
+			DecimalFormat formatter = new DecimalFormat();
+			formatter.setMaximumFractionDigits(2);
+			return "R$ " + formatter.format(valor);
+		}
+		return "Indefinido";
+	}
 	public PlanoSaude getPlanoSaude() {
 		return planoSaude;
 	}
 	public void setPlanoSaude(PlanoSaude planoSaude) {
 		this.planoSaude = planoSaude;
 	}
-	public List<Procedimento> getProcedimentos() {
-		return procedimentos;
+	public List<ItemFatura> getItens() {
+		return itens;
 	}
-	public void setProcedimentos(List<Procedimento> procedimentos) {
-		this.procedimentos = procedimentos;
+	public void setItens(List<ItemFatura> itens) {
+		this.itens = itens;
 	}
 	public Pagador getPagador() {
 		return pagador;
 	}
 	public void setPagador(Pagador pagador) {
 		this.pagador = pagador;
-	}
-	public Beneficiario getBeneficiario() {
-		return beneficiario;
-	}
-	public void setBeneficiario(Beneficiario beneficiario) {
-		this.beneficiario = beneficiario;
 	}
 	@Transient
 	public Date getData() {
@@ -73,6 +83,13 @@ public class Fatura extends GenericModel{
 	public String getPlanoData(){
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		return this.planoSaude.getNome() + ", " + format.format(new Date(dataMS));
+	}
+	
+	public Boolean getPaga() {
+		return paga;
+	}
+	public void setPaga(Boolean paga) {
+		this.paga = paga;
 	}
 	
 }
