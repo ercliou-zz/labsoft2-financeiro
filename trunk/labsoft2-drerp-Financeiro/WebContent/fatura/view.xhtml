@@ -1,0 +1,44 @@
+<ui:composition template="../index/index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:fieldset legend="Vizualização de Fatura">
+				<h:panelGrid columns="2" cellpadding="10">
+
+					<h:outputLabel value="Pagador: " />
+					<h:outputText value="#{faturaBean.fatura.pagador.nome}" />
+
+					<h:outputLabel value="Plano de Saúde: " />
+					<h:outputText value="#{faturaBean.fatura.planoSaude.nome}" />
+
+					<h:outputLabel value="Data: " />
+					<h:outputText value="#{faturaBean.fatura.data}" />
+
+					<h:outputLabel value="Itens: " />
+					<p:panel>
+						<h:panelGrid columns="2" cellpadding="10">
+							<c:forEach var="item" items="#{faturaBean.fatura.itens}">
+								<h:outputText value="#{item.procedimento.nome}" />
+								<h:outputText value="#{item.valorFormatado}" />
+							</c:forEach>
+						</h:panelGrid>
+					</p:panel>
+
+
+					<h:outputLabel value="Valor Total: " />
+					<h:outputText value="#{faturaBean.fatura.valorFormatado}" />
+
+					<h:commandButton action="list.xhtml" value="Voltar" />
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
