@@ -1,0 +1,52 @@
+<ui:composition template="../index/index.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="content">
+		<p:fieldset legend="Lista de Faturas">
+			<h:form>
+				<p:dataTable value="#{faturaBean.faturas}" var="fatura"
+					paginator="true" rows="8">
+
+					<p:column headerText="Estado">
+						<c:if test="#{fatura.paga}">Paga</c:if>
+						<c:if test="#{!fatura.paga}">Pendente</c:if>
+					</p:column>
+
+					<p:column headerText="Pagador">
+						<h:outputText value="#{fatura.pagador.nome}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="Data">
+						<h:outputText value="#{fatura.data}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="Valor">
+						<h:outputText value="#{fatura.valorFormatado}"></h:outputText>
+					</p:column>
+
+					<p:column>
+						<h:commandLink style="padding:3px" action="#{faturaBean.view}"
+							value="Vizualizar">
+							<f:setPropertyActionListener target="#{faturaBean.fatura}"
+								value="#{fatura}" />
+						</h:commandLink>
+						<h:commandLink style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{faturaBean.delete}"
+							value="Excluir">
+							<f:setPropertyActionListener target="#{faturaBean.fatura}"
+								value="#{fatura}" />
+						</h:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
+				<h:commandButton action="#{faturaBean.create}" value="Nova" />
+
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+</ui:composition>
