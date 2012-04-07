@@ -10,8 +10,8 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <property name="current_session_context_class">thread</property>
-        <property name="show_sql">true</property>
-        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="show_sql">false</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         
 <!--     	<property name="hibernate.hbm2ddl.import_files">importar.sql</property> -->
     
@@ -22,9 +22,10 @@
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Beneficiario"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Pagador"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Fatura"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.ItemFatura"/>
     	<mapping class="br.com.drerp.financeiro.model.transferencia.Hollerith"/>
-    	<mapping class="br.com.drerp.financeiro.model.planosaude.Guia"/>
-    	<mapping class="br.com.drerp.financeiro.model.planosaude.Glosa"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.Guia"/>
+    	<mapping class="br.com.drerp.financeiro.model.transferencia.Glosa"/>
     	<mapping class="br.com.drerp.financeiro.model.usuario.Usuario"/>
     	<mapping class="br.com.drerp.financeiro.model.tabela.ItemTabela"/>
     	<mapping class="br.com.drerp.financeiro.model.tabela.Coluna"/>

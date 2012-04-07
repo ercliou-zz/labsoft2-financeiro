@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.drerp.financeiro.dao.GenericDAOImpl;
-import br.com.drerp.financeiro.model.transferencia.ContaPagar;
 import br.com.drerp.financeiro.model.transferencia.Departamento;
 import br.com.drerp.financeiro.model.transferencia.Salario;
 import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;

@@ -49,6 +49,10 @@ public class RequisicaoTransferenciaBean {
 		return edit();
 	}
 	
+	public String view(){
+		return "view";
+	}
+	
 	public String edit(){
 		return "edit";
 	}

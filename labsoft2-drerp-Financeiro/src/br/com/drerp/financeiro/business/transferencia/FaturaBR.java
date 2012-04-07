@@ -13,4 +13,5 @@ public class FaturaBR extends GenericBR<FaturaDAOImpl, Fatura> {
 			Long dataFinal){
 		return super.dao.listarFaturas(plano, dataInicial, dataFinal);
 	}
+	
 }

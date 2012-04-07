@@ -10,8 +10,8 @@ import org.primefaces.model.DualListModel;
 
 import br.com.drerp.financeiro.business.planosaude.GuiaBR;
 import br.com.drerp.financeiro.business.transferencia.FaturaBR;
-import br.com.drerp.financeiro.model.planosaude.Guia;
 import br.com.drerp.financeiro.model.transferencia.Fatura;
+import br.com.drerp.financeiro.model.transferencia.Guia;
 
 @ManagedBean(name="guiaBean")
 @RequestScoped

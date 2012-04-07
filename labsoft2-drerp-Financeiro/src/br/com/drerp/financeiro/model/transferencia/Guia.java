@@ -1,4 +1,4 @@
-package br.com.drerp.financeiro.model.planosaude;
+package br.com.drerp.financeiro.model.transferencia;
 
 import java.util.Date;
 import java.util.List;
@@ -11,8 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import br.com.drerp.financeiro.model.GenericModel;
-import br.com.drerp.financeiro.model.transferencia.Fatura;
-import br.com.drerp.financeiro.model.transferencia.Pagador;
+import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 
 @Entity
 @Table(name="FIN_GUIA")

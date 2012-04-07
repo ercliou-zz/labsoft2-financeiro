@@ -1,4 +1,4 @@
-package br.com.drerp.financeiro.model.planosaude;
+package br.com.drerp.financeiro.model.transferencia;
 
 import java.util.List;
 
@@ -8,7 +8,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.drerp.financeiro.model.GenericModel;
-import br.com.drerp.financeiro.model.transferencia.Fatura;
 
 @Entity
 @Table(name="FIN_GLOSA")

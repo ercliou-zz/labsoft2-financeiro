@@ -10,10 +10,8 @@ import javax.persistence.Table;
 @Table(name="FIN_CONTARECEBER")
 public class ContaReceber extends Transferencia implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2306774825117902576L;
+	
 	@OneToOne
 	private NotaFiscal notaFiscal;
 
