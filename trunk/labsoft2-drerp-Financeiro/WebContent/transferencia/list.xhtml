@@ -1,47 +1,71 @@
-<ui:composition template="../index.xhtml"
+<ui:composition template="../index/index.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
-    	LISTA
-		<h:panelGrid columns="2" cellpadding="10">
+		<p:fieldset legend="Lista de Contas a Pagar">
 			<h:form>
-				<h:dataTable value="#{planoSaudeBean.planos}" var="planoSaude"
-					rules="rows">
-					<h:column>
-						<f:facet name="header"></f:facet>
-						<h:outputText value="#{planoSaude.nome}"></h:outputText>
-					</h:column>
-					<h:column>
-						<f:facet name="header"></f:facet>
-						<h:commandLink action="#{planoSaudeBean.view}">Vizualizar
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
-						</h:commandLink>
-					</h:column>
-					<h:column>
-						<f:facet name="header"></f:facet>
-						<h:commandLink action="#{planoSaudeBean.edit}">Editar
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
-						</h:commandLink>
-					</h:column>
-					<h:column>
-						<f:facet name="header"></f:facet>
-						<h:commandLink onclick="return confirm('Tem certeza que deseja remover este plano de saúde?');" onaction="#{planoSaudeBean.delete}">Excluir
-											<f:setPropertyActionListener target="#{planoSaudeBean.plano}"
-								value="#{planoSaude}" />
-						</h:commandLink>
-					</h:column>
+				<p:dataTable value="#{requisicaoTransferenciaBean.salarios}" var="salario"
+					paginator="true" rows="4">
 
-				</h:dataTable>
+					<f:facet name="header">  
+			            Requisições de Salários
+			        </f:facet> 
 
-				<h:commandLink action="#{planoSaudeBean.create}">
-					Novo
-				</h:commandLink>
+					<p:column headerText="Beneficiario">
+						<h:outputText value="#{salario.beneficiario.nome}"></h:outputText>
+					</p:column>
+					
+					<p:column headerText="Data de Requisição">
+						<h:outputText value="#{salario.dataRequisicao}"></h:outputText>
+					</p:column>
+					
+					<p:column headerText="Data Limite">
+						<h:outputText value="#{salario.dataLimite}"></h:outputText>
+					</p:column>
+					
+
+					<p:column>
+						<h:commandLink style="padding:3px" action="#{requisicaoTransferenciaBean.view}" value="Vizualizar">
+								<f:setPropertyActionListener target="#{requisicaoTransferenciaBean.transferencia}" value="#{transferencia}" />
+							</h:commandLink>
+					</p:column>
+
+				</p:dataTable>
+				
+				<p:dataTable value="#{requisicaoTransferenciaBean.contas}" var="conta"
+					paginator="true" rows="4">
+
+					<f:facet name="header">  
+			            Requisições de Contas Gerais  
+			        </f:facet> 
+
+					<p:column headerText="Beneficiario">
+						<h:outputText value="#{conta.beneficiario.nome}"></h:outputText>
+					</p:column>
+					
+					<p:column headerText="Data de Requisição">
+						<h:outputText value="#{conta.dataRequisicao}"></h:outputText>
+					</p:column>
+					
+					<p:column headerText="Data Limite">
+						<h:outputText value="#{conta.dataLimite}"></h:outputText>
+					</p:column>
+					
+					<p:column>
+						<h:commandLink style="padding:3px" action="#{requisicaoTransferenciaBean.view}" value="Vizualizar">
+								<f:setPropertyActionListener target="#{requisicaoTransferenciaBean.transferencia}" value="#{transferencia}" />
+							</h:commandLink>
+					</p:column>
+
+				</p:dataTable>
+				
+				<h:commandButton action="#{requisicaoTransferenciaBean.create}" value="Requisição de Pagamento" />
+
 			</h:form>
-		</h:panelGrid>
+		</p:fieldset>
 	</ui:define>
 </ui:composition>

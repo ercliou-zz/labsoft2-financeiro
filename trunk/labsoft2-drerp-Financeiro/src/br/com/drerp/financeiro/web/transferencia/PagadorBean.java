@@ -2,9 +2,14 @@ package br.com.drerp.financeiro.web.transferencia;
 
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 import br.com.drerp.financeiro.business.transferencia.PagadorBR;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 
+@ManagedBean(name = "pagadorBean")
+@RequestScoped
 public class PagadorBean {
 	private Pagador pagador;
 	private PagadorBR pagadorBR;
