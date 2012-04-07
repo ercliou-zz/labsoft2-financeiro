@@ -1,24 +1,53 @@
-<ui:composition template="../index.xhtml"
+<ui:composition template="../index/index.xhtml"
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
-		EDIÇÃO
-		<h:panelGrid columns="2" cellpadding="10">
-			<h:form>
-				<table>
-					<tr>
-						<h:inputHidden value="#{planoSaudeBean.plano.id}" />
-						<h:outputLabel value="Nome: " for="nome" />
-						<h:inputText id="nome" label="nome"
-							value="#{planoSaudeBean.plano.nome}" />
-					</tr>
-				</table>
-				<h:commandButton action="#{planoSaudeBean.save}" class="ui-state-default ui-corner-all login_button" value="Salvar" />
-				<h:commandButton action="list.xhtml" class="ui-state-default ui-corner-all login_button" value="Cancelar" />
-			</h:form>
-		</h:panelGrid>
+
+		<h:form>
+
+			<p:fieldset legend="Requisição de Pagamento de Salário ou Conta">
+
+				<h:panelGrid columns="2" cellpadding="10">
+					
+					<h:outputLabel value="Tipo de Conta: " />
+					<h:selectOneMenu id="tipoContaPagar"
+						value="#{requisicaoTransferenciaBean.tipoContaPagar}">
+						<f:selectItem itemLabel="Geral" itemValue="CONTA" />
+						<f:selectItem itemLabel="Salário" itemValue="SALARIO" />
+					</h:selectOneMenu>
+					
+					<h:outputText value="Pagador: " />
+					<h:selectOneMenu value="#{requisicaoTransferenciaBean.pagadorSelecionado}">
+						<f:selectItem itemLabel="Selecione o Pagador" itemValue="" />
+						<c:forEach var="pagador" items="#{requisicaoTransferenciaBean.pagadores}">
+							<f:selectItem itemLabel="#{pagador.nome}" itemValue="#{pagador.id}" />
+						</c:forEach>
+					</h:selectOneMenu>
+					
+					<h:outputText value="Procedimento: " />
+					<h:selectOneMenu value="#{requisicaoTransferenciaBean.beneficiarioSelecionado}">
+						<f:selectItem itemLabel="Selecione o Beneficiário" itemValue="" />
+						<c:forEach var="beneficiario" items="#{requisicaoTransferenciaBean.beneficiarios}">
+							<f:selectItem itemLabel="#{beneficiario.nome}" itemValue="#{beneficiario.id}" />
+						</c:forEach>
+					</h:selectOneMenu>
+					
+					<h:outputLabel value="Valor: " />
+					<h:inputText value="#{requisicaoTransferenciaBean.transferencia.valor}" />
+					
+					<h:outputLabel value="Data Limite: " />
+					<p:calendar value="#{requisicaoTransferenciaBean.dataLimite}" />
+					
+					<h:commandButton action="#{requisicaoTransferenciaBean.save}" value="Salvar" />
+					<h:commandButton action="list.xhtml" value="Cancelar" />
+					
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
 	</ui:define>
 </ui:composition>

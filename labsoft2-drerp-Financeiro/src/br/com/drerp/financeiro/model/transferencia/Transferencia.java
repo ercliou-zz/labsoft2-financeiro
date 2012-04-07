@@ -3,6 +3,7 @@ package br.com.drerp.financeiro.model.transferencia;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -14,9 +15,11 @@ import br.com.drerp.financeiro.model.GenericModel;
 public class Transferencia extends GenericModel {
 
 	@OneToOne
+	@JoinColumn(name="beneficiario_fk")
 	private Beneficiario beneficiario;
 	
 	@OneToOne
+	@JoinColumn(name="pagador_fk")
 	private Pagador pagador;
 	
 	private BigDecimal valor;
