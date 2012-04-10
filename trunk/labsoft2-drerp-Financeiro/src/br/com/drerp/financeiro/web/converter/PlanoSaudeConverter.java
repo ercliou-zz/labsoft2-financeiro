@@ -6,7 +6,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
-import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 
 @FacesConverter("planoSaudeConverter")
 public class PlanoSaudeConverter implements Converter {
