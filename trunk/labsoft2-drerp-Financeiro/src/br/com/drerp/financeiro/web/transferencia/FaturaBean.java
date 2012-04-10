@@ -13,13 +13,16 @@ import br.com.drerp.financeiro.api.FinanceiroFacade;
 import br.com.drerp.financeiro.api.FinanceiroFacadeImpl;
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
 import br.com.drerp.financeiro.business.procedimento.ProcedimentoBR;
+import br.com.drerp.financeiro.business.transferencia.ContaReceberBR;
 import br.com.drerp.financeiro.business.transferencia.FaturaBR;
 import br.com.drerp.financeiro.business.transferencia.PagadorBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
+import br.com.drerp.financeiro.model.transferencia.ContaReceber;
 import br.com.drerp.financeiro.model.transferencia.Fatura;
 import br.com.drerp.financeiro.model.transferencia.ItemFatura;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
+import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
 import br.com.drerp.financeiro.util.FinanceiroConstants;
 
 @ManagedBean(name = "faturaBean")
@@ -40,6 +43,8 @@ public class FaturaBean {
 	private DualListModel<Procedimento> procedimentos;
 	private ProcedimentoBR procedimentoBR;
 	
+	private ContaReceberBR contaReceberBR;
+	
 	private FinanceiroFacade facade;
 
 	public FaturaBean() {
@@ -48,6 +53,7 @@ public class FaturaBean {
 		this.pagadorBR = new PagadorBR();
 		this.procedimentoBR = new ProcedimentoBR();
 		this.planoSaudeBR = new PlanoSaudeBR();
+		this.contaReceberBR = new ContaReceberBR();
 		this.facade = new FinanceiroFacadeImpl();
 		
 		List<Procedimento> source = this.procedimentoBR.list();
@@ -75,7 +81,8 @@ public class FaturaBean {
 	public String save() {
 		this.fatura.setDataMS((new Date()).getTime());
 		this.fatura.setPaga(false);
-		this.fatura.setPagador(this.pagadorBR.getById(pagadorSelecionado));
+		Pagador pagador = this.pagadorBR.getById(pagadorSelecionado);
+		this.fatura.setPagador(pagador);
 		this.fatura.setPlanoSaude(this.planoSaudeBR.getById(planoSelecionado));
 		List<Procedimento> procedimentosSelecionados = new ArrayList<Procedimento>();
 		List<ItemFatura> itens = new ArrayList<ItemFatura>();
@@ -98,10 +105,19 @@ public class FaturaBean {
 		
 		// Para guias e contas a receber:
 		if(this.fatura.getPlanoSaude().getNome().equals(FinanceiroConstants.PLANO_PARTICULAR)){
-			// TODO GERAR BOLETO e NOTA FISCAL
+			ContaReceber conta = new ContaReceber();
+			conta.setPagador(pagador);
+			conta.setDataRequisicaoMilis((new Date()).getTime());
+			//Limite de pagamento de 60dias corridos
+			conta.setDataLimiteMilis((new Date()).getTime() + 60*24*60*60*1000);
+			conta.setStatus(StatusTransferencia.PENDENTE);
+			conta.setValor(fatura.getValor());
+			this.contaReceberBR.save(conta);
+			
 		}
 		else{
-			// TODO GERAR ALGUMA COISA?
+			//ContaReceber conta;
+			//conta.setBeneficiario(beneficiario)
 		}
 		return list();
 	}

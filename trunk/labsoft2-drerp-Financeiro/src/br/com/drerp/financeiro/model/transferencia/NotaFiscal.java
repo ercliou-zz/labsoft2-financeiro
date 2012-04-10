@@ -15,9 +15,6 @@ import br.com.drerp.financeiro.model.GenericModel;
 @Table(name = "FIN_NOTAFISCAL")
 public class NotaFiscal extends GenericModel implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2949266713763971487L;
 
 	@OneToOne

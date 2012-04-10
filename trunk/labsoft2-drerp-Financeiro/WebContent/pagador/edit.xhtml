@@ -21,6 +21,18 @@
 					
 					<h:outputLabel value="Info Bancária: " />
 					<h:inputText value="#{pagadorBean.pagador.infoBancaria}" />
+					
+					<h:outputLabel value="Logradouro: " />
+					<h:inputText value="#{pagadorBean.pagador.endereco.rua}" />
+					
+					<h:outputLabel value="CEP: " />
+					<h:inputText value="#{pagadorBean.pagador.endereco.cep}" />
+					
+					<h:outputLabel value="Cidade: " />
+					<h:inputText value="#{pagadorBean.pagador.endereco.cidade}" />
+					
+					<h:outputLabel value="Estado: " />
+					<h:inputText value="#{pagadorBean.pagador.endereco.estado}" />
 
 					<h:commandButton action="#{pagadorBean.save}" value="Salvar" />
 					<h:commandButton action="list.xhtml" value="Cancelar" />

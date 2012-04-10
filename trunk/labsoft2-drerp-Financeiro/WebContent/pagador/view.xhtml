@@ -20,6 +20,18 @@
 					
 					<h:outputLabel value="Info Bancária: " />
 					<h:outputText value="#{pagadorBean.pagador.infoBancaria}" />
+					
+					<h:outputLabel value="Logradouro: " />
+					<h:outputText value="#{pagadorBean.pagador.endereco.rua}" />
+					
+					<h:outputLabel value="CEP: " />
+					<h:outputText value="#{pagadorBean.pagador.endereco.cep}" />
+					
+					<h:outputLabel value="Cidade: " />
+					<h:outputText value="#{pagadorBean.pagador.endereco.cidade}" />
+					
+					<h:outputLabel value="Estado: " />
+					<h:outputText value="#{pagadorBean.pagador.endereco.estado}" />
 
 					<h:commandButton action="list.xhtml" value="Voltar" />
 				</h:panelGrid>

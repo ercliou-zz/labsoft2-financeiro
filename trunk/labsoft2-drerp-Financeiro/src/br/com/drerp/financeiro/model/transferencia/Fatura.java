@@ -2,9 +2,11 @@ package br.com.drerp.financeiro.model.transferencia;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -80,9 +82,14 @@ public class Fatura extends GenericModel{
 	public void setDataMS(Long dataMS) {
 		this.dataMS = dataMS;
 	}
-	public String getPlanoData(){
+	
+	public String getDataBoleto(Integer diasCorridos){
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		return this.planoSaude.getNome() + ", " + format.format(new Date(dataMS));
+		return format.format(new Date(dataMS + diasCorridos*24*60*60*1000));
+	}
+	
+	public String getDataBoleto(){
+		return getDataBoleto(0);
 	}
 	
 	public Boolean getPaga() {
@@ -90,6 +97,17 @@ public class Fatura extends GenericModel{
 	}
 	public void setPaga(Boolean paga) {
 		this.paga = paga;
+	}
+	
+	public String getValorBoleto() {
+		if (valor != null) {
+			DecimalFormat formatter = new DecimalFormat();
+			formatter.setMaximumFractionDigits(2);
+			formatter.setDecimalSeparatorAlwaysShown(true);
+			formatter.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(new Locale("pt","BR")));
+			return formatter.format(valor);
+		}
+		return "ERRO - Indefinido";
 	}
 	
 }
