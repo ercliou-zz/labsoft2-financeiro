@@ -20,6 +20,10 @@
 					<p:column headerText="Pagador">
 						<h:outputText value="#{fatura.pagador.nome}"></h:outputText>
 					</p:column>
+					
+					<p:column headerText="Plano de Saúde">
+						<h:outputText value="#{fatura.planoSaude.nome}"></h:outputText>
+					</p:column>
 
 					<p:column headerText="Data">
 						<h:outputText value="#{fatura.data}"></h:outputText>
@@ -35,9 +39,18 @@
 							<f:setPropertyActionListener target="#{faturaBean.fatura}"
 								value="#{fatura}" />
 						</h:commandLink>
-						<h:commandLink style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{faturaBean.delete}"
-							value="Excluir">
+						<h:commandLink style="padding:3px"
+							onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;"
+							action="#{faturaBean.delete}" value="Excluir">
 							<f:setPropertyActionListener target="#{faturaBean.fatura}"
+								value="#{fatura}" />
+						</h:commandLink>
+					</p:column>
+
+					<p:column>
+						<h:commandLink  rendered="#{fatura.planoSaude.nome=='Particular'}" style="padding:3px"
+							action="#{boletoBean.gerarBoleto}" value="Gerar Boleto">
+							<f:setPropertyActionListener target="#{boletoBean.fatura}"
 								value="#{fatura}" />
 						</h:commandLink>
 					</p:column>

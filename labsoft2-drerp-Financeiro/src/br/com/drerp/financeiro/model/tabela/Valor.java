@@ -11,43 +11,48 @@ import javax.persistence.Table;
 import br.com.drerp.financeiro.model.GenericModel;
 
 @Entity
-@Table(name="FIN_VALOR")
-public class Valor extends GenericModel{
-	
+@Table(name = "FIN_VALOR")
+public class Valor extends GenericModel {
+
 	@OneToOne
-	@JoinColumn(name="itemTabela_fk")
+	@JoinColumn(name = "itemTabela_fk")
 	private ItemTabela itemTabela;
-	
+
 	@OneToOne
-	@JoinColumn(name="coluna_fk")
+	@JoinColumn(name = "coluna_fk")
 	private Coluna coluna;
-	
-	
+
 	private BigDecimal valor;
-	
+
 	public ItemTabela getItemTabela() {
 		return itemTabela;
 	}
+
 	public void setItemTabela(ItemTabela itemTabela) {
 		this.itemTabela = itemTabela;
 	}
+
 	public Coluna getColuna() {
 		return coluna;
 	}
+
 	public void setColuna(Coluna coluna) {
 		this.coluna = coluna;
 	}
+
 	public BigDecimal getValor() {
 		return valor;
 	}
-	public String getValorMoeda(){
-		if(valor != null){
-		DecimalFormat formatter = new DecimalFormat();
-		formatter.setMaximumFractionDigits(2);
-		return "R$ " + formatter.format(valor);
+
+	public String getValorMoeda() {
+		if (valor != null) {
+			DecimalFormat formatter = new DecimalFormat();
+			formatter.setMaximumFractionDigits(2);
+			return "R$ " + formatter.format(valor);
 		}
 		return "Indefinido";
 	}
+
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
