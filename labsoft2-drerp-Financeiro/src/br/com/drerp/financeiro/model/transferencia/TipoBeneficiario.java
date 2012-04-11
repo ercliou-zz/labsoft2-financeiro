@@ -1,5 +1,7 @@
 package br.com.drerp.financeiro.model.transferencia;
 
-public enum TipoBeneficiario {
+import java.io.Serializable;
+
+public enum TipoBeneficiario implements Serializable{
 	EMPRESA, FUNCIONARIO
 }
