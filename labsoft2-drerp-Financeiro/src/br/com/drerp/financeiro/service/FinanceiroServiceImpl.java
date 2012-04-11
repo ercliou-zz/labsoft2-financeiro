@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
 import br.com.drerp.financeiro.business.procedimento.ProcedimentoBR;
-import br.com.drerp.financeiro.business.transferencia.PagadorBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.transferencia.Beneficiario;
@@ -14,9 +13,6 @@ import br.com.drerp.financeiro.model.transferencia.NotaFiscal;
 
 public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2683423957843060597L;
 
 	@Override
@@ -25,7 +21,7 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		ContaPagar contaPagar = new ContaPagar();
 		contaPagar.setBeneficiario(empresa);
 		
-		PagadorBR pagadorBR = new PagadorBR();
+		//PagadorBR pagadorBR = new PagadorBR();
 		contaPagar.setPagador(null);
 		return Boolean.TRUE;
 	}

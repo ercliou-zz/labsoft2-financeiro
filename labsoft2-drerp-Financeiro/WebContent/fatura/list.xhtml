@@ -11,10 +11,10 @@
 			<h:form>
 				<p:dataTable value="#{faturaBean.faturas}" var="fatura"
 					paginator="true" rows="8">
-
+			#{fatura.paga == 'false'}
 					<p:column headerText="Estado">
-						<c:if test="#{fatura.paga}">Paga</c:if>
-						<c:if test="#{!fatura.paga}">Pendente</c:if>
+						<h:outputText rendered="#{fatura.paga}" value="Paga"/>
+						<h:outputText rendered="#{!fatura.paga}" value="Pendente"/>
 					</p:column>
 
 					<p:column headerText="Pagador">

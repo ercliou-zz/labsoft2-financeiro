@@ -112,6 +112,9 @@ public class FaturaBean {
 			conta.setDataLimiteMilis((new Date()).getTime() + 60*24*60*60*1000);
 			conta.setStatus(StatusTransferencia.PENDENTE);
 			conta.setValor(fatura.getValor());
+			List<Fatura> fats = new ArrayList<Fatura>();
+			fats.add(fatura);
+			conta.setFaturas(fats);
 			this.contaReceberBR.save(conta);
 			
 		}
