@@ -32,26 +32,6 @@ public class TransferenciaOutBean implements Serializable{
 		salarioBR = new SalarioBR();
 		contaPagar = new ContaPagar();
 	}
-
-//	public String create(){
-//		requisicaoTransferencia = new RequisicaoTransferencia();
-//		return "requisicaoTransferenciaNovo";
-//	}
-//	
-	
-//	public String save(){
-//		contaPagarBR.save(contaPagar);
-//		return "RequisicaoTransferenciaLista";
-//	}
-	
-//	public String alter(){
-//		contaPagar = new ContaPagar();
-//		return "requisicaoTransferenciaNovo";
-//	}
-	
-	public String listarAprovadas(){
-		return "requisicaoAprovadaList";
-	}
 	
 	public String realizarTransferencia(){
 		// falta umas condicoes aquiiii !! verificar o status antes!!

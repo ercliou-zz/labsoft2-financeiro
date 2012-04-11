@@ -8,21 +8,17 @@
 
 	<ui:define name="content">
 
-		<p:dataTable value="#{transferenciaOutBean.contaPagarList}"
+		<p:dataTable value="#{transferenciaInBean.contaReceberList}"
 			var="requisicao" rules="rows">
-			<f:facet name="header">Lista de Requisições de Contas à Pagar</f:facet>
+			<f:facet name="header">Lista de Requisições de Contas a Receber</f:facet>
 
 			<p:column>
-				<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{requisicao.id}"></h:outputText>
-			</p:column>
-			<p:column>
 				<f:facet name="header">Beneficiario</f:facet>
-					#{requisicao.beneficiario.infoBancaria}
+					#{requisicao.beneficiario.nome}
 			</p:column>
 			<p:column>
 				<f:facet name="header">Pagador</f:facet>
-					#{requisicao.pagador.infoBancaria}
+					#{requisicao.pagador.nome}
 			</p:column>
 			<p:column>
 				<f:facet name="header">Data Requisição</f:facet>
@@ -45,9 +41,9 @@
 					<f:facet name="header">Valor da Transferência Realizada</f:facet>
 					<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
 						<h:commandLink
-							action="#{transferenciaOutBean.realizarTransferencia}">Realizar
+							action="#{transferenciaInBean.lancarPagamento}">Lançar Pagamento
 						<f:setPropertyActionListener
-								target="#{transferenciaOutBean.contaPagar}"
+								target="#{transferenciaInBean.contaReceber}"
 								value="#{requisicao}" />
 						</h:commandLink>
 					</h:panelGroup>
@@ -56,9 +52,9 @@
 			<p:column>
 				<h:form>
 					<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
-						<h:commandLink action="#{transferenciaOutBean.delete}">Deletar
+						<h:commandLink action="#{transferenciaInBean.delete}">Deletar
 					<f:setPropertyActionListener
-								target="#{transferenciaOutBean.contaPagar}"
+								target="#{transferenciaInBean.contaReceber}"
 								value="#{requisicao}" />
 						</h:commandLink>
 					</h:panelGroup>
@@ -67,9 +63,9 @@
 			<p:column>
 				<h:form>
 					<h:panelGroup rendered="#{requisicao.status == 'PENDENTE'}">
-						<h:commandLink action="#{transferenciaOutBean.registrarErro}">Erro
+						<h:commandLink action="#{transferenciaInBean.registrarErro}">Erro
 					<f:setPropertyActionListener
-								target="#{transferenciaOutBean.contaPagar}"
+								target="#{transferenciaInBean.contaReceber}"
 								value="#{requisicao}" />
 						</h:commandLink>
 					</h:panelGroup>

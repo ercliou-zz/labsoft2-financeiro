@@ -13,16 +13,12 @@
 			<f:facet name="header">Lista de Requisições de Contas à Pagar</f:facet>
 
 			<p:column>
-				<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{requisicao.id}"></h:outputText>
-			</p:column>
-			<p:column>
 				<f:facet name="header">Beneficiario</f:facet>
-					#{requisicao.beneficiario.infoBancaria}
+					#{requisicao.beneficiario.nome}
 			</p:column>
 			<p:column>
 				<f:facet name="header">Pagador</f:facet>
-					#{requisicao.pagador.infoBancaria}
+					#{requisicao.pagador.nome}
 			</p:column>
 			<p:column>
 				<f:facet name="header">Data Requisição</f:facet>
