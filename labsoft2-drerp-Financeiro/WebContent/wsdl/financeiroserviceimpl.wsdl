@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="FinanceiroServiceImplService" targetNamespace="http://service.financeiro.drerp.com.br/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.financeiro.drerp.com.br/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+<import namespace="http://service.financeiro.drerp.com.br/" schemaLocation="financeiroserviceimpl_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="pagarConsultaPlanoSaude">
+    <wsdl:part name="parameters" element="tns:pagarConsultaPlanoSaude">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarPlanosSaude">
+    <wsdl:part name="parameters" element="tns:listarPlanosSaude">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarProdutoResponse">
+    <wsdl:part name="parameters" element="tns:pagarProdutoResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConsultaParticularResponse">
+    <wsdl:part name="parameters" element="tns:pagarConsultaParticularResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConsultaPlanoSaudeResponse">
+    <wsdl:part name="parameters" element="tns:pagarConsultaPlanoSaudeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarPlanosSaudeResponse">
+    <wsdl:part name="parameters" element="tns:listarPlanosSaudeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarProduto">
+    <wsdl:part name="parameters" element="tns:pagarProduto">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarProcedimentosResponse">
+    <wsdl:part name="parameters" element="tns:listarProcedimentosResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarSalarioResponse">
+    <wsdl:part name="parameters" element="tns:pagarSalarioResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConsultaParticular">
+    <wsdl:part name="parameters" element="tns:pagarConsultaParticular">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarProcedimentos">
+    <wsdl:part name="parameters" element="tns:listarProcedimentos">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarSalario">
+    <wsdl:part name="parameters" element="tns:pagarSalario">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="FinanceiroServiceImpl">
+    <wsdl:operation name="listarPlanosSaude">
+      <wsdl:input name="listarPlanosSaude" message="tns:listarPlanosSaude">
+    </wsdl:input>
+      <wsdl:output name="listarPlanosSaudeResponse" message="tns:listarPlanosSaudeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarProduto">
+      <wsdl:input name="pagarProduto" message="tns:pagarProduto">
+    </wsdl:input>
+      <wsdl:output name="pagarProdutoResponse" message="tns:pagarProdutoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConsultaPlanoSaude">
+      <wsdl:input name="pagarConsultaPlanoSaude" message="tns:pagarConsultaPlanoSaude">
+    </wsdl:input>
+      <wsdl:output name="pagarConsultaPlanoSaudeResponse" message="tns:pagarConsultaPlanoSaudeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarSalario">
+      <wsdl:input name="pagarSalario" message="tns:pagarSalario">
+    </wsdl:input>
+      <wsdl:output name="pagarSalarioResponse" message="tns:pagarSalarioResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConsultaParticular">
+      <wsdl:input name="pagarConsultaParticular" message="tns:pagarConsultaParticular">
+    </wsdl:input>
+      <wsdl:output name="pagarConsultaParticularResponse" message="tns:pagarConsultaParticularResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarProcedimentos">
+      <wsdl:input name="listarProcedimentos" message="tns:listarProcedimentos">
+    </wsdl:input>
+      <wsdl:output name="listarProcedimentosResponse" message="tns:listarProcedimentosResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FinanceiroServiceImplServiceSoapBinding" type="tns:FinanceiroServiceImpl">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listarPlanosSaude">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarPlanosSaude">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarPlanosSaudeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarProduto">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="pagarProduto">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pagarProdutoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConsultaPlanoSaude">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="pagarConsultaPlanoSaude">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pagarConsultaPlanoSaudeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarSalario">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="pagarSalario">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pagarSalarioResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="pagarConsultaParticular">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="pagarConsultaParticular">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="pagarConsultaParticularResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarProcedimentos">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarProcedimentos">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarProcedimentosResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FinanceiroServiceImplService">
+    <wsdl:port name="FinanceiroServiceImplPort" binding="tns:FinanceiroServiceImplServiceSoapBinding">
+      <soap:address location="http://localhost:8080/Financeiro2/services/FinanceiroServiceImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
