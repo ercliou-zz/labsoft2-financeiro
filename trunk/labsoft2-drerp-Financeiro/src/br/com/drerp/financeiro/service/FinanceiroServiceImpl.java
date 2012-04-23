@@ -2,62 +2,217 @@ package br.com.drerp.financeiro.service;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+
+import javax.jws.WebService;
 
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
 import br.com.drerp.financeiro.business.procedimento.ProcedimentoBR;
+import br.com.drerp.financeiro.business.tabela.TabelaBR;
+import br.com.drerp.financeiro.business.transferencia.BeneficiarioBR;
+import br.com.drerp.financeiro.business.transferencia.ContaPagarBR;
+import br.com.drerp.financeiro.business.transferencia.ContaReceberBR;
+import br.com.drerp.financeiro.business.transferencia.PagadorBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
 import br.com.drerp.financeiro.model.transferencia.Beneficiario;
 import br.com.drerp.financeiro.model.transferencia.ContaPagar;
-import br.com.drerp.financeiro.model.transferencia.NotaFiscal;
+import br.com.drerp.financeiro.model.transferencia.ContaReceber;
+import br.com.drerp.financeiro.model.transferencia.Departamento;
+import br.com.drerp.financeiro.model.transferencia.Pagador;
+import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
 
+@WebService(targetNamespace = "http://service.financeiro.drerp.com.br/", portName = "FinanceiroServiceImplPort", serviceName = "FinanceiroServiceImplService")
 public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 
 	private static final long serialVersionUID = 2683423957843060597L;
 
-	@Override
-	public Boolean pagarProduto(BigDecimal valor, Beneficiario empresa) {
+	public Beneficiario[] listarEmpresas() {
+		BeneficiarioBR beneficiarioBR = new BeneficiarioBR();
+		List<Beneficiario> empresas = beneficiarioBR.listarEmpresas();
+		return empresas.toArray(new Beneficiario[empresas.size()]);
+	}
 
-		ContaPagar contaPagar = new ContaPagar();
-		contaPagar.setBeneficiario(empresa);
-		
-		//PagadorBR pagadorBR = new PagadorBR();
-		contaPagar.setPagador(null);
+	public Boolean registrarEmpresa(Beneficiario empresa) {
+		BeneficiarioBR beneficiarioBR = new BeneficiarioBR();
+		try {
+			beneficiarioBR.salvar(empresa);
+		} catch (Exception e) {
+			return Boolean.FALSE;
+		}
 		return Boolean.TRUE;
 	}
 
-	@Override
-	public BigDecimal pagarSalario(BigDecimal valor, Beneficiario funcionario) {
-		// TODO Auto-generated method stub
-		return new BigDecimal(10000);
+	public Boolean pagarProduto(BigDecimal valor, Beneficiario empresa) {
+		long now = System.currentTimeMillis();
+		ContaPagar conta = new ContaPagar();
+		conta.setDataRequisicaoMilis(now);
+		conta.setDataRealizacaoMilis(now + 10);
+		conta.setDataLimiteMilis(now + 300000);
+
+		ContaPagarBR contaBR = new ContaPagarBR();
+		BeneficiarioBR beneficiarioBR = new BeneficiarioBR();
+		Beneficiario beneficiario = beneficiarioBR.salvar(empresa);
+		conta.setBeneficiario(beneficiario);
+
+		PagadorBR pagadorBR = new PagadorBR();
+		Pagador clinica = pagadorBR.getClinica();
+
+		conta.setPagador(clinica);
+		conta.setDepartamento(Departamento.ALMOXARIFADO);
+
+		try {
+			contaBR.save(conta);
+		} catch (Exception e) {
+			return Boolean.FALSE;
+		}
+
+		return Boolean.TRUE;
 	}
 
-	@Override
+	public Imposto[] pagarSalario(BigDecimal salarioBruto,
+			Beneficiario funcionario) {
+		long now = System.currentTimeMillis();
+		ContaPagar conta = new ContaPagar();
+		conta.setDataRequisicaoMilis(now);
+		conta.setDataRealizacaoMilis(now + 10);
+		conta.setDataLimiteMilis(now + 300000);
+		conta.setStatus(StatusTransferencia.PENDENTE);
+
+		ContaPagarBR contaBR = new ContaPagarBR();
+
+		Beneficiario beneficiario = new Beneficiario();
+		// beneficiario.setNome(funcionario.getNome());
+		// beneficiario.setDocumento(funcionario.getDocumento());
+		// beneficiario.setInfoBancaria(funcionario.getInfoBancaria());
+		// beneficiario.setTipoBeneficiario(funcionario.getTipoBeneficiario());
+		//
+		BeneficiarioBR beneficiarioBR = new BeneficiarioBR();
+		beneficiario = beneficiarioBR.salvar(funcionario);
+
+		conta.setBeneficiario(beneficiario);
+		conta.setValor(salarioBruto);
+		conta.setDepartamento(Departamento.RH);
+
+		PagadorBR pagadorBR = new PagadorBR();
+		Pagador clinica = pagadorBR.getClinica();
+
+		conta.setPagador(clinica);
+
+		try {
+			contaBR.save(conta);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<Imposto> impostos = Imposto.aplicaImpostos(salarioBruto
+				.doubleValue());
+		return impostos.toArray(new Imposto[impostos.size()]);
+	}
+
 	public Procedimento[] listarProcedimentos() {
-		
+
 		ProcedimentoBR procedimentoBR = new ProcedimentoBR();
-		return (Procedimento[]) procedimentoBR.list().toArray();
+		List<Procedimento> procedimentoList = procedimentoBR.list();
+		return procedimentoList.toArray(new Procedimento[procedimentoList
+				.size()]);
 	}
 
-	@Override
 	public PlanoSaude[] listarPlanosSaude() {
 
 		PlanoSaudeBR planoSaudeBR = new PlanoSaudeBR();
-		return (PlanoSaude[]) planoSaudeBR.list().toArray();
+		List<PlanoSaude> planoSaudeList = planoSaudeBR.list();
+		return planoSaudeList.toArray(new PlanoSaude[planoSaudeList.size()]);
 	}
 
-	@Override
 	public Boolean pagarConsultaPlanoSaude(PlanoSaude planoSaude,
 			Procedimento[] listaProcedimentos) {
-		// TODO Auto-generated method stub
+		long now = System.currentTimeMillis();
+		ContaReceber conta = new ContaReceber();
+		conta.setDataRequisicaoMilis(now);
+		conta.setDataRealizacaoMilis(now + 10);
+		conta.setDataLimiteMilis(now + 300000);
+		conta.setStatus(StatusTransferencia.PENDENTE);
+
+		ContaReceberBR contaBR = new ContaReceberBR();
+		PagadorBR pagadorBR = new PagadorBR();
+
+		Pagador pag = new Pagador();
+		pag.setNome(planoSaude.getNome());
+		pag.setDocumento(planoSaude.getNome());
+
+		Pagador pagador = pagadorBR.salvar(pag);
+
+		conta.setPagador(pagador);
+		BigDecimal valor = new BigDecimal(0);
+
+		TabelaBR t = new TabelaBR();
+
+		PlanoSaudeBR psBR = new PlanoSaudeBR();
+		PlanoSaude ps = psBR.getById(planoSaude.getId());
+		
+		ProcedimentoBR pBR = new ProcedimentoBR();
+		Procedimento p;
+		for (Procedimento proc : listaProcedimentos) {
+			p = pBR.getById(proc.getId());
+			valor = valor.add(t.recuperarValor(ps, p));
+		}
+		conta.setValor(valor);
+		BeneficiarioBR beneficiarioBR = new BeneficiarioBR();
+		Beneficiario clinica = beneficiarioBR.getClinica();
+
+		conta.setBeneficiario(clinica);
+
+		try {
+			contaBR.save(conta);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Boolean.FALSE;
+		}
 		return Boolean.TRUE;
 	}
 
-	@Override
-	public NotaFiscal pagarConsultaParticular(PlanoSaude planoSaude,
+	public NotaFiscal pagarConsultaParticular(Pagador paciente,
 			Procedimento[] listaProcedimentos) {
-		// TODO Auto-generated method stub
-		return new NotaFiscal();
+		long now = System.currentTimeMillis();
+		ContaReceber conta = new ContaReceber();
+		conta.setDataRequisicaoMilis(now);
+		conta.setDataRealizacaoMilis(now + 10);
+		conta.setDataLimiteMilis(now + 300000);
+		conta.setStatus(StatusTransferencia.PENDENTE);
+
+		ContaReceberBR contaBR = new ContaReceberBR();
+		PagadorBR pagadorBR = new PagadorBR();
+
+		Pagador pagador = pagadorBR.salvar(paciente);
+
+		conta.setPagador(pagador);
+		BigDecimal valor = new BigDecimal(0);
+
+		PlanoSaudeBR psBR = new PlanoSaudeBR();
+		PlanoSaude ps = psBR.getByNome("Particular");
+
+		TabelaBR t = new TabelaBR();
+
+		ProcedimentoBR pBR = new ProcedimentoBR();
+		Procedimento p;
+		for (Procedimento proc : listaProcedimentos) {
+			p = pBR.getById(proc.getId());
+			valor = valor.add(t.recuperarValor(ps, p));
+		}
+		conta.setValor(valor);
+
+		BeneficiarioBR beneficiarioBR = new BeneficiarioBR();
+		Beneficiario clinica = beneficiarioBR.getClinica();
+
+		conta.setBeneficiario(clinica);
+
+		try {
+			contaBR.lancarPagamento(conta);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		NotaFiscal nota = new NotaFiscal(valor);
+		return nota;
 	}
 
 }

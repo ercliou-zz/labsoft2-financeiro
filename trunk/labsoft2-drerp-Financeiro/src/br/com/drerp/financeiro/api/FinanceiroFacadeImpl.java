@@ -23,7 +23,6 @@ public class FinanceiroFacadeImpl implements FinanceiroFacade {
 		this.pedidoBR = new PedidoOrcamentoBR();
 	}
 
-	@Override
 	public Boolean requisitarTransferencia(Beneficiario beneficiario,
 			Pagador pagador, BigDecimal valor, Date data) {
 
@@ -42,7 +41,6 @@ public class FinanceiroFacadeImpl implements FinanceiroFacade {
 		return Boolean.TRUE;
 	}
 
-	@Override
 	public BigDecimal pedirOrcamento(Pagador pagador, List<Procedimento> procedimentos, PlanoSaude planoSaude) {
 		
 		// tratar excecao!!

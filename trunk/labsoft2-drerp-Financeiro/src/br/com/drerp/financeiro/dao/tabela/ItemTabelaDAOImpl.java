@@ -11,7 +11,6 @@ import br.com.drerp.financeiro.model.tabela.ItemTabela;
 
 public class ItemTabelaDAOImpl extends GenericDAOImpl<ItemTabela> implements ItemTabelaDAO {
 
-	@Override
 	@SuppressWarnings("unchecked")
 	public ItemTabela getByProcedimento(Procedimento procedimento) {
 		List<ItemTabela> retrieved = session.createCriteria(ItemTabela.class).add(Restrictions.eq("procedimento",procedimento)).list();

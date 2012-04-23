@@ -5,24 +5,20 @@
 <import namespace="http://service.financeiro.drerp.com.br/" schemaLocation="financeiroserviceimpl_schema1.xsd"/>
 </schema>
   </wsdl:types>
+  <wsdl:message name="registrarEmpresa">
+    <wsdl:part name="parameters" element="tns:registrarEmpresa">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="pagarConsultaPlanoSaude">
     <wsdl:part name="parameters" element="tns:pagarConsultaPlanoSaude">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="listarPlanosSaude">
-    <wsdl:part name="parameters" element="tns:listarPlanosSaude">
-    </wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="pagarProdutoResponse">
-    <wsdl:part name="parameters" element="tns:pagarProdutoResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="pagarConsultaParticularResponse">
     <wsdl:part name="parameters" element="tns:pagarConsultaParticularResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="pagarConsultaPlanoSaudeResponse">
-    <wsdl:part name="parameters" element="tns:pagarConsultaPlanoSaudeResponse">
+  <wsdl:message name="pagarProdutoResponse">
+    <wsdl:part name="parameters" element="tns:pagarProdutoResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="listarPlanosSaudeResponse">
@@ -33,16 +29,12 @@
     <wsdl:part name="parameters" element="tns:pagarProduto">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="listarProcedimentosResponse">
-    <wsdl:part name="parameters" element="tns:listarProcedimentosResponse">
-    </wsdl:part>
-  </wsdl:message>
   <wsdl:message name="pagarSalarioResponse">
     <wsdl:part name="parameters" element="tns:pagarSalarioResponse">
     </wsdl:part>
   </wsdl:message>
-  <wsdl:message name="pagarConsultaParticular">
-    <wsdl:part name="parameters" element="tns:pagarConsultaParticular">
+  <wsdl:message name="listarEmpresasResponse">
+    <wsdl:part name="parameters" element="tns:listarEmpresasResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="listarProcedimentos">
@@ -51,6 +43,30 @@
   </wsdl:message>
   <wsdl:message name="pagarSalario">
     <wsdl:part name="parameters" element="tns:pagarSalario">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarEmpresas">
+    <wsdl:part name="parameters" element="tns:listarEmpresas">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarPlanosSaude">
+    <wsdl:part name="parameters" element="tns:listarPlanosSaude">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConsultaPlanoSaudeResponse">
+    <wsdl:part name="parameters" element="tns:pagarConsultaPlanoSaudeResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listarProcedimentosResponse">
+    <wsdl:part name="parameters" element="tns:listarProcedimentosResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="pagarConsultaParticular">
+    <wsdl:part name="parameters" element="tns:pagarConsultaParticular">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="registrarEmpresaResponse">
+    <wsdl:part name="parameters" element="tns:registrarEmpresaResponse">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="FinanceiroServiceImpl">
@@ -64,6 +80,18 @@
       <wsdl:input name="pagarProduto" message="tns:pagarProduto">
     </wsdl:input>
       <wsdl:output name="pagarProdutoResponse" message="tns:pagarProdutoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarEmpresa">
+      <wsdl:input name="registrarEmpresa" message="tns:registrarEmpresa">
+    </wsdl:input>
+      <wsdl:output name="registrarEmpresaResponse" message="tns:registrarEmpresaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarEmpresas">
+      <wsdl:input name="listarEmpresas" message="tns:listarEmpresas">
+    </wsdl:input>
+      <wsdl:output name="listarEmpresasResponse" message="tns:listarEmpresasResponse">
     </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="pagarConsultaPlanoSaude">
@@ -108,6 +136,24 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="pagarProdutoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="listarEmpresas">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listarEmpresas">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listarEmpresasResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registrarEmpresa">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="registrarEmpresa">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="registrarEmpresaResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
