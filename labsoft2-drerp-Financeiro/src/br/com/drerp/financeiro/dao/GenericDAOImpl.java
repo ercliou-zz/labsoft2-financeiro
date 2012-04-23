@@ -46,8 +46,6 @@ public abstract class GenericDAOImpl <T> implements GenericDAO<T> {
 		return list;
 	}
 
-
-	@Override
 	public void merge(T entidade) {
 		session.merge(entidade);
 		session.flush();

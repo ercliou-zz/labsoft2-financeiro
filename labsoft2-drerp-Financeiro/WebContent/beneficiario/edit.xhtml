@@ -3,6 +3,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<ui:define name="content">
@@ -12,21 +13,29 @@
 			<p:fieldset legend="Edição de Beneficiários">
 
 				<h:panelGrid columns="2" cellpadding="10">
-					
+
 					<h:outputLabel value="Nome: " />
 					<h:inputText value="#{beneficiarioBean.beneficiario.nome}" />
-					
+
 					<h:outputLabel value="Documento: " />
 					<h:inputText value="#{beneficiarioBean.beneficiario.documento}" />
-					
+
 					<h:outputLabel value="Info Bancária: " />
 					<h:inputText value="#{beneficiarioBean.beneficiario.infoBancaria}" />
 
+					<h:outputLabel value="Tipo Beneficiário: " />
+					<h:selectOneMenu id="tipoBeneficiario"
+						value="#{beneficiarioBean.beneficiario.tipoBeneficiario}">
+						<f:selectItem itemLabel="Empresa" itemValue="EMPRESA" />
+						<f:selectItem itemLabel="Funcionário" itemValue="FUNCIONARIO" />
+					</h:selectOneMenu>
+
+
 					<h:commandButton action="#{beneficiarioBean.save}" value="Salvar" />
 					<h:commandButton action="list.xhtml" value="Cancelar" />
-					
+
 					<h:inputHidden value="#{beneficiarioBean.beneficiario.id}" />
-					
+
 				</h:panelGrid>
 			</p:fieldset>
 		</h:form>

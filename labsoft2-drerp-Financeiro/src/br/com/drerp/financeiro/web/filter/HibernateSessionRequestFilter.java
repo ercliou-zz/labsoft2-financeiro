@@ -18,12 +18,10 @@ public class HibernateSessionRequestFilter implements Filter{
 
 	private SessionFactory sessionFactory;
 	
-	@Override
 	public void destroy() {
 		
 	}
 
-	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
 			FilterChain filterChain) throws IOException, ServletException {
 		try{
@@ -44,7 +42,6 @@ public class HibernateSessionRequestFilter implements Filter{
 		
 	}
 
-	@Override
 	public void init(FilterConfig config) throws ServletException {
 		sessionFactory = HibernateUtil.getSessionFactory();
 	}

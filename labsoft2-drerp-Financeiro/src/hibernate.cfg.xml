@@ -3,41 +3,54 @@
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.password">root</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/financeiro-db</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-        <property name="current_session_context_class">thread</property>
-        <property name="show_sql">false</property>
-        <property name="hibernate.hbm2ddl.auto">update</property>
-        
-<!--     	<property name="hibernate.hbm2ddl.import_files">importar.sql</property> -->
-    
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.Transferencia"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.ContaPagar"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.ContaReceber"/>
-	   	<mapping class="br.com.drerp.financeiro.model.transferencia.Salario"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.Beneficiario"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.Pagador"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.Fatura"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.ItemFatura"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.Hollerith"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.Guia"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.Glosa"/>
-    	<mapping class="br.com.drerp.financeiro.model.usuario.Usuario"/>
-    	<mapping class="br.com.drerp.financeiro.model.tabela.ItemTabela"/>
-    	<mapping class="br.com.drerp.financeiro.model.tabela.Coluna"/>
-    	<mapping class="br.com.drerp.financeiro.model.tabela.Valor"/>
-    	<mapping class="br.com.drerp.financeiro.model.planosaude.PlanoSaude"/>
-    	<mapping class="br.com.drerp.financeiro.model.procedimento.Procedimento"/>
-    	<mapping class="br.com.drerp.financeiro.model.planosaude.PlanoSaudeLog"/>
-    	<mapping class="br.com.drerp.financeiro.model.orcamento.PedidoOrcamento"/>
-    	<mapping class="br.com.drerp.financeiro.model.orcamento.Orcamento"/>
-    	<mapping class="br.com.drerp.financeiro.model.transferencia.NotaFiscal"/>
-    	<mapping class="br.com.drerp.financeiro.model.tabela.ValorLog"/>
-    
-    </session-factory>
-    
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">root</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/financeiro-db</property>
+<!-- 		<property name="hibernate.connection.username">marolyas</property> -->
+<!-- 		<property name="hibernate.connection.password">marolyas-2012</property> -->
+		<!-- <property name="hibernate.connection.url">jdbc:mysql://143.107.102.24:3306/financeiro-db</property> -->
+<!-- 		<property name="hibernate.connection.url">jdbc:mysql://186.204.148.52:5575/financeiro-db</property> -->
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="current_session_context_class">thread</property>
+		<property name="show_sql">false</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<!-- <property name="hibernate.hbm2ddl.import_files">importar.sql</property> -->
+		<property name="connection.provider_class">
+			org.hibernate.connection.C3P0ConnectionProvider
+		</property>
+		<property name="hibernate.c3p0.acquire_increment">3</property>
+		<property name="hibernate.c3p0.idle_test_period">3600</property>
+		<property name="hibernate.c3p0.timeout">1800</property>
+		<property name="hibernate.c3p0.max_size">15</property>
+		<property name="hibernate.c3p0.min_size">3</property>
+		<property name="hibernate.c3p0.max_statements">0</property>
+		<property name="hibernate.c3p0.preferredTestQuery">select 1;</property>
+
+
+		<mapping class="br.com.drerp.financeiro.model.transferencia.Transferencia" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.ContaPagar" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.ContaReceber" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.Salario" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.Beneficiario" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.Pagador" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.Fatura" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.ItemFatura" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.Hollerith" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.Guia" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.Glosa" />
+		<mapping class="br.com.drerp.financeiro.model.usuario.Usuario" />
+		<mapping class="br.com.drerp.financeiro.model.tabela.ItemTabela" />
+		<mapping class="br.com.drerp.financeiro.model.tabela.Coluna" />
+		<mapping class="br.com.drerp.financeiro.model.tabela.Valor" />
+		<mapping class="br.com.drerp.financeiro.model.planosaude.PlanoSaude" />
+		<mapping class="br.com.drerp.financeiro.model.procedimento.Procedimento" />
+		<mapping class="br.com.drerp.financeiro.model.planosaude.PlanoSaudeLog" />
+		<mapping class="br.com.drerp.financeiro.model.orcamento.PedidoOrcamento" />
+		<mapping class="br.com.drerp.financeiro.model.orcamento.Orcamento" />
+		<mapping class="br.com.drerp.financeiro.model.transferencia.NotaFiscal" />
+		<mapping class="br.com.drerp.financeiro.model.tabela.ValorLog" />
+
+	</session-factory>
 </hibernate-configuration>

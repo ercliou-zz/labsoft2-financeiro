@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.financeiro.drerp.com.br/" targetNamespace="http://service.financeiro.drerp.com.br/" version="1.0">
+<?xml version="1.0" encoding="utf-8"?><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.financeiro.drerp.com.br/" elementFormDefault="unqualified" targetNamespace="http://service.financeiro.drerp.com.br/" version="1.0">
+<xs:element name="listarEmpresas" type="tns:listarEmpresas"/>
+<xs:element name="listarEmpresasResponse" type="tns:listarEmpresasResponse"/>
 <xs:element name="listarPlanosSaude" type="tns:listarPlanosSaude"/>
 <xs:element name="listarPlanosSaudeResponse" type="tns:listarPlanosSaudeResponse"/>
 <xs:element name="listarProcedimentos" type="tns:listarProcedimentos"/>
@@ -11,6 +13,8 @@
 <xs:element name="pagarProdutoResponse" type="tns:pagarProdutoResponse"/>
 <xs:element name="pagarSalario" type="tns:pagarSalario"/>
 <xs:element name="pagarSalarioResponse" type="tns:pagarSalarioResponse"/>
+<xs:element name="registrarEmpresa" type="tns:registrarEmpresa"/>
+<xs:element name="registrarEmpresaResponse" type="tns:registrarEmpresaResponse"/>
 <xs:complexType name="listarPlanosSaude">
     <xs:sequence/>
   </xs:complexType>
@@ -56,6 +60,24 @@
       <xs:element minOccurs="0" name="return" type="xs:boolean"/>
     </xs:sequence>
   </xs:complexType>
+<xs:complexType name="registrarEmpresa">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:beneficiario"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="registrarEmpresaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="listarEmpresas">
+    <xs:sequence/>
+  </xs:complexType>
+<xs:complexType name="listarEmpresasResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:beneficiario"/>
+    </xs:sequence>
+  </xs:complexType>
 <xs:complexType name="pagarConsultaPlanoSaude">
     <xs:sequence>
       <xs:element minOccurs="0" name="arg0" type="tns:planoSaude"/>
@@ -85,7 +107,13 @@
   </xs:complexType>
 <xs:complexType name="pagarSalarioResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="return" type="xs:decimal"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:imposto"/>
+    </xs:sequence>
+  </xs:complexType>
+<xs:complexType name="imposto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="aliquota" type="xs:double"/>
+      <xs:element minOccurs="0" name="nome" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="pagarConsultaParticular">
@@ -120,71 +148,10 @@
     </xs:sequence>
   </xs:complexType>
 <xs:complexType name="notaFiscal">
-    <xs:complexContent>
-      <xs:extension base="tns:genericModel">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="aliquotaIcms" type="xs:int"/>
-          <xs:element minOccurs="0" name="aliquotaIpi" type="xs:int"/>
-          <xs:element minOccurs="0" name="aliquotaIss" type="xs:int"/>
-          <xs:element minOccurs="0" name="contaReceber" type="tns:contaReceber"/>
-          <xs:element minOccurs="0" name="dataEmissao" type="xs:dateTime"/>
-          <xs:element minOccurs="0" name="icms" type="xs:decimal"/>
-          <xs:element minOccurs="0" name="ipi" type="xs:decimal"/>
-          <xs:element minOccurs="0" name="iss" type="xs:decimal"/>
-          <xs:element minOccurs="0" name="valorFinal" type="xs:decimal"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-<xs:complexType name="contaReceber">
-    <xs:complexContent>
-      <xs:extension base="tns:transferencia">
-        <xs:sequence>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="faturas" nillable="true" type="tns:fatura"/>
-          <xs:element minOccurs="0" name="notaFiscal" type="tns:notaFiscal"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-<xs:complexType name="transferencia">
-    <xs:complexContent>
-      <xs:extension base="tns:genericModel">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="beneficiario" type="tns:beneficiario"/>
-          <xs:element minOccurs="0" name="dataLimiteMilis" type="xs:long"/>
-          <xs:element minOccurs="0" name="dataRealizacaoMilis" type="xs:long"/>
-          <xs:element minOccurs="0" name="dataRequisicaoMilis" type="xs:long"/>
-          <xs:element minOccurs="0" name="pagador" type="tns:pagador"/>
-          <xs:element minOccurs="0" name="status" type="tns:statusTransferencia"/>
-          <xs:element minOccurs="0" name="valor" type="xs:decimal"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-<xs:complexType name="fatura">
-    <xs:complexContent>
-      <xs:extension base="tns:genericModel">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="dataMS" type="xs:long"/>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="itens" nillable="true" type="tns:itemFatura"/>
-          <xs:element minOccurs="0" name="paga" type="xs:boolean"/>
-          <xs:element minOccurs="0" name="pagador" type="tns:pagador"/>
-          <xs:element minOccurs="0" name="planoSaude" type="tns:planoSaude"/>
-          <xs:element minOccurs="0" name="valor" type="xs:decimal"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-<xs:complexType name="itemFatura">
-    <xs:complexContent>
-      <xs:extension base="tns:genericModel">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="fatura" type="tns:fatura"/>
-          <xs:element minOccurs="0" name="procedimento" type="tns:procedimento"/>
-          <xs:element minOccurs="0" name="valor" type="xs:decimal"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="descontos" type="xs:decimal"/>
+      <xs:element minOccurs="0" name="valor" type="xs:decimal"/>
+    </xs:sequence>
   </xs:complexType>
 <xs:complexType name="listarProcedimentos">
     <xs:sequence/>
@@ -206,13 +173,6 @@
       <xs:enumeration value="MATERIAL"/>
       <xs:enumeration value="MEDICAMENTO"/>
       <xs:enumeration value="USO_DE_EQUIPAMENTO"/>
-    </xs:restriction>
-  </xs:simpleType>
-<xs:simpleType name="statusTransferencia">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="PENDENTE"/>
-      <xs:enumeration value="EFETUADA"/>
-      <xs:enumeration value="ERRO"/>
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
