@@ -44,4 +44,12 @@ public class SalarioBR extends GenericBR<SalarioDAOImpl, Salario> {
 		}
 		return total;
 	}
+	
+	public BigDecimal getGastoByPeriodo(GregorianCalendar inicio, GregorianCalendar fim){
+		BigDecimal total = new BigDecimal(0);
+		for (Salario salario: this.dao.listByPeriodo(inicio.getTimeInMillis(), fim.getTimeInMillis())) {
+			total = total.add(salario.getValor());
+		}
+		return total;
+	}
 }

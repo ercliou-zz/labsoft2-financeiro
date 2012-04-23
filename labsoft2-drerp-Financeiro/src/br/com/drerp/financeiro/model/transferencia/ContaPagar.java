@@ -10,7 +10,6 @@ import javax.persistence.Table;
 public class ContaPagar extends Transferencia implements Serializable{
 	
 	private static final long serialVersionUID = 2207536572978139692L;
-	private Departamento departamento;
 	
 	public ContaPagar(Transferencia transferencia) {
 		this.setBeneficiario(transferencia.getBeneficiario());
@@ -24,14 +23,6 @@ public class ContaPagar extends Transferencia implements Serializable{
 	
 	public ContaPagar() {
 		super();
-	}
-
-	public Departamento getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
 	}
 
 }

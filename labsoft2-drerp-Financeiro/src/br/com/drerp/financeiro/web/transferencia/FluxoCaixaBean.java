@@ -21,9 +21,12 @@ import org.primefaces.model.chart.PieChartModel;
 
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
 import br.com.drerp.financeiro.business.transferencia.ContaPagarBR;
+import br.com.drerp.financeiro.business.transferencia.ContaReceberBR;
 import br.com.drerp.financeiro.business.transferencia.SalarioBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
+import br.com.drerp.financeiro.model.transferencia.ContaReceber;
 import br.com.drerp.financeiro.model.transferencia.Departamento;
+import br.com.drerp.financeiro.model.transferencia.Transferencia;
 import br.com.drerp.financeiro.util.TipoGrafico;
 import br.com.drerp.financeiro.util.TipoParametroGrafico;
 import br.com.drerp.financeiro.util.TipoSentidoFluxoGrafico;
@@ -65,15 +68,20 @@ public class FluxoCaixaBean implements Serializable{
 	
 	private TipoSentidoFluxoGrafico sentidoSelecionado; 
 	
+	private List<Transferencia> relatorio;
+	
 	private PlanoSaudeBR planoSaudeBR;
 	
 	private ContaPagarBR contaPagarBR;
+	
+	private ContaReceberBR contaReceberBR;
 	
 	private SalarioBR salarioBR;
 	
 	public FluxoCaixaBean() {
 		planoSaudeBR = new PlanoSaudeBR();
 		contaPagarBR = new ContaPagarBR();
+		contaReceberBR = new ContaReceberBR();
 		salarioBR = new SalarioBR();
 		
 		planosList = planoSaudeBR.list();
@@ -86,9 +94,13 @@ public class FluxoCaixaBean implements Serializable{
     	categoryModel = new CartesianChartModel();
     	pieModel = new PieChartModel();
     	maxEixoY= 0;
+    	
+    	relatorio = new ArrayList<Transferencia>();
 	}
 	
 	public String gerarGrafico(){
+		
+		gerarRelatorio();
     	
     	switch (tipoGrafico) {
 		case BARRA:
@@ -110,30 +122,67 @@ public class FluxoCaixaBean implements Serializable{
     	return null;
     }
 	
+
+	private void gerarRelatorio(){
+		
+		
+		
+		List<GregorianCalendar> listaDatas = getListaDatas();
+		GregorianCalendar inicio = listaDatas.get(0);
+		GregorianCalendar fim = listaDatas.get(listaDatas.size()-1);
+		
+		switch (sentidoSelecionado) {
+		case IN:
+			for (ContaReceber conta : contaReceberBR.listReceitaByPlanos(planosDual.getTarget(), inicio, fim)) {
+				relatorio.add(conta);
+			}
+			break;
+		case OUT:
+			for(Transferencia transf: contaPagarBR.listTransferenciaOutByDptos(dptosDual.getTarget(), inicio, fim)){
+				relatorio.add(transf);
+			}
+			break;
+		case INOUT:
+			for(Transferencia transf: contaPagarBR.listTransferenciaInOut(inicio, fim)){
+				relatorio.add(transf);
+			}	
+			break;
+		default:
+			break;
+		}
+		
+	}
 	
-private void gerarBarraOuLinha(){
+	
+	private void gerarBarraOuLinha(){
     	
     	int calendarField = getCalendarField();
     	List<GregorianCalendar> listaDatas = getListaDatas();
     	categoryModel = new CartesianChartModel();
     	int maxDadoTemp = 0;
-    	ChartSeries planoSeries;
-		BigDecimal novoDado = new BigDecimal(0);
+    	
+		
 		
 		switch (sentidoSelecionado) {
 		case OUT:
 			for (Departamento dpto : dptosDual.getTarget()) {
+				ChartSeries planoSeries;
 	    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
 	    			planoSeries = new ChartSeries();
 	    		} else {
 	    			planoSeries = new LineChartSeries();
 	    		}
 	    		planoSeries.setLabel(dpto.toString());
-	    		
+	    		BigDecimal novoDado = new BigDecimal(0);
 	    		for (int i = 1; i < listaDatas.size(); i++) {
 					novoDado = contaPagarBR.getGastoByDpto(dpto, listaDatas.get(i-1), listaDatas.get(i));
 					novoDado = novoDado.add(salarioBR.getSalarioByDpto(dpto, listaDatas.get(i-1), listaDatas.get(i)));
-	    			planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+					
+					if(calendarField == Calendar.MONTH){
+						planoSeries.set(listaDatas.get(i-1).get(calendarField)+1+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+					} else{
+						planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+					}
 	    			
 	    			maxDadoTemp = novoDado.intValue(); 
 	    			if(maxDadoTemp > maxEixoY){
@@ -144,32 +193,83 @@ private void gerarBarraOuLinha(){
 			}
 			break;
 		case IN:
-//			PlanoSaude plano;
-//			for (String psId : planosSelecionados) {
-//				plano = planoSaudeBR.getById(Long.parseLong(psId));
-//	    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
-//	    			planoSeries = new ChartSeries();
-//	    		} else {
-//	    			planoSeries = new LineChartSeries();
-//	    		}
-//	    		planoSeries.setLabel(plano.getNome());
-//	    		
-//	    		for (int i = 1; i < listaDatas.size(); i++) {
-//					novoDado = contaPagarBR.getGastoByDpto(dpto, listaDatas.get(i-1), listaDatas.get(i));
-//	    			planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
-//	    			
-//	    			maxDadoTemp = novoDado.intValue(); 
-//	    			if(maxDadoTemp > maxEixoY){
-//	    				maxEixoY = (maxDadoTemp/10)*10+10;
-//	    			}
-//				}
-//	    		categoryModel.addSeries(planoSeries);
-//			}
+			for (PlanoSaude plano : planosDual.getTarget()) {
+				ChartSeries planoSeries;
+	    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
+	    			planoSeries = new ChartSeries();
+	    		} else {
+	    			planoSeries = new LineChartSeries();
+	    		}
+	    		planoSeries.setLabel(plano.getNome());
+	    		BigDecimal novoDado = new BigDecimal(0);
+	    		for (int i = 1; i < listaDatas.size(); i++) {
+					novoDado = contaReceberBR.getReceitaByPlano(plano, listaDatas.get(i-1), listaDatas.get(i));
+					if(calendarField == Calendar.MONTH){
+						planoSeries.set(listaDatas.get(i-1).get(calendarField)+1+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+					} else{
+						planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+					}
+	    			
+	    			maxDadoTemp = novoDado.intValue(); 
+	    			if(maxDadoTemp > maxEixoY){
+	    				maxEixoY = (maxDadoTemp/10)*10+10;
+	    			}
+				}
+	    		categoryModel.addSeries(planoSeries);
+			}
 			break;
 		case INOUT:
-//			grupos = new ArrayList<String>();
-//			grupos.add("in");
-//			grupos.add("out");
+			ChartSeries planoSeries;
+			if(tipoGrafico.equals(TipoGrafico.BARRA)){
+    			planoSeries = new ChartSeries();
+    		} else {
+    			planoSeries = new LineChartSeries();
+    		}
+			
+			// IN
+			planoSeries.setLabel("Receita");
+			for (int i = 1; i < listaDatas.size(); i++) {
+				BigDecimal novoDado = new BigDecimal(0);
+				novoDado = contaReceberBR.getReceitaByPeriodo(listaDatas.get(i-1), listaDatas.get(i));
+
+				if(calendarField == Calendar.MONTH){
+					planoSeries.set(listaDatas.get(i-1).get(calendarField)+1+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+				} else{
+					planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+				}
+    			
+    			maxDadoTemp = novoDado.intValue(); 
+    			if(maxDadoTemp > maxEixoY){
+    				maxEixoY = (maxDadoTemp/10)*10+10;
+    			}
+			}
+    		categoryModel.addSeries(planoSeries);
+    		
+    		// OUT
+    		ChartSeries planoSeries1;
+    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
+    			planoSeries1 = new ChartSeries();
+    		} else {
+    			planoSeries1 = new LineChartSeries();
+    		}
+    		
+    		planoSeries1.setLabel("Gasto");
+			for (int i = 1; i < listaDatas.size(); i++) {
+				BigDecimal novoDado1 = new BigDecimal(0);
+				novoDado1 = contaPagarBR.getGastoByPeriodo(listaDatas.get(i-1), listaDatas.get(i));
+				novoDado1 = novoDado1.add(salarioBR.getGastoByPeriodo(listaDatas.get(i-1), listaDatas.get(i)));
+				if(calendarField == Calendar.MONTH){
+					planoSeries1.set(listaDatas.get(i-1).get(calendarField)+1+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado1);
+				} else{
+					planoSeries1.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado1);
+				}
+    			
+    			maxDadoTemp = novoDado1.intValue(); 
+    			if(maxDadoTemp > maxEixoY){
+    				maxEixoY = (maxDadoTemp/10)*10+10;
+    			}
+			}
+    		categoryModel.addSeries(planoSeries1);
 			break;
 		default:
 			break;
@@ -191,32 +291,16 @@ private void gerarBarraOuLinha(){
 			}
 			break;
 		case IN:
-//			PlanoSaude plano;
-//			for (String psId : planosSelecionados) {
-//				plano = planoSaudeBR.getById(Long.parseLong(psId));
-//	    		if(tipoGrafico.equals(TipoGrafico.BARRA)){
-//	    			planoSeries = new ChartSeries();
-//	    		} else {
-//	    			planoSeries = new LineChartSeries();
-//	    		}
-//	    		planoSeries.setLabel(plano.getNome());
-//	    		
-//	    		for (int i = 1; i < listaDatas.size(); i++) {
-//					novoDado = contaPagarBR.getGastoByDpto(dpto, listaDatas.get(i-1), listaDatas.get(i));
-//	    			planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
-//	    			
-//	    			maxDadoTemp = novoDado.intValue(); 
-//	    			if(maxDadoTemp > maxEixoY){
-//	    				maxEixoY = (maxDadoTemp/10)*10+10;
-//	    			}
-//				}
-//	    		categoryModel.addSeries(planoSeries);
-//			}
+			for (PlanoSaude plano : planosDual.getTarget()) {
+    			pieModel.set(plano.toString(), 
+    					contaReceberBR.getReceitaByPlano(plano, dataInicial, dataFinalLimite));
+			}
 			break;
 		case INOUT:
-//			grupos = new ArrayList<String>();
-//			grupos.add("in");
-//			grupos.add("out");
+			pieModel.set("Receita", 
+					contaReceberBR.getReceitaByPeriodo(dataInicial, dataFinalLimite));
+			pieModel.set("Gasto", 
+					contaPagarBR.getGastoByPeriodo(dataInicial, dataFinalLimite));
 			break;
 		default:
 			break;
@@ -251,7 +335,7 @@ private void gerarBarraOuLinha(){
     	ultimaData.set(proxGranularidadeFina(calendarField), dataFinal.getMinimum(proxGranularidadeFina(calendarField)));
     	ultimaData.add(calendarField, 1);
     	
-    	for (GregorianCalendar data = primeiraData; primeiraData.before(dataFinal); data.add(calendarField, 1)){
+    	for (GregorianCalendar data = primeiraData; data.before(ultimaData); data.add(calendarField, 1)){
     		GregorianCalendar temp = new GregorianCalendar();
     		temp.setTime(data.getTime());
     		lista.add(temp);
@@ -420,6 +504,13 @@ private void gerarBarraOuLinha(){
 	public void setPieModel(PieChartModel pieModel) {
 		this.pieModel = pieModel;
 	}
-	
+
+	public List<Transferencia> getRelatorio() {
+		return relatorio;
+	}
+
+	public void setRelatorio(List<Transferencia> relatorio) {
+		this.relatorio = relatorio;
+	}
 	
 }

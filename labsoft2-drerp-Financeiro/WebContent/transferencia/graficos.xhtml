@@ -52,22 +52,6 @@
                 itemLabel="#{plano.nome}"  
                 itemValue="#{plano.id}" />
                 
-                <!-- 				<p:selectManyCheckbox layout="pageDirection" -->
-<!-- 					value="#{fluxoCaixaBean.dptosDual}"> -->
-<!-- 					<f:selectItem itemLabel="Almoxarifado" itemValue="ALMOXARIFADO" /> -->
-<!-- 					<f:selectItem itemLabel="Recursos Humanos" itemValue="RH" /> -->
-<!-- 					<f:selectItem itemLabel="Consulta" itemValue="CONSULTA" /> -->
-<!-- 					<f:selectItem itemLabel="Outros" itemValue="OUTRO" /> -->
-<!-- 				</p:selectManyCheckbox> -->
-                
-<!-- 				<h:outputText value="Planos de Saúde: " /> -->
-<!-- 				<p:selectManyCheckbox layout="pageDirection" -->
-<!-- 					value="#{fluxoCaixaBean.planosSelecionados}"> -->
-<!-- 					<c:forEach var="plano" items="#{fluxoCaixaBean.planosList}"> -->
-<!-- 						<f:selectItem itemLabel="#{plano.nome}" itemValue="#{plano.id}" /> -->
-<!-- 					</c:forEach> -->
-<!-- 				</p:selectManyCheckbox> -->
-
 			</h:panelGrid>
 
 			<h:commandButton action="#{fluxoCaixaBean.gerarGrafico}"
@@ -77,21 +61,49 @@
 
 		<h:panelGroup rendered="#{fluxoCaixaBean.tipoGrafico == 'BARRA'}">
 			<p:barChart id="basic" value="#{fluxoCaixaBean.categoryModel}"
-				legendPosition="ne" title="Basic Bar Chart" min="0"
+				legendPosition="ne" min="0"
 				max="#{fluxoCaixaBean.maxEixoY}" style="height:300px" />
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{fluxoCaixaBean.tipoGrafico == 'LINHA'}">
 			<p:lineChart id="linear" value="#{fluxoCaixaBean.categoryModel}"
-				legendPosition="e" title="Linear Chart" minY="0"
+				legendPosition="e"  minY="0"
 				maxY="#{fluxoCaixaBean.maxEixoY}" style="height:300px" />
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{fluxoCaixaBean.tipoGrafico == 'PIZZA'}">
 			<p:pieChart id="sample" value="#{fluxoCaixaBean.pieModel}"
-				legendPosition="w" title="Sample Pie Chart"
+				legendPosition="w" 
 				style="width:400px;height:300px" />
 		</h:panelGroup>
+		
+		<p:fieldset legend="Lista de Itens Filtrados"
+				style="margin-top:10px">
+				<p:dataTable paginator="true" rows="8" var="trans"
+					value="#{fluxoCaixaBean.relatorio}">
+					
+					<p:column headerText="Data Realizada">
+						<h:outputText value="#{trans.dataRealizacao}" />
+					</p:column>
+					
+					<p:column headerText="Departamento">
+						<h:outputText value="#{trans.departamento}" />
+					</p:column>
+					
+					<p:column headerText="Beneficiario">
+						<h:outputText value="#{trans.beneficiario}" />
+					</p:column>
+					
+					<p:column headerText="Pagador">
+						<h:outputText value="#{trans.pagador}" />
+					</p:column>
+					
+					<p:column headerText="Valor">
+						<h:outputText value="#{trans.valor}" />
+					</p:column>
+					
+				</p:dataTable>
+			</p:fieldset>
 
 	</ui:define>
 </ui:composition>

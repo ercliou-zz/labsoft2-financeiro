@@ -9,5 +9,6 @@ import br.com.drerp.financeiro.model.transferencia.Departamento;
 public interface ContaPagarDAO extends GenericDAO<ContaPagar>{
 	public List<ContaPagar> listarAbertas();
 	public List<ContaPagar> listarEfetuadas();
-	public List<ContaPagar> getByDpto(Departamento dpto, Long inicioMillis, Long fimMillis);
+	public List<ContaPagar> listarEfetuadasByPeriodo(Long inicioMillis, Long fimMillis);
+	public List<ContaPagar> listByDpto(Departamento dpto, Long inicioMillis, Long fimMillis);
 }

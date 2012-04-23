@@ -119,7 +119,11 @@ public class OrcamentoBean implements Serializable {
 				default:
 					break;
 				}
-    			planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+    			if(calendarField == Calendar.MONTH){
+					planoSeries.set(listaDatas.get(i-1).get(calendarField)+1+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+				} else{
+					planoSeries.set(listaDatas.get(i-1).get(calendarField)+"-"+listaDatas.get(i-1).get(proxGranularidadeGrossa(calendarField)), novoDado);
+				}
     			
     			maxDadoTemp = novoDado.intValue(); 
     			if(maxDadoTemp > maxEixoY){
@@ -166,7 +170,7 @@ public class OrcamentoBean implements Serializable {
 		}
     }
     
-    private List<GregorianCalendar> getListaDatas(){
+private List<GregorianCalendar> getListaDatas(){
     	
     	List<GregorianCalendar> lista = new ArrayList<GregorianCalendar>();
     	int calendarField = getCalendarField();
@@ -180,7 +184,7 @@ public class OrcamentoBean implements Serializable {
     	ultimaData.set(proxGranularidadeFina(calendarField), dataFinal.getMinimum(proxGranularidadeFina(calendarField)));
     	ultimaData.add(calendarField, 1);
     	
-    	for (GregorianCalendar data = primeiraData; primeiraData.before(dataFinal); data.add(calendarField, 1)){
+    	for (GregorianCalendar data = primeiraData; data.before(ultimaData); data.add(calendarField, 1)){
     		GregorianCalendar temp = new GregorianCalendar();
     		temp.setTime(data.getTime());
     		lista.add(temp);

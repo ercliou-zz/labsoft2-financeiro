@@ -32,6 +32,8 @@ public class Transferencia extends GenericModel {
 	
 	private Long dataRealizacaoMilis;
 	
+	private Departamento departamento;
+	
 	public Beneficiario getBeneficiario() {
 		return beneficiario;
 	}
@@ -100,5 +102,14 @@ public class Transferencia extends GenericModel {
 	public void setStatus(StatusTransferencia status) {
 		this.status = status;
 	}
+
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
+	
 
 }
