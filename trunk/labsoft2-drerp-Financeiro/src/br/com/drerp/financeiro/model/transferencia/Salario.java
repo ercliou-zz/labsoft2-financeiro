@@ -21,11 +21,6 @@ public class Salario extends Transferencia implements Serializable{
 	@JoinColumn(name="hollertih_fk")
 	private Hollerith hollerith;
 	
-	private Departamento departamento;
-
-	public Departamento getDepartamento() {
-		return departamento;
-	}
 	public Salario () {
 		super();
 	}
@@ -40,10 +35,6 @@ public class Salario extends Transferencia implements Serializable{
 		this.setValor(transferencia.getValor());
 	}
 
-	public void setDepartamento(Departamento departamento) {
-		this.departamento = departamento;
-	}
-	
 	public Integer getHorasTrabalhadas() {
 		return horasTrabalhadas;
 	}

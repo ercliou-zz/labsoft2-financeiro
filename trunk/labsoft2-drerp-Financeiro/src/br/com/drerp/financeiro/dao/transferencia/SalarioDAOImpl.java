@@ -29,4 +29,12 @@ public class SalarioDAOImpl extends GenericDAOImpl<Salario> implements SalarioDA
 				.add(Restrictions.eq("departamento", dpto)).list();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Salario> listByPeriodo(Long inicioMillis, Long fimMillis) {
+		return session.createCriteria(Salario.class)
+				.add(Restrictions.eq("status", StatusTransferencia.EFETUADA))
+				.add(Restrictions.ge("dataRealizacaoMilis", inicioMillis))
+				.add(Restrictions.lt("dataRealizacaoMilis", fimMillis)).list();
+	}
+	
 }

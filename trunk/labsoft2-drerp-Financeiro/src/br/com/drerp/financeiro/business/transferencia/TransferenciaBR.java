@@ -12,7 +12,7 @@ import br.com.drerp.financeiro.model.transferencia.Departamento;
 import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
 import br.com.drerp.financeiro.model.transferencia.Transferencia;
 
-public class ContaPagarBR extends GenericBR<ContaPagarDAOImpl, ContaPagar> {
+public class TransferenciaBR extends GenericBR<ContaPagarDAOImpl, ContaPagar> {
 	
 	public List<ContaPagar> listarAbertas(){
 		return super.dao.listarAbertas();
@@ -57,12 +57,8 @@ public class ContaPagarBR extends GenericBR<ContaPagarDAOImpl, ContaPagar> {
 		return total;
 	}
 	
-	public List<Transferencia> listTransferenciaOutByDptos(List<Departamento> dptos, GregorianCalendar inicio, GregorianCalendar fim){
+	public List<Transferencia> listTransferenciaByDptos(List<Departamento> dptos, GregorianCalendar inicio, GregorianCalendar fim){
 		return this.dao.listTransferenciaByDptos(dptos, inicio.getTimeInMillis(), fim.getTimeInMillis());
-	}
-	
-	public List<Transferencia> listTransferenciaInOut(GregorianCalendar inicio, GregorianCalendar fim){
-		return this.dao.listTransferenciaByDptos(null, inicio.getTimeInMillis(), fim.getTimeInMillis());
 	}
 	
 }

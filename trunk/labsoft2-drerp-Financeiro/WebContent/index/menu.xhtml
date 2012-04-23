@@ -8,42 +8,46 @@
 	<p:accordionPanel activeIndex="">
 		<p:tab title="Transferência">
 			<h:commandLink style="padding-top:5px;" id="cadastroPagador"
-				action="../pagador/list.xhtml" value="Pagador" />
+				action="../pagador/list.xhtml" value="> Pagador" />
 			<br />
 			<h:commandLink style="padding-top:5px;" id="cadastroBeneficiario"
-				action="../beneficiario/list.xhtml" value="Beneficiario" />
-			<br />
-			<h:commandLink style="padding-top:5px;" id="graficoOrcamento"
-				action="../tabela/orcamentoGraficos.xhtml" value="Graficos Orçamento" />
+				action="../beneficiario/list.xhtml" value="> Beneficiario" />
 			<br />
 			<h:commandLink style="padding-top:5px;" id="requisicaoPagamento"
-				action="../transferencia/list.xhtml" value="Requisição de Pagamento" />
+				action="../transferencia/list.xhtml" value="> Requisição de Pagamento" />
 			<br />
 			<h:commandLink style="padding-top:5px;" id="contaPagar"
-				action="../transferencia/contaPagarList.xhtml" value="Contas a Pagar" />
+				action="../transferencia/contaPagarList.xhtml" value="> Contas a Pagar" />
 				<br />
 			<h:commandLink style="padding-top:5px;" id="contaReceber"
-				action="../transferencia/contaReceberList.xhtml" value="Contas a Receber" />
+				action="../transferencia/contaReceberList.xhtml" value="> Contas a Receber" />
+			<br />
+			<h:commandLink style="padding-top:5px;" id="graficoFluxo"
+				action="../transferencia/graficos.xhtml" value="> Graficos de Fluxo de Caixa" />
+			<br />
 		</p:tab>
 		<p:tab title="Plano de Saúde">
 			<h:commandLink style="padding-top:5px;" id="cadastroPlanoSaude"
-				action="../planoSaude/list.xhtml" value="Cadastro" />
+				action="../planoSaude/list.xhtml" value="> Cadastro" />
+			<br />
+			<h:commandLink style="padding-top:5px;" id="graficoOrcamento"
+				action="../tabela/orcamentoGraficos.xhtml" value="> Graficos de Orçamento" />
 			<br />
 			<h:commandLink style="padding-top:5px;" id="historicoPlanoSaude"
-				action="../planoSaude/planoSaudeLog.xhtml" value="Histórico" />
+				action="../planoSaude/planoSaudeLog.xhtml" value="> Histórico" />
 		</p:tab>
 		<p:tab title="Procedimento">
-			<h:commandLink value="Cadastro" style="padding-top:5px;"
+			<h:commandLink value="> Cadastro" style="padding-top:5px;"
 				id="cadastroProcedimento" action="../procedimento/list.xhtml" />
 			<br />
 			<h:commandLink style="padding-top:5px;" id="tabelaPreco" action="../tabela/tabela.xhtml"
-				value="Tabela" />
+				value="> Tabela" />
 			<br />
 			<h:commandLink style="padding-top:5px;" id="historicoValores"
-				action="../procedimento/valorLog.xhtml" value="Histórico" />
+				action="../procedimento/valorLog.xhtml" value="> Histórico" />
 		</p:tab>
 		<p:tab title="Fatura">
-			<h:commandLink value="Cadastro" style="padding-top:5px;"
+			<h:commandLink value="> Cadastro" style="padding-top:5px;"
 				id="cadastroFatura" action="../fatura/list.xhtml" />
 			<br />
 		</p:tab>

@@ -56,19 +56,19 @@
 
 		<h:panelGroup rendered="#{orcamentoBean.tipoGrafico == 'BARRA'}">
 			<p:barChart id="basic" value="#{orcamentoBean.categoryModel}"
-				legendPosition="ne" title="Basic Bar Chart" min="0"
+				legendPosition="ne" min="0"
 				max="#{orcamentoBean.maxEixoY}" style="height:300px" />
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{orcamentoBean.tipoGrafico == 'LINHA'}">
 			<p:lineChart id="linear" value="#{orcamentoBean.categoryModel}"
-				legendPosition="e" title="Linear Chart" minY="0"
+				legendPosition="e"minY="0"
 				maxY="#{orcamentoBean.maxEixoY}" style="height:300px" />
 		</h:panelGroup>
 
 		<h:panelGroup rendered="#{orcamentoBean.tipoGrafico == 'PIZZA'}">
 			<p:pieChart id="sample" value="#{orcamentoBean.pieModel}"
-				legendPosition="w" title="Sample Pie Chart"
+				legendPosition="w" 
 				style="width:400px;height:300px" />
 		</h:panelGroup>
 

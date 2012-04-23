@@ -7,6 +7,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.drerp.financeiro.dao.GenericDAOImpl;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.transferencia.Fatura;
+import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
 
 public class FaturaDAOImpl extends GenericDAOImpl<Fatura> implements FaturaDAO{
 
@@ -20,5 +21,6 @@ public class FaturaDAOImpl extends GenericDAOImpl<Fatura> implements FaturaDAO{
 		List<Fatura> list = super.session.createCriteria(Fatura.class).add(Restrictions.eq("planoSaude", plano)).list();
 		return list;
 	}
+	
 
 }
