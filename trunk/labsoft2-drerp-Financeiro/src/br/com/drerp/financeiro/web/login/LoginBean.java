@@ -4,7 +4,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import br.com.drerp.financeiro.business.login.LoginBR;
-import br.com.drerp.financeiro.business.planosaude.GuiaTimerSingleton;
 import br.com.drerp.financeiro.model.usuario.TiposUsuario;
 import br.com.drerp.financeiro.model.usuario.Usuario;
 
@@ -18,7 +17,6 @@ public class LoginBean {
 	public LoginBean() {
 		this.usuario = new Usuario();
 		this.loginBR = new LoginBR();
-		GuiaTimerSingleton.start();
 	}
 
 	public Usuario getUsuario() {
