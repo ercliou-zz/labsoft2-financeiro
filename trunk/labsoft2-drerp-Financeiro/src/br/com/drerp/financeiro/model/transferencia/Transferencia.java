@@ -84,7 +84,10 @@ public class Transferencia extends GenericModel {
 	}
 	
 	public Date getDataRealizacao() {
-		return new Date(this.dataRealizacaoMilis);
+		if(dataRealizacaoMilis!=null)
+			return new Date(this.dataRealizacaoMilis);
+		else
+			return null;
 	}
 
 	public BigDecimal getValor() {

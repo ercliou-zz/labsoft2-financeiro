@@ -44,6 +44,9 @@ public class RequisicaoTransferenciaBean {
 		this.pagadorBR = new PagadorBR();
 		this.beneficiarioBR = new BeneficiarioBR();
 		this.transferencia = new Transferencia();
+		
+		this.contas = this.contaPagarBR.listarAbertas();
+		this.salarios = this.salarioBR.listarPendentes();
 	}
 	
 	public String create(){
