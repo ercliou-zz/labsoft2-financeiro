@@ -19,6 +19,7 @@ public class ContaPagar extends Transferencia implements Serializable{
 		this.setPagador(transferencia.getPagador());
 		this.setStatus(transferencia.getStatus());
 		this.setValor(transferencia.getValor());
+		this.setDepartamento(transferencia.getDepartamento());
 	}
 	
 	public ContaPagar() {
