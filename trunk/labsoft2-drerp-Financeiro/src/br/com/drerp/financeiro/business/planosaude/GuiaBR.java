@@ -49,15 +49,15 @@ public class GuiaBR extends GenericBR<GuiaDAOImpl, Guia> {
 
 				ContaReceber conta = new ContaReceber();
 				
-				BeneficiarioBR benBR = new BeneficiarioBR();
-				Beneficiario ben = new Beneficiario();
-				ben.setDocumento(FinanceiroConstants.NOME_CLINICA);
-				ben.setNome(FinanceiroConstants.NOME_CLINICA);
-				ben.setTipoBeneficiario(TipoBeneficiario.EMPRESA);
-				ben.setInfoBancaria("Bradesco - Ag: " + FinanceiroConstants.AGENCIA_CLINICA_BRADESCO+" CC: "+FinanceiroConstants.CONTA_CLINICA_BRADESCO);
-				benBR.salvar(ben);
+//				BeneficiarioBR benBR = new BeneficiarioBR();
+//				Beneficiario ben = new Beneficiario();
+//				ben.setDocumento(FinanceiroConstants.NOME_CLINICA);
+//				ben.setNome(FinanceiroConstants.NOME_CLINICA);
+//				ben.setTipoBeneficiario(TipoBeneficiario.EMPRESA);
+//				ben.setInfoBancaria("Bradesco - Ag: " + FinanceiroConstants.AGENCIA_CLINICA_BRADESCO+" CC: "+FinanceiroConstants.CONTA_CLINICA_BRADESCO);
+//				benBR.salvar(ben);
 				
-				conta.setBeneficiario(ben);
+				conta.setBeneficiario(null);
 				conta.setDataRequisicaoMilis((new Date()).getTime());
 				conta.setDataLimiteMilis((new Date()).getTime()
 						+ new Long(2592000000l));

@@ -9,36 +9,38 @@
 
 		<h:form>
 
-			<p:fieldset
-				legend="Vizualiza��o de Guias">
+			<p:fieldset legend="Vizualização de Guias">
 				<h:panelGrid columns="2" cellpadding="10">
-					
-					<h:outputLabel value="Plano de Sa�de: " />
+
+					<h:outputLabel value="Plano de Saúde: " />
 					<h:outputText value="#{guiaBean.guia.planoSaude.nome}" />
-					
+
 					<h:outputLabel value="Data: " />
 					<h:outputText value="#{guiaBean.guia.dataInicial}" />
 					
-					<h:form>
+					<h:outputLabel value="Faturas: " />
+				</h:panelGrid>
+				<h:form>
+					
 					<p:dataTable value="#{guiaBean.guia.faturas}" var="fatura"
 						paginator="true" rows="8">
 						<p:column headerText="Estado">
-							<h:outputText rendered="#{fatura.paga}" value="Paga"/>
-							<h:outputText rendered="#{!fatura.paga}" value="Pendente"/>
+							<h:outputText rendered="#{fatura.paga}" value="Paga" />
+							<h:outputText rendered="#{!fatura.paga}" value="Pendente" />
 						</p:column>
-	
+
 						<p:column headerText="Data">
 							<h:outputText value="#{fatura.data}"></h:outputText>
 						</p:column>
-	
+
 						<p:column headerText="Valor">
 							<h:outputText value="#{fatura.valorFormatado}"></h:outputText>
 						</p:column>
 					</p:dataTable>
 				</h:form>
 
-					<h:commandButton action="list.xhtml" value="Voltar" />
-				</h:panelGrid>
+				<h:commandButton action="list.xhtml" value="Voltar" />
+
 			</p:fieldset>
 		</h:form>
 	</ui:define>
