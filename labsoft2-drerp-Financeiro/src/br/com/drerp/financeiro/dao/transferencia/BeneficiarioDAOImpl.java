@@ -40,6 +40,7 @@ public class BeneficiarioDAOImpl extends GenericDAOImpl<Beneficiario> implements
 		if (b == null) {
 			this.session.save(beneficiario);
 			this.session.flush();
+			b = beneficiario;
 		}
 		return b;
 	}
