@@ -6,14 +6,17 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.drerp.financeiro.business.GenericBR;
+import br.com.drerp.financeiro.business.transferencia.BeneficiarioBR;
 import br.com.drerp.financeiro.business.transferencia.ContaReceberBR;
 import br.com.drerp.financeiro.business.transferencia.FaturaBR;
 import br.com.drerp.financeiro.dao.planosaude.GuiaDAOImpl;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
+import br.com.drerp.financeiro.model.transferencia.Beneficiario;
 import br.com.drerp.financeiro.model.transferencia.ContaReceber;
 import br.com.drerp.financeiro.model.transferencia.Fatura;
 import br.com.drerp.financeiro.model.transferencia.Guia;
 import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
+import br.com.drerp.financeiro.model.transferencia.TipoBeneficiario;
 import br.com.drerp.financeiro.util.FinanceiroConstants;
 
 public class GuiaBR extends GenericBR<GuiaDAOImpl, Guia> {
@@ -45,8 +48,16 @@ public class GuiaBR extends GenericBR<GuiaDAOImpl, Guia> {
 				guias.add(guia);
 
 				ContaReceber conta = new ContaReceber();
-				// setar nossa clinica
-				conta.setBeneficiario(null);
+				
+				BeneficiarioBR benBR = new BeneficiarioBR();
+				Beneficiario ben = new Beneficiario();
+				ben.setDocumento(FinanceiroConstants.NOME_CLINICA);
+				ben.setNome(FinanceiroConstants.NOME_CLINICA);
+				ben.setTipoBeneficiario(TipoBeneficiario.EMPRESA);
+				ben.setInfoBancaria("Bradesco - Ag: " + FinanceiroConstants.AGENCIA_CLINICA_BRADESCO+" CC: "+FinanceiroConstants.CONTA_CLINICA_BRADESCO);
+				benBR.salvar(ben);
+				
+				conta.setBeneficiario(ben);
 				conta.setDataRequisicaoMilis((new Date()).getTime());
 				conta.setDataLimiteMilis((new Date()).getTime()
 						+ new Long(2592000000l));
