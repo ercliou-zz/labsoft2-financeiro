@@ -1,6 +1,7 @@
 package br.com.drerp.financeiro.web.planosaude;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -34,6 +35,11 @@ public class GuiaBean {
 		
 	}
 	
+	public String gerar(){
+		Long now = (new Date()).getTime();
+		guiaBR.lancarFaturasDoMes(now - 2592000000l, now);
+		return list();
+	}
 
 	public String edit() {
 		return "edit";
@@ -67,8 +73,6 @@ public class GuiaBean {
 	public void listarFaturas(){
 		List<Fatura> list = this.faturaBR.listarFaturas(this.guia.getPlanoSaude(), this.guia.getDataInicialMS(), this.guia.getDataFinalMS());
 		this.faturas = new DualListModel<Fatura>(list, new ArrayList<Fatura>()); 
-		//		return edit();
-//		return edit();
 	}
 	
 	public Guia getGuia() {
