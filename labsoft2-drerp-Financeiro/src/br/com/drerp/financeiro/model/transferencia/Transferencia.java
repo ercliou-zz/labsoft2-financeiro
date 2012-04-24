@@ -60,7 +60,9 @@ public class Transferencia extends GenericModel {
 
 	@Transient
 	public Date getDataRequisicao() {
+		if(dataRequisicaoMilis!=null)
 		return new Date(this.dataRequisicaoMilis);
+		else return null;
 	}
 
 	public Long getDataLimiteMilis() {
@@ -72,7 +74,9 @@ public class Transferencia extends GenericModel {
 	}
 
 	public Date getDataLimite() {
+		if(dataLimiteMilis!=null)
 		return new Date(this.dataLimiteMilis);
+		else return null;
 	}
 	
 	public Long getDataRealizacaoMilis() {
