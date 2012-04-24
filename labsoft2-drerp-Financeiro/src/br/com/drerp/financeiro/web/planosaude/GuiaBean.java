@@ -44,6 +44,7 @@ public class GuiaBean {
 	}
 	
 	public String list() {
+		guias = guiaBR.listGuia();
 		return "list";
 	}
 	
@@ -75,12 +76,6 @@ public class GuiaBean {
 	}
 	public void setGuia(Guia guia) {
 		this.guia = guia;
-	}
-	public GuiaBR getGuiaBR() {
-		return guiaBR;
-	}
-	public void setGuiaBR(GuiaBR guiaBR) {
-		this.guiaBR = guiaBR;
 	}
 	public List<Guia> getGuias() {
 		return guias;

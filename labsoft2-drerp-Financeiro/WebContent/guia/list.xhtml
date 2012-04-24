@@ -8,30 +8,27 @@
 	<ui:define name="content">
 		<p:fieldset legend="Lista de Guias">
 				<h:form>
-					<p:dataTable value="#{procedimentoBean.procedimentos}"
-						var="procedimento" paginator="true" rows="8">
+					<p:dataTable value="#{guiaBean.guias}"
+						var="guia" paginator="true" rows="8">
 						
-						<p:column filterBy="#{procedimento.nome}" filterMatchMode="contains" headerText="Nome">
-							<h:outputText value="#{procedimento.nome}"></h:outputText>
+						<p:column filterBy="#{guia.planoSaude}" filterMatchMode="contains" headerText="Plano de Saude">
+							<h:outputText value="#{guia.planoSaude}"></h:outputText>
 						</p:column>
-						<p:column headerText="Tipo">
-							<h:outputText value="#{procedimento.tipo}"></h:outputText>
+						<p:column headerText="Pagador">
+							<h:outputText value="#{guia.pagador.nome}"></h:outputText>
+						</p:column>
+						<p:column headerText="Data">
+							<h:outputText value="#{guia.dataInicial}"></h:outputText>
 						</p:column>
 						<p:column>
-							<h:commandLink style="padding:3px" action="#{procedimentoBean.view}" value="Vizualizar">
-								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
-							</h:commandLink>
-							<h:commandLink style="padding:3px" action="#{procedimentoBean.edit}" value="Editar">
-								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
-							</h:commandLink>
-							<h:commandLink style="padding:3px" onclick="if(!confirm('Tem certeza que deseja remover este item?')) return false;" action="#{procedimentoBean.delete}" value="Excluir">
-								<f:setPropertyActionListener target="#{procedimentoBean.procedimento}" value="#{procedimento}" />
+							<h:commandLink style="padding:3px" action="#{guiaBean.view}" value="Vizualizar">
+								<f:setPropertyActionListener target="#{guiaBean.guia}" value="#{guia}" />
 							</h:commandLink>
 						</p:column>
 
 					</p:dataTable>
 					
-					<h:commandButton action="#{procedimentoBean.create}" value="Novo"/>
+<!-- 					HELDER BOTAO PRA VOCE -->
 				
 				</h:form>
 		</p:fieldset>

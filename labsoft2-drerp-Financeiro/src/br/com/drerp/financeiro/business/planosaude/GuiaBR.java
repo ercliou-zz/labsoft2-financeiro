@@ -61,4 +61,9 @@ public class GuiaBR extends GenericBR<GuiaDAOImpl, Guia>{
 		}
 		return guias;
 	}
+	
+	public List<Guia> listGuia(){
+		return this.dao.listGuia();
+	}
+	
 }
