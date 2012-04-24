@@ -8,9 +8,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.drerp.financeiro.dao.GenericDAOImpl;
-import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.transferencia.ContaPagar;
-import br.com.drerp.financeiro.model.transferencia.ContaReceber;
 import br.com.drerp.financeiro.model.transferencia.Departamento;
 import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
 import br.com.drerp.financeiro.model.transferencia.Transferencia;
