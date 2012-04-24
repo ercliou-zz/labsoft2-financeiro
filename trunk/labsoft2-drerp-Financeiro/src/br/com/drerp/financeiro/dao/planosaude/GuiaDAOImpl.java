@@ -11,7 +11,7 @@ public class GuiaDAOImpl extends GenericDAOImpl<Guia> implements GuiaDAO{
 	
 	@SuppressWarnings("unchecked")
 	public List<Guia> listGuia() {
-		return session.createCriteria(Guia.class).addOrder(Order.desc("dataRealizacaoMilis")).list();
+		return session.createCriteria(Guia.class).addOrder(Order.desc("dataInicialMS")).list();
 	}
 
 }

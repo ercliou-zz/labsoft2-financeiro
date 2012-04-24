@@ -129,24 +129,13 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 
 	public Boolean pagarConsultaPlanoSaude(PlanoSaude planoSaude, Procedimento[] listaProcedimentos) {
 		
-		long now = System.currentTimeMillis();
-		ContaReceber conta = new ContaReceber();
-		conta.setDataRequisicaoMilis(now);
-		conta.setDataRealizacaoMilis(now + 10);
-		conta.setDataLimiteMilis(now + 300000);
-		conta.setStatus(StatusTransferencia.PENDENTE);
-
-		ContaReceberBR contaBR = new ContaReceberBR();
 		PagadorBR pagadorBR = new PagadorBR();
-
-		
 		Pagador pag = new Pagador();
 		pag.setNome(planoSaude.getNome());
 		pag.setDocumento(planoSaude.getNome());
 
 		Pagador pagador = pagadorBR.salvar(pag);
 
-		conta.setPagador(pagador);
 		BigDecimal valor = new BigDecimal(0);
 
 		TabelaBR t = new TabelaBR();
@@ -160,21 +149,10 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 			p = pBR.getById(proc.getId());
 			valor = valor.add(t.recuperarValor(ps, p));
 		}
-		conta.setValor(valor);
-		BeneficiarioBR beneficiarioBR = new BeneficiarioBR();
-		Beneficiario clinica = beneficiarioBR.getClinica();
-
-		conta.setBeneficiario(clinica);
 		
 		FaturaBR faturaBR = new FaturaBR();
 		faturaBR.salvarFatura(pagador.getId(), planoSaude.getId(), Arrays.asList(listaProcedimentos));
 		
-		try {
-			contaBR.save(conta);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return Boolean.FALSE;
-		}
 		return Boolean.TRUE;
 	}
 
@@ -183,8 +161,7 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		long now = System.currentTimeMillis();
 		ContaReceber conta = new ContaReceber();
 		conta.setDataRequisicaoMilis(now);
-		conta.setDataRealizacaoMilis(now + 10);
-		conta.setDataLimiteMilis(now + 300000);
+		conta.setDataLimiteMilis(now + 2592000000l);
 		conta.setStatus(StatusTransferencia.PENDENTE);
 
 		ContaReceberBR contaBR = new ContaReceberBR();
