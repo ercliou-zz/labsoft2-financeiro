@@ -11,8 +11,24 @@
 			<p:fieldset
 				legend="Vizualização de Planos de Saúde">
 				<h:panelGrid columns="2" cellpadding="10">
+				
 					<h:outputLabel value="Valor: " />
 					<h:outputText value="#{requisicaoTransferenciaBean.transferencia.valor}" />
+					
+					<h:outputLabel value="Status: " />
+					<h:outputText value="#{requisicaoTransferenciaBean.transferencia.status}" />
+					
+					<h:outputLabel value="Departamento: " />
+					<h:outputText value="#{requisicaoTransferenciaBean.transferencia.departamento}" />
+					
+					<h:outputLabel value="Data de Requisicao: " />
+					<h:outputText value="#{requisicaoTransferenciaBean.transferencia.dataRequisicao}" />
+					
+					<h:outputLabel value="Data Limite: " />
+					<h:outputText value="#{requisicaoTransferenciaBean.transferencia.dataLimite}" />
+					
+					<h:outputLabel value="Data Realizada: " />
+					<h:outputText value="#{requisicaoTransferenciaBean.transferencia.dataRealizacao}" />
 
 					<h:commandButton action="list.xhtml" value="Voltar" />
 				</h:panelGrid>
