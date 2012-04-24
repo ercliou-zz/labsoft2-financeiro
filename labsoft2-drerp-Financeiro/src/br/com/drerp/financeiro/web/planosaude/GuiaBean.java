@@ -27,7 +27,7 @@ public class GuiaBean {
 	public GuiaBean(){
 		this.guia = new Guia();
 		this.guiaBR = new GuiaBR();
-		this.guias = new ArrayList<Guia>();
+		this.guias = guiaBR.listGuia();
 		this.faturaBR = new FaturaBR();
         this.faturas = new DualListModel<Fatura>(this.faturaBR.list(), new ArrayList<Fatura>()); 
         
@@ -50,7 +50,6 @@ public class GuiaBean {
 	}
 	
 	public String list() {
-		guias = guiaBR.listGuia();
 		return "list";
 	}
 	
