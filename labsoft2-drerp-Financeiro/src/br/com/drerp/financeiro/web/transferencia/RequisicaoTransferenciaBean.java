@@ -12,6 +12,7 @@ import br.com.drerp.financeiro.business.transferencia.PagadorBR;
 import br.com.drerp.financeiro.business.transferencia.SalarioBR;
 import br.com.drerp.financeiro.model.transferencia.Beneficiario;
 import br.com.drerp.financeiro.model.transferencia.ContaPagar;
+import br.com.drerp.financeiro.model.transferencia.Departamento;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 import br.com.drerp.financeiro.model.transferencia.Salario;
 import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
@@ -29,12 +30,12 @@ public class RequisicaoTransferenciaBean {
 	private List<ContaPagar> contas;
 	private List<Salario> salarios;
 	private Date dataLimite;
+	private Departamento departamento;
 	
 	private PagadorBR pagadorBR;
 	private BeneficiarioBR beneficiarioBR;
 	private List<Pagador> pagadores;
 	private List<Beneficiario> beneficiarios;
-	private Long pagadorSelecionado;
 	private Long beneficiarioSelecionado;
 	
 	public RequisicaoTransferenciaBean() {
@@ -68,7 +69,8 @@ public class RequisicaoTransferenciaBean {
 		transferencia.setStatus(StatusTransferencia.PENDENTE);
 		transferencia.setDataLimiteMilis(this.dataLimite.getTime());
 		transferencia.setBeneficiario(this.beneficiarioBR.getById(beneficiarioSelecionado));
-		transferencia.setPagador(this.pagadorBR.getById(pagadorSelecionado));
+		transferencia.setPagador(this.pagadorBR.getClinica());
+		transferencia.setDepartamento(this.departamento);
 		if(this.tipoContaPagar.equals(TipoContaPagar.CONTA)){
 			ContaPagar conta = new ContaPagar(this.transferencia);
 			this.contaPagarBR.save(conta);
@@ -138,14 +140,6 @@ public class RequisicaoTransferenciaBean {
 		this.beneficiarios = beneficiarios;
 	}
 
-	public Long getPagadorSelecionado() {
-		return pagadorSelecionado;
-	}
-
-	public void setPagadorSelecionado(Long pagadorSelecionado) {
-		this.pagadorSelecionado = pagadorSelecionado;
-	}
-
 	public Long getBeneficiarioSelecionado() {
 		return beneficiarioSelecionado;
 	}
@@ -154,5 +148,12 @@ public class RequisicaoTransferenciaBean {
 		this.beneficiarioSelecionado = beneficiarioSelecionado;
 	}
 
+	public Departamento getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
+	}
 	
 }
