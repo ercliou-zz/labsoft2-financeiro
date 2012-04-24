@@ -41,6 +41,7 @@ public class PagadorDAOImpl extends GenericDAOImpl<Pagador> implements
 		if (p == null) {
 			this.session.save(pagador);
 			this.session.flush();
+			p = pagador;
 		}
 		return p;
 	}

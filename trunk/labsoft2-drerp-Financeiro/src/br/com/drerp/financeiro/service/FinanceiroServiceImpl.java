@@ -50,8 +50,8 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		long now = System.currentTimeMillis();
 		ContaPagar conta = new ContaPagar();
 		conta.setDataRequisicaoMilis(now);
-		conta.setDataRealizacaoMilis(now + 10);
-		conta.setDataLimiteMilis(now + 300000);
+		conta.setDataLimiteMilis(now + 2592000000l);
+		conta.setStatus(StatusTransferencia.PENDENTE);
 
 		ContaPagarBR contaBR = new ContaPagarBR();
 		BeneficiarioBR beneficiarioBR = new BeneficiarioBR();
@@ -62,6 +62,7 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		Pagador clinica = pagadorBR.getClinica();
 
 		conta.setPagador(clinica);
+		conta.setValor(valor);
 		conta.setDepartamento(Departamento.ALMOXARIFADO);
 
 		try {
@@ -78,8 +79,7 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		long now = System.currentTimeMillis();
 		ContaPagar conta = new ContaPagar();
 		conta.setDataRequisicaoMilis(now);
-		conta.setDataRealizacaoMilis(now + 10);
-		conta.setDataLimiteMilis(now + 300000);
+		conta.setDataLimiteMilis(now + 2592000000l);
 		conta.setStatus(StatusTransferencia.PENDENTE);
 
 		ContaPagarBR contaBR = new ContaPagarBR();
