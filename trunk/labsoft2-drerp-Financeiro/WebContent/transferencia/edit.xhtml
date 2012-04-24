@@ -21,12 +21,13 @@
 						<f:selectItem itemLabel="Salário" itemValue="SALARIO" />
 					</h:selectOneMenu>
 					
-					<h:outputText value="Pagador: " />
-					<h:selectOneMenu value="#{requisicaoTransferenciaBean.pagadorSelecionado}">
-						<f:selectItem itemLabel="Selecione o Pagador" itemValue="" />
-						<c:forEach var="pagador" items="#{requisicaoTransferenciaBean.pagadores}">
-							<f:selectItem itemLabel="#{pagador.nome}" itemValue="#{pagador.id}" />
-						</c:forEach>
+					<h:outputLabel value="Departamento: " />
+					<h:selectOneMenu id="dpto"
+						value="#{requisicaoTransferenciaBean.tipoContaPagar}">
+						<f:selectItem itemLabel="Almoxarifado" itemValue="ALMOXARIFADO" />
+						<f:selectItem itemLabel="Consulta" itemValue="CONSULTA" />
+						<f:selectItem itemLabel="Recursos Humanos" itemValue="RH" />
+						<f:selectItem itemLabel="Outros" itemValue="OUTRO" />
 					</h:selectOneMenu>
 					
 					<h:outputText value="Beneficiário: " />
