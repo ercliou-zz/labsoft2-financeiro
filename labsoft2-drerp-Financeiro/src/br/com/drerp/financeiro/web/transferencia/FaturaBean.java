@@ -1,7 +1,6 @@
 package br.com.drerp.financeiro.web.transferencia;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -9,21 +8,14 @@ import javax.faces.bean.RequestScoped;
 
 import org.primefaces.model.DualListModel;
 
-import br.com.drerp.financeiro.api.FinanceiroFacade;
-import br.com.drerp.financeiro.api.FinanceiroFacadeImpl;
 import br.com.drerp.financeiro.business.planosaude.PlanoSaudeBR;
 import br.com.drerp.financeiro.business.procedimento.ProcedimentoBR;
-import br.com.drerp.financeiro.business.transferencia.ContaReceberBR;
 import br.com.drerp.financeiro.business.transferencia.FaturaBR;
 import br.com.drerp.financeiro.business.transferencia.PagadorBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
-import br.com.drerp.financeiro.model.transferencia.ContaReceber;
 import br.com.drerp.financeiro.model.transferencia.Fatura;
-import br.com.drerp.financeiro.model.transferencia.ItemFatura;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
-import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
-import br.com.drerp.financeiro.util.FinanceiroConstants;
 
 @ManagedBean(name = "faturaBean")
 @RequestScoped
@@ -43,18 +35,12 @@ public class FaturaBean {
 	private DualListModel<Procedimento> procedimentos;
 	private ProcedimentoBR procedimentoBR;
 	
-	private ContaReceberBR contaReceberBR;
-	
-	private FinanceiroFacade facade;
-
 	public FaturaBean() {
 		this.fatura = new Fatura();
 		this.faturaBR = new FaturaBR();
 		this.pagadorBR = new PagadorBR();
 		this.procedimentoBR = new ProcedimentoBR();
 		this.planoSaudeBR = new PlanoSaudeBR();
-		this.contaReceberBR = new ContaReceberBR();
-		this.facade = new FinanceiroFacadeImpl();
 		
 		List<Procedimento> source = this.procedimentoBR.list();
 		List<Procedimento> target = new ArrayList<Procedimento>();
@@ -79,49 +65,16 @@ public class FaturaBean {
 	}
 
 	public String save() {
-		this.fatura.setDataMS((new Date()).getTime());
-		this.fatura.setPaga(false);
-		Pagador pagador = this.pagadorBR.getById(pagadorSelecionado);
-		this.fatura.setPagador(pagador);
-		this.fatura.setPlanoSaude(this.planoSaudeBR.getById(planoSelecionado));
 		List<Procedimento> procedimentosSelecionados = new ArrayList<Procedimento>();
-		List<ItemFatura> itens = new ArrayList<ItemFatura>();
 		for (Object procedimentoId : procedimentos.getTarget()) {
 			if(procedimentoId.getClass().isAssignableFrom(String.class)){
-				Procedimento proc = this.procedimentoBR.getById(Long.parseLong((String)procedimentoId));
+				Procedimento proc = procedimentoBR.getById(Long.parseLong((String)procedimentoId));
 				procedimentosSelecionados.add(proc);
-				ItemFatura item = new ItemFatura();
-				item.setFatura(fatura);
-				item.setProcedimento(proc);
-				List<Procedimento> procedimentoItem = new ArrayList<Procedimento>();
-				procedimentoItem.add(proc);
-				item.setValor(this.facade.pedirOrcamento(fatura.getPagador(), procedimentoItem, fatura.getPlanoSaude()));
-				itens.add(item);
 			}
 		}
-		this.fatura.setItens(itens);
-		this.fatura.setValor(this.facade.pedirOrcamento(fatura.getPagador(), procedimentosSelecionados, fatura.getPlanoSaude()));
-		this.faturaBR.save(this.fatura);
 		
-		// Para guias e contas a receber:
-		if(this.fatura.getPlanoSaude().getNome().equals(FinanceiroConstants.PLANO_PARTICULAR)){
-			ContaReceber conta = new ContaReceber();
-			conta.setPagador(pagador);
-			conta.setDataRequisicaoMilis((new Date()).getTime());
-			//Limite de pagamento de 60dias corridos
-			conta.setDataLimiteMilis((new Date()).getTime() + 60*24*60*60*1000);
-			conta.setStatus(StatusTransferencia.PENDENTE);
-			conta.setValor(fatura.getValor());
-			List<Fatura> fats = new ArrayList<Fatura>();
-			fats.add(fatura);
-			conta.setFaturas(fats);
-			this.contaReceberBR.save(conta);
-			
-		}
-		else{
-			//ContaReceber conta;
-			//conta.setBeneficiario(beneficiario)
-		}
+		this.fatura = this.faturaBR.salvarFatura(this.pagadorSelecionado, this.planoSelecionado, procedimentosSelecionados);
+
 		return list();
 	}
 

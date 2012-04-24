@@ -2,6 +2,7 @@ package br.com.drerp.financeiro.service;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.jws.WebService;
@@ -12,6 +13,7 @@ import br.com.drerp.financeiro.business.tabela.TabelaBR;
 import br.com.drerp.financeiro.business.transferencia.BeneficiarioBR;
 import br.com.drerp.financeiro.business.transferencia.ContaPagarBR;
 import br.com.drerp.financeiro.business.transferencia.ContaReceberBR;
+import br.com.drerp.financeiro.business.transferencia.FaturaBR;
 import br.com.drerp.financeiro.business.transferencia.PagadorBR;
 import br.com.drerp.financeiro.model.planosaude.PlanoSaude;
 import br.com.drerp.financeiro.model.procedimento.Procedimento;
@@ -21,6 +23,7 @@ import br.com.drerp.financeiro.model.transferencia.ContaReceber;
 import br.com.drerp.financeiro.model.transferencia.Departamento;
 import br.com.drerp.financeiro.model.transferencia.Pagador;
 import br.com.drerp.financeiro.model.transferencia.StatusTransferencia;
+import br.com.drerp.financeiro.util.FinanceiroConstants;
 
 @WebService(targetNamespace = "http://service.financeiro.drerp.com.br/", portName = "FinanceiroServiceImplPort", serviceName = "FinanceiroServiceImplService")
 public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
@@ -124,8 +127,8 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		return planoSaudeList.toArray(new PlanoSaude[planoSaudeList.size()]);
 	}
 
-	public Boolean pagarConsultaPlanoSaude(PlanoSaude planoSaude,
-			Procedimento[] listaProcedimentos) {
+	public Boolean pagarConsultaPlanoSaude(PlanoSaude planoSaude, Procedimento[] listaProcedimentos) {
+		
 		long now = System.currentTimeMillis();
 		ContaReceber conta = new ContaReceber();
 		conta.setDataRequisicaoMilis(now);
@@ -136,6 +139,7 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		ContaReceberBR contaBR = new ContaReceberBR();
 		PagadorBR pagadorBR = new PagadorBR();
 
+		
 		Pagador pag = new Pagador();
 		pag.setNome(planoSaude.getNome());
 		pag.setDocumento(planoSaude.getNome());
@@ -161,7 +165,10 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		Beneficiario clinica = beneficiarioBR.getClinica();
 
 		conta.setBeneficiario(clinica);
-
+		
+		FaturaBR faturaBR = new FaturaBR();
+		faturaBR.salvarFatura(pagador.getId(), planoSaude.getId(), Arrays.asList(listaProcedimentos));
+		
 		try {
 			contaBR.save(conta);
 		} catch (Exception e) {
@@ -189,7 +196,7 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		BigDecimal valor = new BigDecimal(0);
 
 		PlanoSaudeBR psBR = new PlanoSaudeBR();
-		PlanoSaude ps = psBR.getByNome("Particular");
+		PlanoSaude ps = psBR.getByNome(FinanceiroConstants.PLANO_PARTICULAR);
 
 		TabelaBR t = new TabelaBR();
 
@@ -205,6 +212,9 @@ public class FinanceiroServiceImpl implements FinanceiroService, Serializable {
 		Beneficiario clinica = beneficiarioBR.getClinica();
 
 		conta.setBeneficiario(clinica);
+		
+		FaturaBR faturaBR = new FaturaBR();
+		faturaBR.salvarFatura(pagador.getId(), ps.getId(), Arrays.asList(listaProcedimentos));
 
 		try {
 			contaBR.lancarPagamento(conta);
