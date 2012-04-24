@@ -49,6 +49,7 @@ public class FaturaBR extends GenericBR<FaturaDAOImpl, Fatura> {
 		
 		fatura.setItens(itens);
 		fatura.setValor(facade.pedirOrcamento(fatura.getPagador(), procedimentos, fatura.getPlanoSaude()));
+		this.dao.save(fatura);
 		return fatura;
 	}
 	
